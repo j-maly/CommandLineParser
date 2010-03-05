@@ -58,6 +58,7 @@ namespace ParserTest
 		static void Main(string[] args)
 		{
 			CommandLineParser.CommandLineParser parser = new CommandLineParser.CommandLineParser();
+            parser.ShowUsageOnEmptyCommandline = true;
 
 #if autoargs
 #else
@@ -121,11 +122,12 @@ namespace ParserTest
 
 
 #if autoargs
-			ParsingTarget p = new ParsingTarget();
+            ParsingTarget p = new ParsingTarget();
 			// read the argument attributes 
 			parser.ExtractArgumentAttributes(p);
 #endif
 			List<string[]> examples = new List<string[]>();
+            examples.Add(new string[0]); //No arguments passed
 			examples.Add(new[] { "--version", "1.3" }); //parses OK 
 			examples.Add(new[] { "--color", "red", "--version", "1.2" }); //parses OK 
 			examples.Add(new[] { "--point", "[1;3]", "-o", "2" }); //parses OK 
@@ -133,12 +135,15 @@ namespace ParserTest
 			examples.Add(new[] { "--show", "--hide" }); //parses OK 
 			examples.Add(new[] { "-d" }); // error, missing value
 			examples.Add(new[] { "-d", "C:\\Input" });
-
+            
 			foreach (string[] arguments in examples)
 			{
 				try
 				{
-					Console.WriteLine("INPUT: {0}", arguments);
+                    if (arguments.Length == 0)
+                        Console.WriteLine("INPUT: No arguments supplied.");
+                    else
+					    Console.WriteLine("INPUT: {0}", arguments);
 
 					parser.ParseCommandLine(arguments);
 
@@ -180,6 +185,7 @@ namespace ParserTest
 			parser.ShowParsedArguments();
 			Console.WriteLine("RESULT: OK");
 			Console.WriteLine();
+
 		}
 	}
 }

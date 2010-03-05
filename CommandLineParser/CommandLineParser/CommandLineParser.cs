@@ -161,9 +161,10 @@ namespace CommandLineParser
             ExpandShortSwitches(args_list);
             AdditionalArgumentsSettings.AdditionalArguments = new string[0];
 
+            this.args = args;
+
             if (args.Length > 0)
             {
-                this.args = args;    
                 int argIndex;
                 for (argIndex = 0; argIndex < args_list.Count;)
                 {
@@ -287,7 +288,7 @@ namespace CommandLineParser
             arguments.ForEach(delegate (Argument arg)
                                   {
                                       if (!arg.Optional && !arg.Parsed)
-                                          throw new MandatoryArgumentNotSetException(Messages.EXC_MISSING_MANDATORY_ARGUMENT, arg.Name);
+                                          throw new MandatoryArgumentNotSetException(string.Format(Messages.EXC_MISSING_MANDATORY_ARGUMENT, arg.Name), arg.Name);
                                   });                         
         }
 
@@ -431,7 +432,7 @@ namespace CommandLineParser
 
                 if (argument.Optional)
                     Console.Write(Messages.MSG_OPTIONAL);
-                Console.WriteLine("... {0}", argument.Description);
+                Console.WriteLine("... {0} ", argument.Description);
                 if (!String.IsNullOrEmpty(argument.FullDescription))
                 {
                     Console.WriteLine();

@@ -232,7 +232,7 @@
     <value>Usage:</value>
   </data>
   <data name="EXC_MISSING_MANDATORY_ARGUMENT" xml:space="preserve">
-    <value>Argument {0} is not marked as optional and was not found on the commad line.</value>
+    <value>Argument {0} is not marked as optional and was not found on the command line.</value>
   </data>
   <data name="EXC_ADDITIONAL_ARGUMENTS_FOUND" xml:space="preserve">
     <value>Additional arguments found and parser does not accept additional arguments. Set AcceptAdditionalArguments to true if you want to accept them. </value>

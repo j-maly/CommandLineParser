@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Reflection;
-using System.Text;
 using CommandLineParser.Exceptions;
 
 namespace CommandLineParser.Arguments
@@ -33,7 +30,9 @@ namespace CommandLineParser.Arguments
 
         private bool parsed = false;
 
-        private bool allowMultiple = false; 
+        private bool allowMultiple = false;
+
+        private string example;
 
         /// <summary>
         /// List of short aliases.
@@ -171,6 +170,15 @@ namespace CommandLineParser.Arguments
                 }
                 shortName = value;
             }
+        }
+
+        /// <summary>
+        /// Example usage of the attribute. 
+        /// </summary>
+        public string Example
+        {
+            get { return example; }
+            set { example = value; }
         }
 
         /// <summary>
@@ -410,6 +418,15 @@ namespace CommandLineParser.Arguments
         {
             get { return argument.ShortName; }
             set { argument.ShortName = value; }
+        }
+
+        /// <summary>
+        /// Example usage of the attribute.
+        /// </summary>
+        public string Example
+        {
+            get { return argument.Example; }
+            set { argument.Example = value; }
         }
 
         #endregion

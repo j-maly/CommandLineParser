@@ -34,7 +34,7 @@ namespace ParserTest
 			[ValueArgument(typeof(string), 'l', "level", Description = "Set the level")]
 			public string level;
 
-			[ValueArgument(typeof(Point), 'p', "point", Description = "specify the point")]
+			[ValueArgument(typeof(Point), 'p', "point", Description = "specify the point", Example = "[0,1]")]
 			public Point point;
 
 			[BoundedValueArgument(typeof(int), 'o', "optimization",

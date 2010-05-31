@@ -394,6 +394,15 @@ namespace CommandLineParser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Example: {0}.
+        /// </summary>
+        internal static string MSG_EXAMPLE_FORMAT {
+            get {
+                return ResourceManager.GetString("MSG_EXAMPLE_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  [optional] .
         /// </summary>
         internal static string MSG_OPTIONAL {

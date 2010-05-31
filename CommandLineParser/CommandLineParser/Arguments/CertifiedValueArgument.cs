@@ -14,7 +14,7 @@ namespace CommandLineParser.Arguments
     /// <seealso cref="BoundedValueArgument{TValue}"/>
     /// <seealso cref="EnumeratedValueArgument{TValue}"/>
     /// <include file='Doc\CommandLineParser.xml' path='CommandLineParser/Arguments/CertifiedValueArgument/*'/>
-    public abstract class CertifiedValueArgument<TValue>: ValueArgument<TValue>
+    public abstract class CertifiedValueArgument<TValue> : ValueArgument<TValue>
     {
         #region constructor
 
@@ -64,7 +64,17 @@ namespace CommandLineParser.Arguments
         internal override void Parse(IList<string> args, ref int i)
         {
             base.Parse(args, ref i);
-            Certify(Value);
+            if (AllowMultiple)
+            {
+                foreach (TValue val in Values)
+                {
+                    Certify(val);
+                }
+            }
+            else
+            {
+                Certify(Value);
+            }
         }
 
         /// <summary>

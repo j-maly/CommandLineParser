@@ -236,16 +236,16 @@ namespace CommandLineParser.Arguments
         /// <exception cref="CommandLineArgumentOutOfRangeException">Thrown when <paramref name="value"/> lies outside the interval. </exception>
         internal override void Certify(TValue value)
         {
-            if (useMinValue && MinValue.CompareTo(Value) == 1)
+            if (useMinValue && MinValue.CompareTo(value) == 1)
             {
                 throw new CommandLineArgumentOutOfRangeException(
-                    string.Format(Messages.EXC_ARG_BOUNDED_LESSER_THAN_MIN, Value, minValue), Name);
+                    string.Format(Messages.EXC_ARG_BOUNDED_LESSER_THAN_MIN, value, minValue), Name);
             }
 
-            if (useMaxValue && MaxValue.CompareTo(Value) == -1)
+            if (useMaxValue && MaxValue.CompareTo(value) == -1)
             {
                 throw new CommandLineArgumentOutOfRangeException(
-                    string.Format(Messages.EXC_ARG_BOUNDED_GREATER_THAN_MAX, Value, maxValue), Name);
+                    string.Format(Messages.EXC_ARG_BOUNDED_GREATER_THAN_MAX, value, maxValue), Name);
             }
         }
     }

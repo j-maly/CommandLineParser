@@ -433,6 +433,12 @@ namespace CommandLineParser
                 if (argument.Optional)
                     Console.Write(Messages.MSG_OPTIONAL);
                 Console.WriteLine("... {0} ", argument.Description);
+
+                if (!String.IsNullOrEmpty(argument.Example))
+                {
+                    Console.WriteLine(Messages.MSG_EXAMPLE_FORMAT, argument.Example);
+                }
+
                 if (!String.IsNullOrEmpty(argument.FullDescription))
                 {
                     Console.WriteLine();

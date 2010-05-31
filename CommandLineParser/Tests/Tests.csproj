@@ -51,11 +51,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertifiedValueArgumentTest.cs" />
+    <Compile Include="DeclarativeArguments.cs" />
+    <Compile Include="ImperativeArguments.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueArgumentTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="nunit.framework.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommandLineParser\CommandLineParser_VS2010.csproj">
+      <Project>{251387D3-9F28-4FB2-90A4-01DD05F1D2AF}</Project>
+      <Name>CommandLineParser_VS2010</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

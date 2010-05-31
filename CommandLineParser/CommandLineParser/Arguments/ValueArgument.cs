@@ -213,7 +213,7 @@ namespace CommandLineParser.Arguments
 
             //multiple value argument can be bound only to a proper collection
             if (AllowMultiple
-                && (!(typeof(List<string>).IsAssignableFrom(boundType)))
+                && (!(typeof(List<TValue>).IsAssignableFrom(boundType)))
                 && !boundType.IsArray)
             {
                 throw new InvalidOperationException("ValueArguments that allow multiple values can be bound only to an object implementing ICollection<TVale> and the collection must not be read only.");

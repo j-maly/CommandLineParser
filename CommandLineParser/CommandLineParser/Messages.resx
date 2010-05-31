@@ -240,4 +240,7 @@
   <data name="EXC_NOT_ENOUGH_ADDITIONAL_ARGUMENTS" xml:space="preserve">
     <value>Not enough additional arguments. Needed {0} additional arguments.</value>
   </data>
+  <data name="MSG_EXAMPLE_FORMAT" xml:space="preserve">
+    <value>Example: {0}</value>
+  </data>
 </root>

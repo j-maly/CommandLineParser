@@ -11,12 +11,12 @@ Global
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs10.codeplex.com/
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = CommandLineParser\\CommandLineParser_VS2010.csproj
-		SccProjectName1 = CommandLineParser
-		SccLocalPath1 = CommandLineParser
-		SccProjectUniqueName2 = ParserTest\\ParserTest_VS2010.csproj
-		SccProjectName2 = ParserTest
-		SccLocalPath2 = ParserTest
+		SccProjectUniqueName1 = ParserTest\\ParserTest_VS2010.csproj
+		SccProjectName1 = ParserTest
+		SccLocalPath1 = ParserTest
+		SccProjectUniqueName2 = CommandLineParser\\CommandLineParser_VS2010.csproj
+		SccProjectName2 = CommandLineParser
+		SccLocalPath2 = CommandLineParser
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

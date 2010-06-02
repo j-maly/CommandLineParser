@@ -1,6 +1,5 @@
 using System.IO;
 using CommandLineParser.Arguments;
-using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
 using System.Collections.Generic;
 using NUnit.Framework;

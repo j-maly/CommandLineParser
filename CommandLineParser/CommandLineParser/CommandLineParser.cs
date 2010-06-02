@@ -39,6 +39,8 @@ namespace CommandLineParser
         private readonly List<string> showUsageCommands = new List<string> { "--help", "/?" };
         private string showUsageHeader;
         private string showUsageFooter;
+        private bool acceptSlash = true;
+        private bool acceptHyphen = true;
 
         #endregion
 
@@ -92,6 +94,9 @@ namespace CommandLineParser
             set { showUsageFooter = value; }
         }
 
+        /// <summary>
+        /// Arguments that directly invoke <see cref="ShowUsage()"/>. By default this is --help and /?.
+        /// </summary>
         public IList <string> ShowUsageCommands
         {
             get
@@ -140,6 +145,24 @@ namespace CommandLineParser
         {
             get { return allowShortSwitchGrouping; }
             set { allowShortSwitchGrouping = value; }
+        }
+
+        /// <summary>
+        /// Allows arguments in /a and /arg format
+        /// </summary>
+        public bool AcceptSlash
+        {
+            get { return acceptSlash; }
+            set { acceptSlash = value; }
+        }
+
+        /// <summary>
+        /// Allows arguments in -a and --arg format
+        /// </summary>
+        public bool AcceptHyphen
+        {
+            get { return acceptHyphen; }
+            set { acceptSlash = value; }
         }
 
         /// <summary>
@@ -274,38 +297,67 @@ namespace CommandLineParser
         {
             if (curArg[0] == '-')
             {
-                string argName;
-                if (curArg.Length > 1)
+                if (AcceptHyphen)
                 {
-                    if (curArg[1] == '-')
+                    string argName;
+                    if (curArg.Length > 1)
                     {
-                        //long name
-                        argName = curArg.Substring(2);
-                        if (argName.Length == 1)
+                        if (curArg[1] == '-')
                         {
-                            throw new CommandLineFormatException(String.Format(Messages.EXC_FORMAT_SHORTNAME_PREFIX, argName));
-                        }
+                            //long name
+                            argName = curArg.Substring(2);
+                            if (argName.Length == 1)
+                            {
+                                throw new CommandLineFormatException(String.Format(
+                                    Messages.EXC_FORMAT_SHORTNAME_PREFIX, argName));
+                            }
 
+                        }
+                        else
+                        {
+                            //short name
+                            argName = curArg.Substring(1);
+                            if (argName.Length != 1)
+                            {
+                                throw new CommandLineFormatException(
+                                    String.Format(Messages.EXC_FORMAT_LONGNAME_PREFIX, argName));
+                            }
+                        }
+                        Argument argument = LookupArgument(argName);
+                        if (argument != null) return argument;
+                        else
+                            throw new UnknownArgumentException(string.Format(Messages.EXC_ARG_UNKNOWN, argName), argName);
                     }
                     else
                     {
-                        //short name
-                        argName = curArg.Substring(1);
-                        if (argName.Length != 1)
-                        {
-                            throw new CommandLineFormatException(
-                                String.Format(Messages.EXC_FORMAT_LONGNAME_PREFIX, argName));
-                        }
+                        throw new CommandLineFormatException(Messages.EXC_FORMAT_SINGLEHYPHEN);
                     }
-                    Argument argument = LookupArgument(argName);
-                    if (argument != null) return argument;
-                    else throw new UnknownArgumentException(string.Format(Messages.EXC_ARG_UNKNOWN, argName), argName);
                 }
                 else
+                    return null;
+            }
+            else if (curArg[0] == '/')
+            {
+                if (AcceptSlash)
                 {
-                    throw new CommandLineFormatException(Messages.EXC_FORMAT_SINGLEHYPHEN);
+                    if (curArg.Length > 1)
+                    {
+                        if (curArg[1] == '/')
+                        {
+                            throw new CommandLineFormatException(Messages.EXC_FORMAT_SINGLESLASH);
+                        }
+                        string argName = curArg.Substring(1);
+                        Argument argument = LookupArgument(argName);
+                        if (argument != null) return argument;
+                        else throw new UnknownArgumentException(string.Format(Messages.EXC_ARG_UNKNOWN, argName), argName);
+                    }
+                    else
+                    {
+                        throw new CommandLineFormatException(Messages.EXC_FORMAT_DOUBLESLASH);
+                    }
                 }
-
+                else
+                    return null;
             }
             else
             /*

@@ -264,4 +264,10 @@
   <data name="GROUP_ONE_OR_NONE_USED" xml:space="preserve">
     <value>These arguments can not be used together: {0}.</value>
   </data>
+  <data name="EXC_FORMAT_DOUBLESLASH" xml:space="preserve">
+    <value>Invalid sequence "//" in the command line. </value>
+  </data>
+  <data name="EXC_FORMAT_SINGLESLASH" xml:space="preserve">
+    <value>Found character '/' not followed by an argument.</value>
+  </data>
 </root>

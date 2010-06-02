@@ -175,7 +175,7 @@ namespace ParserTest
 			try
 			{
 				// this fails, because there is only one file
-				parser.ParseCommandLine(new[] { "-d", "C:\\Input", "file1.txt" });
+				parser.ParseCommandLine(new[] { "/d", "C:\\Input", "file1.txt" });
 				parser.ShowParsedArguments();
 			}
 			catch (CommandLineException e)
@@ -184,7 +184,7 @@ namespace ParserTest
 				Console.WriteLine();
 			}
 			// two files - OK 
-			parser.ParseCommandLine(new[] { "-d", "C:\\Input", "file1.txt", "file2.txt" });
+			parser.ParseCommandLine(new[] { "/d", "C:\\Input", "file1.txt", "file2.txt" });
 			parser.ShowParsedArguments();
 			Console.WriteLine("RESULT: OK");
 			Console.WriteLine();

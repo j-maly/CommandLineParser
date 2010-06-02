@@ -277,6 +277,15 @@ namespace CommandLineParser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid sequence &quot;//&quot; in the command line. .
+        /// </summary>
+        internal static string EXC_FORMAT_DOUBLESLASH {
+            get {
+                return ResourceManager.GetString("EXC_FORMAT_DOUBLESLASH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Only short argument names (single character) are allowed after single &apos;-&apos; character (e.g. -v). For long names use double &apos;-&apos; format (e.g. &apos;--ver&apos;). Wrong argument is: {0}.
         /// </summary>
         internal static string EXC_FORMAT_LONGNAME_PREFIX {
@@ -300,6 +309,15 @@ namespace CommandLineParser {
         internal static string EXC_FORMAT_SINGLEHYPHEN {
             get {
                 return ResourceManager.GetString("EXC_FORMAT_SINGLEHYPHEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Found character &apos;/&apos; not followed by an argument..
+        /// </summary>
+        internal static string EXC_FORMAT_SINGLESLASH {
+            get {
+                return ResourceManager.GetString("EXC_FORMAT_SINGLESLASH", resourceCulture);
             }
         }
         

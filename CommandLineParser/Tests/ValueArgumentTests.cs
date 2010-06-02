@@ -1,21 +1,22 @@
 using System.IO;
 using CommandLineParser.Arguments;
+using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
-using NUnit.Framework;
 using System.Collections.Generic;
+using NUnit.Framework;
 
 namespace Tests
 {
     [TestFixture]
-    public class CertifiedValueArgumentTest
+    public class ValueArgumentTests
     {
         public CommandLineParser.CommandLineParser CommandLineParser;
-        ParsingTarget target;
+        ParsingTarget target; 
 
         class ParsingTarget
         {
-            [BoundedValueArgument(typeof(int), 'i', MaxValue = 10, UseMaxValue = true, AllowMultiple = true)]
-            public List<int> Numbers = new List<int>();
+            [ValueArgument(typeof(int), 'i', AllowMultiple = true)]
+            public List<int> Numbers = new List<int>(); 
         }
 
         [TestFixtureSetUp]
@@ -27,9 +28,24 @@ namespace Tests
         }
 
         [Test]
-        public void MultpleCertifiedValueTest()
+        public void MultipleValuesTest()
         {
             string[] args = new[] { "-i", "1", "-i", "2", "-i", "3" };
+            CommandLineParser.ParseCommandLine(args);
+        }
+
+        public enum MyEnum
+        {
+            One,
+            Two
+        }
+
+        [Test]
+        public void EnumTest()
+        {
+            ValueArgument<MyEnum> enumArg = new ValueArgument<MyEnum>('e');
+            CommandLineParser.Arguments.Add(enumArg);
+            string[] args = new[] { "-e", "One" };
             CommandLineParser.ParseCommandLine(args);
         }
     }

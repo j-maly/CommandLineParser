@@ -124,18 +124,21 @@ namespace ParserTest
 #if autoargs
             ParsingTarget p = new ParsingTarget();
 			// read the argument attributes 
+		    parser.ShowUsageHeader = "This is an interesting command";
+		    parser.ShowUsageFooter = "And that is all";
 			parser.ExtractArgumentAttributes(p);
 #endif
 			List<string[]> examples = new List<string[]>();
             examples.Add(new string[0]); //No arguments passed
-			examples.Add(new[] { "--version", "1.3" }); //parses OK 
-			examples.Add(new[] { "--color", "red", "--version", "1.2" }); //parses OK 
-			examples.Add(new[] { "--point", "[1;3]", "-o", "2" }); //parses OK 
-			examples.Add(new[] { "-d", "C:\\Input", "-i", "in.txt", "-x", "out.txt" }); //parses OK 
-			examples.Add(new[] { "--show", "--hide" }); //parses OK 
-			examples.Add(new[] { "-d" }); // error, missing value
-			examples.Add(new[] { "-d", "C:\\Input" });
-            
+			examples.Add(new[] { "/help" }); //show usage 
+			examples.Add(new[] { "/version", "1.3" }); //parses OK 
+			examples.Add(new[] { "/color", "red", "/version", "1.2" }); //parses OK 
+			examples.Add(new[] { "/point", "[1;3]", "/o", "2" }); //parses OK 
+			examples.Add(new[] { "/d", "C:\\Input", "/i", "in.txt", "/x", "out.txt" }); //parses OK 
+			examples.Add(new[] { "/show", "/hide" }); //parses OK 
+			examples.Add(new[] { "/d" }); // error, missing value
+			examples.Add(new[] { "/d", "C:\\Input" });
+
 			foreach (string[] arguments in examples)
 			{
 				try

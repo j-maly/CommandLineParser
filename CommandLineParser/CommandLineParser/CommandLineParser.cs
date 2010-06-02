@@ -36,6 +36,10 @@ namespace CommandLineParser
 
 		private readonly AdditionalArgumentsSettings additionalArgumentsSettings = new AdditionalArgumentsSettings();
 
+        private readonly List<string> showUsageCommands = new List<string> { "--help", "/?" };
+        private string showUsageHeader;
+        private string showUsageFooter;
+
         #endregion
 
         /// <summary>
@@ -70,6 +74,32 @@ namespace CommandLineParser
     		get { return additionalArgumentsSettings; }
     	}
 
+        /// <summary>
+        /// Text printed in the beginning of 'show usage'
+        /// </summary>
+        public string ShowUsageHeader
+        {
+            get { return showUsageHeader; }
+            set { showUsageHeader = value; }
+        }
+
+        /// <summary>
+        /// Text printed in the end of 'show usage'
+        /// </summary>
+        public string ShowUsageFooter
+        {
+            get { return showUsageFooter; }
+            set { showUsageFooter = value; }
+        }
+
+        public IList <string> ShowUsageCommands
+        {
+            get
+            {
+                return showUsageCommands;
+            }
+        }
+
     	/// <summary>
         /// When set to true, usage help is printed on the console when command line is without arguments.
         /// Default is false. 
@@ -80,6 +110,7 @@ namespace CommandLineParser
             set { showUsageOnEmptyCommandline = value; }
         }
 
+        
         /// <summary>
         /// When set to true, <see cref="MandatoryArgumentNotSetException"/> is thrown when some of the non-optional argument
         /// is not found on the command line. Default is true.
@@ -156,31 +187,37 @@ namespace CommandLineParser
         public void ParseCommandLine(string[] args)
         {
             arguments.ForEach(delegate(Argument a) { a.Init(); });
-            List<string> args_list = new List<string>(args);
+            List<string> argsList = new List<string>(args);
             InitializeArgumentLookupDictionaries();
-            ExpandShortSwitches(args_list);
+            ExpandShortSwitches(argsList);
             AdditionalArgumentsSettings.AdditionalArguments = new string[0];
 
             this.args = args;
 
+            if ((args.Length == 0 && ShowUsageOnEmptyCommandline) ||
+                (args.Length == 1 && showUsageCommands.Contains(args[0])))
+            {
+                ShowUsage();
+                return;
+            }
+
             if (args.Length > 0)
             {
                 int argIndex;
-                for (argIndex = 0; argIndex < args_list.Count;)
+
+                for (argIndex = 0; argIndex < argsList.Count;)
                 {
-                    string curArg = args_list[argIndex];
+                    string curArg = argsList[argIndex];
                     Argument argument = ParseArgument(curArg);
                     if (argument == null)
                         break;
 
-                    argument.Parse(args_list, ref argIndex);
+                    argument.Parse(argsList, ref argIndex);
                     argument.UpdateBoundObject();
                 }
 
-                ParseAdditionalArguments(args_list, argIndex);   
+                ParseAdditionalArguments(argsList, argIndex);   
             }
-            else if (ShowUsageOnEmptyCommandline)
-                ShowUsage();
 
             PerformMandatoryArgumentsCheck();
             PerformCertificationCheck();
@@ -212,16 +249,16 @@ namespace CommandLineParser
 
                 if (attrs.Length == 1 && attrs[0] is ArgumentAttribute)
                 {
-                    this.Arguments.Add((attrs[0] as ArgumentAttribute).Argument);
-                    (attrs[0] as ArgumentAttribute).Argument.Bind = 
+                    this.Arguments.Add(((ArgumentAttribute) attrs[0]).Argument);
+                    ((ArgumentAttribute) attrs[0]).Argument.Bind = 
                         new FieldArgumentBind(parsingTarget, info.Name);
                 }
             }
 
-            object[] type_attrs = targetType.GetCustomAttributes(typeof(ArgumentCertificationAttribute), true);
-            foreach (object certificationAttr in type_attrs)
+            object[] typeAttrs = targetType.GetCustomAttributes(typeof(ArgumentCertificationAttribute), true);
+            foreach (object certificationAttr in typeAttrs)
             {
-                this.Certifications.Add((certificationAttr as ArgumentCertificationAttribute).Certification);
+                this.Certifications.Add(((ArgumentCertificationAttribute) certificationAttr).Certification);
             }
         }
 
@@ -397,6 +434,8 @@ namespace CommandLineParser
         /// </summary>
         public void ShowUsage()
         {
+            Console.WriteLine(ShowUsageHeader);
+
             Console.WriteLine(Messages.MSG_USAGE);
 
             foreach (Argument argument in arguments)
@@ -456,6 +495,8 @@ namespace CommandLineParser
                 }
                 Console.WriteLine();
             }
+
+            Console.WriteLine(ShowUsageFooter);
         }
 
         /// <summary>
@@ -497,8 +538,8 @@ namespace CommandLineParser
 		/// <summary>
 		/// <para>
 		/// Fills FullDescription of all the difined arguments from a resource file. 
-		/// For each argument there is selected that string from a resource that has the same resource key
-		/// as is currrent value of the argument's FullDescription. 
+		/// For each argument selects a string from a resource that has the same resource key
+		/// as is the currrent value of the argument's FullDescription. 
 		/// </para>
 		/// <para>
 		/// This way the value of FullDescription's can be set to keys and these keys are replaced by 

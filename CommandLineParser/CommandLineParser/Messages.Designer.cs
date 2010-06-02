@@ -304,6 +304,24 @@ namespace CommandLineParser {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All or none of these arguments: {0} must be used..
+        /// </summary>
+        internal static string EXC_GROUP_ALL_OR_NONE_USED_NOT_ALL_USED {
+            get {
+                return ResourceManager.GetString("EXC_GROUP_ALL_OR_NONE_USED_NOT_ALL_USED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All of these arguments: {0} must be used..
+        /// </summary>
+        internal static string EXC_GROUP_ALL_USED_NOT_ALL_USED {
+            get {
+                return ResourceManager.GetString("EXC_GROUP_ALL_USED_NOT_ALL_USED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to At least one of these arguments: {0} must be used..
         /// </summary>
         internal static string EXC_GROUP_AT_LEAST_ONE {
@@ -340,7 +358,7 @@ namespace CommandLineParser {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These argumens can not be used together: {0}..
+        ///   Looks up a localized string similar to These arguments can not be used together: {0}..
         /// </summary>
         internal static string EXC_GROUP_ONE_OR_NONE_MORE_USED {
             get {
@@ -372,6 +390,51 @@ namespace CommandLineParser {
         internal static string EXC_NOT_ENOUGH_ADDITIONAL_ARGUMENTS {
             get {
                 return ResourceManager.GetString("EXC_NOT_ENOUGH_ADDITIONAL_ARGUMENTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All or none of these arguments: {0} must be used..
+        /// </summary>
+        internal static string GROUP_ALL_OR_NONE_USED {
+            get {
+                return ResourceManager.GetString("GROUP_ALL_OR_NONE_USED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All of these arguments: {0} must be used..
+        /// </summary>
+        internal static string GROUP_ALL_USED {
+            get {
+                return ResourceManager.GetString("GROUP_ALL_USED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only one of these arguments: {0} can be used..
+        /// </summary>
+        internal static string GROUP_AT_LEAST_ONE_USED {
+            get {
+                return ResourceManager.GetString("GROUP_AT_LEAST_ONE_USED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One (and only one) of these arguments: {0} must be used..
+        /// </summary>
+        internal static string GROUP_EXACTLY_ONE_USED {
+            get {
+                return ResourceManager.GetString("GROUP_EXACTLY_ONE_USED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These arguments can not be used together: {0}..
+        /// </summary>
+        internal static string GROUP_ONE_OR_NONE_USED {
+            get {
+                return ResourceManager.GetString("GROUP_ONE_OR_NONE_USED", resourceCulture);
             }
         }
         

@@ -1,22 +1,21 @@
 using System.IO;
 using CommandLineParser.Arguments;
-using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
-using System.Collections.Generic;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Tests
 {
     [TestFixture]
-    public class ValueArgumentTest
+    public class CertifiedValueArgumentTests
     {
         public CommandLineParser.CommandLineParser CommandLineParser;
-        ParsingTarget target; 
+        ParsingTarget target;
 
         class ParsingTarget
         {
-            [ValueArgument(typeof(int), 'i', AllowMultiple = true)]
-            public List<int> Numbers = new List<int>(); 
+            [BoundedValueArgument(typeof(int), 'i', MaxValue = 10, UseMaxValue = true, AllowMultiple = true)]
+            public List<int> Numbers = new List<int>();
         }
 
         [TestFixtureSetUp]
@@ -28,7 +27,7 @@ namespace Tests
         }
 
         [Test]
-        public void MultipleValuesTest()
+        public void MultpleCertifiedValueTest()
         {
             string[] args = new[] { "-i", "1", "-i", "2", "-i", "3" };
             CommandLineParser.ParseCommandLine(args);

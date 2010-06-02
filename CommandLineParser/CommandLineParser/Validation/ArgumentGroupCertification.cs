@@ -25,9 +25,19 @@ namespace CommandLineParser.Validation
         /// <summary>
         /// Only one of the arguments in the group can be used
         /// </summary>
-        OneOreNoneUsed
+        OneOreNoneUsed,
+
+        /// <summary>
+        /// All or none of the arguments in the group can be used
+        /// </summary>
+        AllOrNoneUsed,
+
+        /// <summary>
+        /// All of the arguments in the group must be used
+        /// </summary>
+        AllUsed
     }
-    
+
     /// <summary>
     /// Allows to define which arguments can be used together and which combinations
     /// are forbidden for the application.
@@ -56,7 +66,7 @@ namespace CommandLineParser.Validation
         /// <param name="arguments">arguments in the group</param>
         /// <param name="condition">condition for the group</param>
         public ArgumentGroupCertification(
-            Argument[] arguments, 
+            Argument[] arguments,
             EArgumentGroupCondition condition)
         {
             this.argumentGroup = arguments;
@@ -132,7 +142,7 @@ namespace CommandLineParser.Validation
             if (argumentGroup.Length == 0)
                 throw new InvalidArgumentGroupException(
                     "Argument group is empty. Argument group must have at least one member.");
-        
+
             int usedArgsFromGroup = 0;
             foreach (Argument argument in argumentGroup)
             {
@@ -147,7 +157,7 @@ namespace CommandLineParser.Validation
                 case EArgumentGroupCondition.AtLeastOneUsed:
                     if (usedArgsFromGroup == 0)
                         throw new ArgumentConflictException(
-                            String.Format(Messages.EXC_GROUP_AT_LEAST_ONE, argumentGroupString ));
+                            String.Format(Messages.EXC_GROUP_AT_LEAST_ONE, argumentGroupString));
                     break;
                 case EArgumentGroupCondition.ExactlyOneUsed:
                     if (usedArgsFromGroup == 0)
@@ -162,6 +172,16 @@ namespace CommandLineParser.Validation
                         throw new ArgumentConflictException(
                             String.Format(Messages.EXC_GROUP_ONE_OR_NONE_MORE_USED, argumentGroupString));
                     break;
+                case EArgumentGroupCondition.AllUsed:
+                    if (usedArgsFromGroup != argumentGroup.Length)
+                        throw new ArgumentConflictException(
+                            String.Format(Messages.EXC_GROUP_ALL_USED_NOT_ALL_USED, argumentGroupString));
+                    break;
+                case EArgumentGroupCondition.AllOrNoneUsed:
+                    if (usedArgsFromGroup != argumentGroup.Length && usedArgsFromGroup != 0)
+                        throw new ArgumentConflictException(
+                            String.Format(Messages.EXC_GROUP_ALL_OR_NONE_USED_NOT_ALL_USED, argumentGroupString));
+                    break;
             }
         }
 
@@ -175,20 +195,25 @@ namespace CommandLineParser.Validation
                 switch (condition)
                 {
                     case EArgumentGroupCondition.AtLeastOneUsed:
-                        return String.Format(Messages.EXC_GROUP_AT_LEAST_ONE, argumentGroupString);
+                        return String.Format(Messages.GROUP_AT_LEAST_ONE_USED, argumentGroupString);
                     case EArgumentGroupCondition.ExactlyOneUsed:
-                        return String.Format(Messages.EXC_GROUP_EXACTLY_ONE_NONE_USED, argumentGroupString);
+                        return String.Format(Messages.GROUP_EXACTLY_ONE_USED, argumentGroupString);
                     case EArgumentGroupCondition.OneOreNoneUsed:
+                        return String.Format(Messages.GROUP_ONE_OR_NONE_USED, argumentGroupString);
+                    case EArgumentGroupCondition.AllUsed:
+                        return String.Format(Messages.GROUP_ALL_USED, argumentGroupString);
+                    case EArgumentGroupCondition.AllOrNoneUsed:
+                        return String.Format(Messages.GROUP_ALL_OR_NONE_USED, argumentGroupString);
                     default:
-                        return String.Format(Messages.EXC_GROUP_ONE_OR_NONE_MORE_USED, argumentGroupString);
-                        
+                        return String.Empty;
+
                 }
-                
+
             }
         }
     }
 
-    
+
     /// <summary>
     /// Thrown when there is some conflict among the used arguments. 
     /// </summary>
@@ -208,9 +233,9 @@ namespace CommandLineParser.Validation
     /// <summary>
     /// Use ArgumentGroupCertificationAttribute to define <see cref="ArgumentGroupCertification"/>s declaratively. 
     /// </summary>
-	/// <include file='Doc\CommandLineParser.xml' path='CommandLineParser/Certifications/CertificationAttribute/*'/>
+    /// <include file='Doc\CommandLineParser.xml' path='CommandLineParser/Certifications/CertificationAttribute/*'/>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = true)]
-    public class ArgumentGroupCertificationAttribute: ArgumentCertificationAttribute
+    public class ArgumentGroupCertificationAttribute : ArgumentCertificationAttribute
     {
         /// <summary>
         /// Adds ArgumentGroupCertification condition for the arguments. 

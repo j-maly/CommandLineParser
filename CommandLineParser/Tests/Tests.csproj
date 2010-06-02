@@ -6,7 +6,7 @@
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tests</RootNamespace>
     <AssemblyName>Tests</AssemblyName>
@@ -37,6 +37,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="nunit.framework, Version=2.5.5.10112, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -51,13 +54,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CertifiedValueArgumentTest.cs" />
-    <Compile Include="DeclarativeArguments.cs" />
-    <Compile Include="ImperativeArguments.cs" />
+    <Compile Include="CertifiedValueArgumentTests.cs" />
+    <Compile Include="AdditionalArgumentsTests.cs" />
+    <Compile Include="GroupCertificationsTests.cs" />
+    <Compile Include="DeclarativeArgumentsTests.cs" />
+    <Compile Include="ImperativeArgumentsTests.cs" />
     <Compile Include="Point.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValueArgumentTest.cs" />
+    <Compile Include="ValueArgumentTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="nunit.framework.dll" />

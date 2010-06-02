@@ -208,7 +208,7 @@
     <value>One of these arguments: {0} must be used.</value>
   </data>
   <data name="EXC_GROUP_ONE_OR_NONE_MORE_USED" xml:space="preserve">
-    <value>These argumens can not be used together: {0}.</value>
+    <value>These arguments can not be used together: {0}.</value>
   </data>
   <data name="EXC_NONNEGATIVE" xml:space="preserve">
     <value>The value must be non negative.</value>
@@ -242,5 +242,26 @@
   </data>
   <data name="MSG_EXAMPLE_FORMAT" xml:space="preserve">
     <value>Example: {0}</value>
+  </data>
+  <data name="EXC_GROUP_ALL_OR_NONE_USED_NOT_ALL_USED" xml:space="preserve">
+    <value>All or none of these arguments: {0} must be used.</value>
+  </data>
+  <data name="EXC_GROUP_ALL_USED_NOT_ALL_USED" xml:space="preserve">
+    <value>All of these arguments: {0} must be used.</value>
+  </data>
+  <data name="GROUP_ALL_OR_NONE_USED" xml:space="preserve">
+    <value>All or none of these arguments: {0} must be used.</value>
+  </data>
+  <data name="GROUP_ALL_USED" xml:space="preserve">
+    <value>All of these arguments: {0} must be used.</value>
+  </data>
+  <data name="GROUP_AT_LEAST_ONE_USED" xml:space="preserve">
+    <value>Only one of these arguments: {0} can be used.</value>
+  </data>
+  <data name="GROUP_EXACTLY_ONE_USED" xml:space="preserve">
+    <value>One (and only one) of these arguments: {0} must be used.</value>
+  </data>
+  <data name="GROUP_ONE_OR_NONE_USED" xml:space="preserve">
+    <value>These arguments can not be used together: {0}.</value>
   </data>
 </root>

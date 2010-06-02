@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Tests
 {
     [TestFixture]
-    public class DeclarativeArguments
+    public class DeclarativeArgumentsTests
     {
         public CommandLineParser.CommandLineParser CommandLineParser;
 

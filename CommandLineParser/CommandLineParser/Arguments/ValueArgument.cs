@@ -171,6 +171,7 @@ namespace CommandLineParser.Arguments
         internal override void Parse(IList<string> args, ref int i)
         {
             base.Parse(args, ref i);
+
             i++; // move the cursor to the value EXC_ARG_VALUE_MISSING2
             if (args.Count - 1 < i)
             {

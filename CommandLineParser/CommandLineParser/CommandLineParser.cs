@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
 using CommandLineParser.Validation;
@@ -48,6 +49,8 @@ namespace CommandLineParser
         private bool acceptHyphen = true;
 
         private bool ignoreCase;
+
+        private bool acceptEqualSignSyntaxForValueArguments;
 
         #endregion
 
@@ -181,6 +184,15 @@ namespace CommandLineParser
             set { ignoreCase = value; }
         }
 
+        /// <summary>
+        /// When set to true, values of <see cref="ValueArgument{TValue}"/> are separeted by space, 
+        /// otherwise, they are separeted by equal sign and enclosed in quotation marks
+        /// </summary>
+        public bool AcceptEqualSignSyntaxForValueArguments
+        {
+            get { return acceptEqualSignSyntaxForValueArguments; }
+            set { acceptEqualSignSyntaxForValueArguments = value; }
+        }
 
         /// <summary>
         /// Fills lookup dictionaries with arguments names and aliases 
@@ -233,6 +245,7 @@ namespace CommandLineParser
             List<string> argsList = new List<string>(args);
             InitializeArgumentLookupDictionaries();
             ExpandShortSwitches(argsList);
+            ExpandValueArgumentsWithEqualSigns(argsList);
             AdditionalArgumentsSettings.AdditionalArguments = new string[0];
 
             this.argsNotParsed = args;
@@ -343,6 +356,7 @@ namespace CommandLineParser
                                     String.Format(Messages.EXC_FORMAT_LONGNAME_PREFIX, argName));
                             }
                         }
+
                         Argument argument = LookupArgument(argName);
                         if (argument != null) return argument;
                         else
@@ -448,14 +462,16 @@ namespace CommandLineParser
         /// <seealso cref="AllowShortSwitchGrouping"/>
         private void ExpandShortSwitches(IList<string> argsList)
         {
-            if (allowShortSwitchGrouping)
+            if (AllowShortSwitchGrouping)
             {
                 for (int i = 0; i < argsList.Count; i++)
                 {
                     string arg = argsList[i];
                     if (arg.Length > 2)
                     {
-                        if (arg[0] == '-' && arg[1] != '-')
+                        char sep = arg[0];
+                        if ((arg[0] == '-' && arg[1] != '-' && AcceptHyphen) 
+                            || (arg[0] == '/' && arg[1] != '/' && AcceptSlash))
                         {
                             argsList.RemoveAt(i);
                             //arg ~ -xyz
@@ -467,9 +483,41 @@ namespace CommandLineParser
                                         string.Format(Messages.EXC_BAD_ARG_IN_GROUP, c));
                                 }
 
-                                argsList.Insert(i, "-" + c);
+                                argsList.Insert(i, sep.ToString() + c);
                                 i++;
                             }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ExpandValueArgumentsWithEqualSigns(IList<string> argsList)
+        {
+            if (AcceptEqualSignSyntaxForValueArguments)
+            {
+                for (int i = 0; i < argsList.Count; i++)
+                {
+                    string arg = argsList[i];
+
+                    Regex r = new Regex("(.*)=\"(.*)\"");
+                    if (AcceptEqualSignSyntaxForValueArguments && r.IsMatch(arg))
+                    {
+                        Match m = r.Match(arg);
+                        string argNameWithSep = m.Groups[1].Value;
+                        string argName = argNameWithSep;
+                        while (argName.StartsWith("-") && AcceptHyphen)
+                            argName = argName.Substring(1);
+                        while (argName.StartsWith("/") && AcceptSlash)
+                            argName = argName.Substring(1);
+                        string argValue = m.Groups[2].Value;
+                        Argument argument = LookupArgument(argName);
+                        if (argument is IValueArgument)
+                        {
+                            argsList.RemoveAt(i);
+                            argsList.Insert(i, argNameWithSep);
+                            i++;
+                            argsList.Insert(i, argValue);
                         }
                     }
                 }

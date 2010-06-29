@@ -188,6 +188,9 @@ namespace CommandLineParser
         /// When set to true, values of <see cref="ValueArgument{TValue}"/> are separeted by space, 
         /// otherwise, they are separeted by equal sign and enclosed in quotation marks
         /// </summary>
+        /// <example>
+        /// --output="somefile.txt"
+        /// </example>
         public bool AcceptEqualSignSyntaxForValueArguments
         {
             get { return acceptEqualSignSyntaxForValueArguments; }

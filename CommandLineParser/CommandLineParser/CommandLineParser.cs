@@ -247,8 +247,8 @@ namespace CommandLineParser
             arguments.ForEach(delegate(Argument a) { a.Init(); });
             List<string> argsList = new List<string>(args);
             InitializeArgumentLookupDictionaries();
-            ExpandShortSwitches(argsList);
             ExpandValueArgumentsWithEqualSigns(argsList);
+            ExpandShortSwitches(argsList);
             AdditionalArgumentsSettings.AdditionalArguments = new string[0];
 
             this.argsNotParsed = args;

@@ -24,7 +24,8 @@ namespace CommandLineParser
 
         private Dictionary<string, Argument> longNameLookup;
 
-        private string[] args;
+        readonly Dictionary<string, Argument> ignoreCaseLookupDirectory = new Dictionary<string, Argument>();
+        private string[] argsNotParsed;
 
         private bool showUsageOnEmptyCommandline = false;
 
@@ -37,10 +38,16 @@ namespace CommandLineParser
 		private readonly AdditionalArgumentsSettings additionalArgumentsSettings = new AdditionalArgumentsSettings();
 
         private readonly List<string> showUsageCommands = new List<string> { "--help", "/?" };
+        
         private string showUsageHeader;
+        
         private string showUsageFooter;
+        
         private bool acceptSlash = true;
+        
         private bool acceptHyphen = true;
+
+        private bool ignoreCase;
 
         #endregion
 
@@ -162,8 +169,18 @@ namespace CommandLineParser
         public bool AcceptHyphen
         {
             get { return acceptHyphen; }
-            set { acceptSlash = value; }
+            set { acceptHyphen = value; }
         }
+
+        /// <summary>
+        /// Argument names case insensitive (--OUTPUT or --output are treated equally)
+        /// </summary>
+        public bool IgnoreCase
+        {
+            get { return ignoreCase; }
+            set { ignoreCase = value; }
+        }
+
 
         /// <summary>
         /// Fills lookup dictionaries with arguments names and aliases 
@@ -178,8 +195,6 @@ namespace CommandLineParser
                 {
                     shortNameLookup.Add(argument.ShortName, argument);
                 }
-                //if (argument.shortAliases != null)
-                //{
                 foreach (char aliasChar in argument.ShortAliases)
                 {
                     shortNameLookup.Add(aliasChar, argument);
@@ -188,16 +203,21 @@ namespace CommandLineParser
                 {
                     longNameLookup.Add(argument.LongName, argument);
                 }
-                //}
-                //if (argument.longAliases != null)
-                //{
                 foreach (string aliasString in argument.LongAliases)
                 {
                     longNameLookup.Add(aliasString, argument);
-                } 
-                //}
+                }     
             }
 
+            ignoreCaseLookupDirectory.Clear();
+            foreach (KeyValuePair<char, Argument> keyValuePair in shortNameLookup)
+            {
+                ignoreCaseLookupDirectory.Add(keyValuePair.Key.ToString().ToUpper(), keyValuePair.Value);
+            }
+            foreach (KeyValuePair<string, Argument> keyValuePair in longNameLookup)
+            {
+                ignoreCaseLookupDirectory.Add(keyValuePair.Key.ToUpper(), keyValuePair.Value);
+            }
         }
 
         /// <summary>
@@ -215,7 +235,7 @@ namespace CommandLineParser
             ExpandShortSwitches(argsList);
             AdditionalArgumentsSettings.AdditionalArguments = new string[0];
 
-            this.args = args;
+            this.argsNotParsed = args;
 
             if ((args.Length == 0 && ShowUsageOnEmptyCommandline) ||
                 (args.Length == 1 && showUsageCommands.Contains(args[0])))
@@ -477,6 +497,10 @@ namespace CommandLineParser
                     return longNameLookup[argName];
                 }
             }
+            if (IgnoreCase && ignoreCaseLookupDirectory.ContainsKey(argName.ToUpper()))
+            {
+                return ignoreCaseLookupDirectory[argName.ToUpper()];
+            }
             // argument not found anywhere
             return null;
         }
@@ -558,7 +582,7 @@ namespace CommandLineParser
         {
             Console.WriteLine(Messages.MSG_PARSING_RESULTS);
             Console.WriteLine("\t" + Messages.MSG_COMMAND_LINE);    
-            foreach (string arg in args)
+            foreach (string arg in argsNotParsed)
             {
                 Console.Write(arg);
                 Console.Write(" ");

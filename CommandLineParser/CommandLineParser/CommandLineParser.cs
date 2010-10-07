@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using CommandLineParser.Arguments;
@@ -565,73 +566,83 @@ namespace CommandLineParser
         }
 
         /// <summary>
-        /// Prints arguments information and usage information to the console. 
+        /// Prints arguments information and usage information to
+        /// the <paramref name="outputStream"/>. 
         /// </summary>
-        public void ShowUsage()
+        public void PrintUsage(TextWriter outputStream)
         {
-            Console.WriteLine(ShowUsageHeader);
+            outputStream.WriteLine(ShowUsageHeader);
 
-            Console.WriteLine(Messages.MSG_USAGE);
+            outputStream.WriteLine(Messages.MSG_USAGE);
 
             foreach (Argument argument in arguments)
             {
-                Console.Write("\t");
+                outputStream.Write("\t");
                 bool comma = false;
                 if (argument.ShortName != ' ')
                 {
-                    Console.Write("-" + argument.ShortName);
+                    outputStream.Write("-" + argument.ShortName);
                     comma = true;
                 }
                 foreach (char c in argument.ShortAliases)
                 {
                     if (comma)
-                        Console.WriteLine(", ");
-                    Console.Write("-" + c);
+                        outputStream.WriteLine(", ");
+                    outputStream.Write("-" + c);
                     comma = true;
                 }
                 if (!String.IsNullOrEmpty(argument.LongName))
                 {
                     if (comma)
-                        Console.Write(", ");
-                    Console.Write("--" + argument.LongName);
+                        outputStream.Write(", ");
+                    outputStream.Write("--" + argument.LongName);
                     comma = true;
                 }
                 foreach (string str in argument.LongAliases)
                 {
                     if (comma)
-                        Console.Write(", ");
-                    Console.Write("--" + str);
-                    comma = true; 
+                        outputStream.Write(", ");
+                    outputStream.Write("--" + str);
+                    comma = true;
                 }
 
                 if (argument.Optional)
-                    Console.Write(Messages.MSG_OPTIONAL);
-                Console.WriteLine("... {0} ", argument.Description);
+                    outputStream.Write(Messages.MSG_OPTIONAL);
+                outputStream.WriteLine("... {0} ", argument.Description);
 
                 if (!String.IsNullOrEmpty(argument.Example))
                 {
-                    Console.WriteLine(Messages.MSG_EXAMPLE_FORMAT, argument.Example);
+                    outputStream.WriteLine(Messages.MSG_EXAMPLE_FORMAT, argument.Example);
                 }
 
                 if (!String.IsNullOrEmpty(argument.FullDescription))
                 {
-                    Console.WriteLine();
-                    Console.WriteLine(argument.FullDescription);
+                    outputStream.WriteLine();
+                    outputStream.WriteLine(argument.FullDescription);
                 }
-                Console.WriteLine();
-            }
-            
-            if (Certifications.Count > 0)
-            {
-                Console.WriteLine(Messages.CERT_REMARKS);
-                foreach (ArgumentCertification certification in Certifications)
-                {
-                    Console.WriteLine("\t" + certification.GetDescription);    
-                }
-                Console.WriteLine();
+                outputStream.WriteLine();
             }
 
-            Console.WriteLine(ShowUsageFooter);
+            if (Certifications.Count > 0)
+            {
+                outputStream.WriteLine(Messages.CERT_REMARKS);
+                foreach (ArgumentCertification certification in Certifications)
+                {
+                    outputStream.WriteLine("\t" + certification.GetDescription);
+                }
+                outputStream.WriteLine();
+            }
+
+            outputStream.WriteLine(ShowUsageFooter);
+        }
+
+
+        /// <summary>
+        /// Prints arguments information and usage information to the console. 
+        /// </summary>
+        public void ShowUsage()
+        {
+            PrintUsage(Console.Out);
         }
 
         /// <summary>

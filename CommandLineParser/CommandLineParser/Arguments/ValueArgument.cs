@@ -22,13 +22,15 @@ namespace CommandLineParser.Arguments
     /// Can be either builtin type or any user type (for which specific
     /// conversion routine is provided - <see cref="ConvertValueHandler"/></typeparam>
     /// <include file='Doc\CommandLineParser.xml' path='CommandLineParser/Arguments/ValueArgument/*'/>
-    public class ValueArgument<TValue>: Argument, IValueArgument  
+    public class ValueArgument<TValue>: Argument, IValueArgument, IArgumentWithDefaultValue
     {
         #region property backing fields
 
         private string stringValue;
 
         private TValue value;
+
+        private TValue defaultValue = default(TValue);
 
         private readonly List<TValue> values = new List<TValue>();
 
@@ -108,7 +110,18 @@ namespace CommandLineParser.Arguments
             }
         }
 
-    	/// <summary>
+        /// <summary>
+        /// Default value of the argument. Restored each time <see cref="Init"/> is called.
+        /// </summary>
+        public TValue DefaultValue
+        {
+            get { return defaultValue; }
+            set { defaultValue = value; }
+        }
+
+        object IArgumentWithDefaultValue.DefaultValue { get { return DefaultValue; } }
+
+        /// <summary>
         /// Values of the ValueArgument - for arguments with multiple values allowed. 
         /// Can be used only if <see cref="Argument.AllowMultiple"/> is set to true.
         /// </summary>
@@ -357,7 +370,7 @@ namespace CommandLineParser.Arguments
         public override void Init()
         {
             base.Init();
-            value = default(TValue);
+            value = DefaultValue;
             values.Clear();
             stringValue = String.Empty;
         }
@@ -400,6 +413,8 @@ namespace CommandLineParser.Arguments
     /// </example>
     public class ValueArgumentAttribute: ArgumentAttribute
     {
+        private static Type underlyingValueArgument;
+
         /// <summary>
         /// Creates proper generic <see cref="ValueArgument{TValue}"/> type for <paramref name="type"/>.
         /// </summary>
@@ -409,7 +424,8 @@ namespace CommandLineParser.Arguments
         {
             Type genericType = typeof(ValueArgument<>);
             Type constructedType = genericType.MakeGenericType(type);
-            return constructedType;
+            underlyingValueArgument = constructedType;
+            return underlyingValueArgument;
         }
 
         /// <summary>
@@ -443,6 +459,21 @@ namespace CommandLineParser.Arguments
         public ValueArgumentAttribute(Type type, char shortName, string longName)
             : base(CreateProperValueArgumentType(type), shortName, longName)
         {
-        }    
+        }
+
+        /// <summary>
+        /// Default value
+        /// </summary>
+        public object DefaultValue
+        {
+            get
+            {
+                return underlyingValueArgument.InvokeMember("DefaultValue", BindingFlags.GetProperty, null, Argument, null);
+            }
+            set
+            {
+                underlyingValueArgument.InvokeMember("DefaultValue", BindingFlags.SetProperty, null, Argument, new[] { value });
+            }
+        }
     }
 }

@@ -206,5 +206,20 @@ namespace CommandLineParser.Arguments
                     "InitAllowedValues", BindingFlags.InvokeMethod, null, Argument, new object[] {value});
             }
         }
+
+        /// <summary>
+        /// Default value
+        /// </summary>
+        public object DefaultValue
+        {
+            get
+            {
+                return argumentType.InvokeMember("DefaultValue", BindingFlags.GetProperty, null, Argument, null);
+            }
+            set
+            {
+                argumentType.InvokeMember("DefaultValue", BindingFlags.SetProperty, null, Argument, new[] { value });
+            }
+        }
     }
 }

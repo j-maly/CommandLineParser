@@ -278,6 +278,14 @@ namespace CommandLineParser
                 ParseAdditionalArguments(argsList, argIndex);   
             }
 
+            foreach (Argument argument in arguments)
+            {
+                if (argument is IArgumentWithDefaultValue && !argument.Parsed)
+                {
+                    argument.UpdateBoundObject();
+                }
+            }
+
             PerformMandatoryArgumentsCheck();
             PerformCertificationCheck();
         }

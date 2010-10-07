@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CommandLineParser</RootNamespace>
     <AssemblyName>CommandLineParser</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
@@ -54,6 +54,7 @@
     <Compile Include="Arguments\DirectoryArgument.cs" />
     <Compile Include="Arguments\FieldArgumentBind.cs" />
     <Compile Include="Arguments\FileArgument.cs" />
+    <Compile Include="Arguments\IArgumentWithDefaultValue.cs" />
     <Compile Include="Arguments\IValueArgument.cs" />
     <Compile Include="CommandLineParser.cs" />
     <Compile Include="Arguments\BoundedValueArgument.cs" />

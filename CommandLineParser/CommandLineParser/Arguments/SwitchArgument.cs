@@ -7,11 +7,11 @@ using CommandLineParser.Exceptions;
 namespace CommandLineParser.Arguments
 {
     /// <summary>
-    /// Switch argument can be used to represent options with true/false logic. It is initialized with default value and
+    /// Switch argument can be used to represent options with <c>true</c>/<c>false</c> logic. It is initialized with default value and
     /// when the argument appears on the command line, the value is flipped. 
     /// </summary>
     /// <include file='Doc\CommandLineParser.xml' path='CommandLineParser/Arguments/SwitchArgument/*'/>
-    public class SwitchArgument: Argument
+    public class SwitchArgument: Argument, IArgumentWithDefaultValue
     {
         #region property backing fieldds
         
@@ -80,17 +80,18 @@ namespace CommandLineParser.Arguments
             set { defaultValue = value; }
         }
 
+        object IArgumentWithDefaultValue.DefaultValue { get { return DefaultValue; } }
 
         /// <summary>
         /// Parse argument. This method reads the argument from the input field and moves the 
         /// index to the next argument.
         /// </summary>
         /// <param name="args">command line arguments</param>
-        /// <param name="i">index to the args array, where this argument occured. </param>
+        /// <param name="i">index to the args array, where this argument occurred. </param>
         internal override void Parse(IList<string> args, ref int i)
         {
             base.Parse(args, ref i);
-            value = !value;
+            Value = !Value;
             Parsed = true; 
             i++;
         }
@@ -123,7 +124,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         internal override void PrintValueInfo()
         {
-            Console.WriteLine(Messages.EXC_ARG_SWITCH_PRINT, Name, value == true ? "1" : "0");
+            Console.WriteLine(Messages.EXC_ARG_SWITCH_PRINT, Name, value ? "1" : "0");
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace CommandLineParser.Arguments
         public override void Init()
         {
             base.Init();
-            this.value = defaultValue;
+            this.Value = DefaultValue;
         }
     }
    
@@ -146,16 +147,16 @@ namespace CommandLineParser.Arguments
     /// attribute and let the CommandLineParse take care of binding the attribute to the field.
     /// </para>
     /// </summary>
-    /// <remarks>Appliable to fields and properties (public).</remarks>
+    /// <remarks>Applicable to fields and properties (public).</remarks>
     /// <remarks>Use <see cref="CommandLineParser.ExtractArgumentAttributes"/> for each object 
-    /// you where you have delcared argument attributes.</remarks>
+    /// you where you have declared argument attributes.</remarks>
     /// <example>
     /// <code source="Examples\AttributeExample.cs" lang="cs" title="Example of declaring argument attributes" />
     /// </example>
     public class SwitchArgumentAttribute: ArgumentAttribute
     {
         /// <summary>
-        /// Creates new instance of SwitchArgumentAtribute.
+        /// Creates new instance of SwitchArgumentAttribute.
         /// </summary>
         /// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>
         /// <param name="defaultValue"><see cref="SwitchArgument.DefaultValue">default value</see> of the underlying argument</param>
@@ -165,7 +166,7 @@ namespace CommandLineParser.Arguments
         }
 
         /// <summary>
-        /// Creates new instance of SwitchArgumentAtribute.
+        /// Creates new instance of SwitchArgumentAttribute.
         /// </summary>
         /// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>
         /// <param name="longName"><see cref="Argument.LongName">long name</see> of the underlying argument</param>

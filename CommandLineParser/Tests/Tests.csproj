@@ -56,6 +56,8 @@
   <ItemGroup>
     <Compile Include="CertifiedValueArgumentTests.cs" />
     <Compile Include="AdditionalArgumentsTests.cs" />
+    <Compile Include="DeclarativeValueTests.cs" />
+    <Compile Include="DeclarativeSwitchTests.cs" />
     <Compile Include="EqualSignSyntaxTests.cs" />
     <Compile Include="IgnoreCaseTests.cs" />
     <Compile Include="GroupCertificationsTests.cs" />

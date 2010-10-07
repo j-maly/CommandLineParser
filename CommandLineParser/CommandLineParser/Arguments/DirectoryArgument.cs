@@ -136,5 +136,20 @@ namespace CommandLineParser.Arguments
 			get { return ((DirectoryArgument)Argument).DirectoryMustExist; }
 			set { ((DirectoryArgument)Argument).DirectoryMustExist = value; }
 		}
+
+        /// <summary>
+        /// Default value
+        /// </summary>
+        public DirectoryInfo DefaultValue
+        {
+            get
+            {
+                return ((DirectoryArgument)Argument).DefaultValue;
+            }
+            set
+            {
+                ((DirectoryArgument)Argument).DefaultValue = value;
+            }
+        }
 	}
 }

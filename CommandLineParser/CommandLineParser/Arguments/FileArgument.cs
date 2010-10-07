@@ -161,5 +161,20 @@ namespace CommandLineParser.Arguments
 			get { return ((FileArgument)Argument).FileMustExist; }
 			set { ((FileArgument)Argument).FileMustExist = value; }
 		}
+
+        /// <summary>
+        /// Default value
+        /// </summary>
+        public FileInfo DefaultValue
+        {
+            get
+            {
+                return ((FileArgument) Argument).DefaultValue;
+            }
+            set
+            {
+                ((FileArgument)Argument).DefaultValue = value;
+            }
+        }
 	}
 }

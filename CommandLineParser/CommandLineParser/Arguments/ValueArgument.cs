@@ -86,7 +86,7 @@ namespace CommandLineParser.Arguments
                 if (Parsed)
                     return stringValue;
                 else
-                    throw new InvalidOperationException(Messages.EXC_ARG_VALUE_STRINGVALUE_ACCESS);
+                    return null;
             }
         }
 

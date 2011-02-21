@@ -85,17 +85,76 @@ namespace CommandLineParser
 		/// </summary>
 		public void ProcessArguments()
 		{
+		    int optionals = 0;
+		    int multiples = 0;
+		    foreach (IValueArgument typedAdditionalArgument in TypedAdditionalArguments)
+		    {
+                if (typedAdditionalArgument.Optional)
+                {
+                    optionals++;
+                }
+		        if (typedAdditionalArgument.AllowMultiple)
+		        {
+		            multiples++;
+		        }
+		    }
+
+		    if (optionals > 1 || multiples > 1)
+		    {
+                throw new CommandLineException("If Optional or AllowMultiple flags are set for additional argument, there can only be one additional argument. ");
+		    }
+
+		    if (optionals == 1 && TypedAdditionalArguments.Count > 1)
+		    {
+                throw new CommandLineException("If Optional or AllowMultiple flags are set for additional argument, there can only be one additional argument. ");
+		    }
+
+		    if (multiples == 1 && TypedAdditionalArguments.Count > 1)
+		    {
+                throw new CommandLineException("If Optional or AllowMultiple flags are set for additional argument, there can only be one additional argument. ");
+		    }
+
 			if (AdditionalArguments.Length < TypedAdditionalArguments.Count)
 			{
-				throw new MissingAdditionalArgumentsException(string.Format(Messages.EXC_NOT_ENOUGH_ADDITIONAL_ARGUMENTS, TypedAdditionalArguments.Count));
+                if (TypedAdditionalArguments.Count == 1 && TypedAdditionalArguments[0].Optional)
+                {
+                    
+                }
+                else
+                {
+                    throw new MissingAdditionalArgumentsException(string.Format(Messages.EXC_NOT_ENOUGH_ADDITIONAL_ARGUMENTS, TypedAdditionalArguments.Count));
+                }
 			}
 
-			for (int i = 0; i < TypedAdditionalArguments.Count; i++)
+		    int i;
+            
+		    for (i = 0; i < Math.Min(TypedAdditionalArguments.Count, AdditionalArguments.Length); i++)
 			{
 				IValueArgument typedAdditionalArgument = TypedAdditionalArguments[i];
 
-				typedAdditionalArgument.Value = typedAdditionalArgument.Convert_obj(AdditionalArguments[i]);
+                if (typedAdditionalArgument.AllowMultiple)
+                {
+                    typedAdditionalArgument.AddToValues(typedAdditionalArgument.Convert_obj(AdditionalArguments[i]));
+                }
+				else
+                {
+                    typedAdditionalArgument.Value = typedAdditionalArgument.Convert_obj(AdditionalArguments[i]);
+                }
 			}
+            
+
+            if (TypedAdditionalArguments.Count == 1)
+            {
+                IValueArgument valueArgument = TypedAdditionalArguments[TypedAdditionalArguments.Count - 1];
+                if (i < AdditionalArguments.Length && valueArgument.AllowMultiple)
+                {
+                    for (; i < AdditionalArguments.Length; i++)
+                    {
+                        TypedAdditionalArguments[0].AddToValues(TypedAdditionalArguments[0].Convert_obj(AdditionalArguments[i]));
+                    }
+                }
+            }
+		    
 		}
 	}
 }

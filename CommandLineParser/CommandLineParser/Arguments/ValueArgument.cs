@@ -160,6 +160,15 @@ namespace CommandLineParser.Arguments
 		}
 
         /// <summary>
+        /// Adds an item to underlying <see cref="Values"/> collection.
+        /// </summary>
+        public void AddToValues(object value)
+        {
+            this.Values.Add((TValue) value);
+        }
+
+
+        /// <summary>
         /// Function that converts string to <typeparamref name="TValue"/> type.
         /// Necessary when non-builtin type is used as <typeparamref name="TValue"/>.
         /// </summary>
@@ -305,7 +314,7 @@ namespace CommandLineParser.Arguments
             return tmpValue;
         }
 
-		/// <summary>
+        /// <summary>
 		/// Non-generic access to <see cref="ValueArgument{TValue}.Convert"/>
 		/// </summary>
 		/// <param name="stringValue">string representing the value</param>

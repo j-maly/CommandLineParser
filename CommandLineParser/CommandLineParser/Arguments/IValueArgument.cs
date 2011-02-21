@@ -21,6 +21,13 @@ namespace CommandLineParser.Arguments
 		/// </summary>
 		bool AllowMultiple { get; set; }
 
+        /// <summary>
+        /// Mark argument optional.
+        /// <see cref="CommandLineParser.CheckMandatoryArguments"/>
+        /// <remarks>Default is true</remarks>
+        /// </summary>
+        bool Optional { get; set; }
+
 		/// <summary>
 		/// Value of the ValueArgument, for arguments with single value.
 		/// Can be used only if <see cref="AllowMultiple"/> is set to false.
@@ -33,11 +40,18 @@ namespace CommandLineParser.Arguments
 		/// </summary>
 		IList<object> Values { get; }
 
+        /// <summary>
+        /// Adds an item to underlying <see cref="Values"/> collection.
+        /// </summary>
+	    void AddToValues(object value);
+
 		/// <summary>
 		/// Non-generic access to <see cref="ValueArgument{TValue}.Convert"/>
 		/// </summary>
 		/// <param name="stringValue">string representing the value</param>
 		/// <returns>parsed value</returns>
 		object Convert_obj(string stringValue);
+
+
 	}
 }

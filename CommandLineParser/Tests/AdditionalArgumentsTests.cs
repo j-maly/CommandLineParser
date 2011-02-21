@@ -78,8 +78,10 @@ namespace Tests
 			 */
             FileArgument additionalFileArgument1 = new FileArgument('_');
             additionalFileArgument1.FileMustExist = false;
+            additionalFileArgument1.Optional = false;
             FileArgument additionalFileArgument2 = new FileArgument('_');
             additionalFileArgument2.FileMustExist = false;
+            additionalFileArgument2.Optional = false;
             CommandLineParser.AdditionalArgumentsSettings.TypedAdditionalArguments.Add(additionalFileArgument1);
             CommandLineParser.AdditionalArgumentsSettings.TypedAdditionalArguments.Add(additionalFileArgument2);
         }

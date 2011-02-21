@@ -87,7 +87,7 @@ namespace CommandLineParser.Arguments
         #endregion
 
         /// <summary>
-        /// Mark argument optional. Arguments with Optional = false can be checked in <see cref="CommandLineParser.ParseCommandLine(string[])"/>"/> method.
+        /// Mark argument optional. 
         /// <see cref="CommandLineParser.CheckMandatoryArguments"/>
         /// <remarks>Default is true</remarks>
         /// </summary>

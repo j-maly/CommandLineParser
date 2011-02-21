@@ -1,4 +1,4 @@
-﻿#define autoargs 
+﻿//#define autoargs 
 //uncomment autoargs defined, to see a declarative way of using the library 
 
 using System;
@@ -117,6 +117,14 @@ namespace ParserTest
         	parser.Arguments.Add(inputFile);
         	parser.Arguments.Add(outputFile);
 			parser.Arguments.Add(inputDirectory);
+
+		    parser.AdditionalArgumentsSettings.AcceptAdditionalArguments = true;
+		    parser.AdditionalArgumentsSettings.RequestedAdditionalArgumentsCount = 1;
+		    FileArgument f = new FileArgument('X');
+		    f.AllowMultiple = true;
+		    f.Optional = true;
+            parser.AdditionalArgumentsSettings.TypedAdditionalArguments.Add(f);
+		    parser.AcceptSlash = true;
         	parser.ShowUsage();
 #endif
 
@@ -138,6 +146,7 @@ namespace ParserTest
 			examples.Add(new[] { "/show", "/hide" }); //parses OK 
 			examples.Add(new[] { "/d" }); // error, missing value
 			examples.Add(new[] { "/d", "C:\\Input" });
+			examples.Add(new[] { "file1", "file2" });
 
 			foreach (string[] arguments in examples)
 			{
@@ -168,8 +177,11 @@ namespace ParserTest
 			 */
 			FileArgument additionalFileArgument1 = new FileArgument('_');
 			additionalFileArgument1.FileMustExist = false;
+		    additionalFileArgument1.Optional = false;
 			FileArgument additionalFileArgument2 = new FileArgument('_');
 			additionalFileArgument2.FileMustExist = false;
+            additionalFileArgument2.Optional = false;
+            parser.AdditionalArgumentsSettings.TypedAdditionalArguments.Clear();
 			parser.AdditionalArgumentsSettings.TypedAdditionalArguments.Add(additionalFileArgument1);
 			parser.AdditionalArgumentsSettings.TypedAdditionalArguments.Add(additionalFileArgument2);
 			try

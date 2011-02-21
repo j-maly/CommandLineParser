@@ -39,7 +39,7 @@ namespace CommandLineParser
 
 		private readonly AdditionalArgumentsSettings additionalArgumentsSettings = new AdditionalArgumentsSettings();
 
-        private readonly List<string> showUsageCommands = new List<string> { "--help", "/?" };
+        private readonly List<string> showUsageCommands = new List<string> { "--help", "/?", "/help" };
         
         private string showUsageHeader;
         
@@ -481,6 +481,11 @@ namespace CommandLineParser
                     string arg = argsList[i];
                     if (arg.Length > 2)
                     {
+                        if (arg[0] == '/' && arg[1] != '/' && AcceptSlash && longNameLookup.ContainsKey(arg.Substring(1)))
+                            continue;
+                        if (ShowUsageCommands.Contains(arg))
+                            continue;
+                        
                         char sep = arg[0];
                         if ((arg[0] == '-' && arg[1] != '-' && AcceptHyphen) 
                             || (arg[0] == '/' && arg[1] != '/' && AcceptSlash))

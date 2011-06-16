@@ -5,21 +5,23 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{251387D3-9F28-4FB2-90A4-01DD05F1D2AF}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{FBB83C7A-3BB4-45FC-8F69-9E912AD63821}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CommandLineParser</RootNamespace>
-    <AssemblyName>CommandLineParser</AssemblyName>
+    <RootNamespace>ParserTest</RootNamespace>
+    <AssemblyName>ParserTest</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,7 +32,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -40,7 +41,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\CommandLineParser.XML</DocumentationFile>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
@@ -49,45 +49,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdditionalArgumentsSettings.cs" />
-    <Compile Include="Arguments\Argument.cs" />
-    <Compile Include="Arguments\DirectoryArgument.cs" />
-    <Compile Include="Arguments\FieldArgumentBind.cs" />
-    <Compile Include="Arguments\FileArgument.cs" />
-    <Compile Include="Arguments\IArgumentWithDefaultValue.cs" />
-    <Compile Include="Arguments\IValueArgument.cs" />
-    <Compile Include="CommandLineParser.cs" />
-    <Compile Include="Arguments\BoundedValueArgument.cs" />
-    <Compile Include="Arguments\EnumeratedValueArgument.cs" />
-    <Compile Include="Arguments\CertifiedValueArgument.cs" />
-    <Compile Include="Exceptions\Exceptions.cs" />
-    <Compile Include="IResource.cs" />
-    <Compile Include="Messages.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Messages.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Point.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Arguments\SwitchArgument.cs" />
-    <Compile Include="Arguments\ValueArgument.cs" />
-    <Compile Include="Validation\ArgumentCertification.cs" />
-    <Compile Include="Validation\ArgumentGroupCertification.cs" />
-    <Compile Include="Validation\DistinctGroupsCertification.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Arguments\Arguments.cd" />
-    <None Include="Arguments\Attributes.cd" />
+    <ProjectReference Include="..\CommandLineParser\CommandLineParser_VS2010_DotNet_2.0.csproj">
+      <Project>{251387D3-9F28-4FB2-90A4-01DD05F1D2AF}</Project>
+      <Name>CommandLineParser_VS2010_DotNet_2.0</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CommandLineParser.xml" />
-    <Content Include="Doc\CommandLineParser.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Messages.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -98,6 +71,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>REM copy $(TargetPath) D:\Programování\XCase\CommandLineParser\ /Y</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

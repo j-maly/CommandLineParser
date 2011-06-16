@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserTest_VS2010_DotNet_4.0", "ParserTest\ParserTest_VS2010_DotNet_4.0.csproj", "{40B83C7A-3BB4-45FC-8F69-9E912AD63821}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLineParser_VS2010_DotNet_4.0", "CommandLineParser\CommandLineParser_VS2010_DotNet_4.0.csproj", "{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs10
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Tests\\Tests.csproj
+		SccProjectName1 = Tests
+		SccLocalPath1 = Tests
+		SccProjectUniqueName2 = ParserTest\\ParserTest_VS2010_DotNet_4.0.csproj
+		SccProjectName2 = ParserTest
+		SccLocalPath2 = ParserTest
+		SccProjectUniqueName3 = CommandLineParser\\CommandLineParser_VS2010_DotNet_4.0.csproj
+		SccProjectName3 = CommandLineParser
+		SccLocalPath3 = CommandLineParser
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{40B83C7A-3BB4-45FC-8F69-9E912AD63821}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40B83C7A-3BB4-45FC-8F69-9E912AD63821}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40B83C7A-3BB4-45FC-8F69-9E912AD63821}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{40B83C7A-3BB4-45FC-8F69-9E912AD63821}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{40B83C7A-3BB4-45FC-8F69-9E912AD63821}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{40B83C7A-3BB4-45FC-8F69-9E912AD63821}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40B83C7A-3BB4-45FC-8F69-9E912AD63821}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40B83C7A-3BB4-45FC-8F69-9E912AD63821}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{40B83C7A-3BB4-45FC-8F69-9E912AD63821}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{40B83C7A-3BB4-45FC-8F69-9E912AD63821}.Release|x86.ActiveCfg = Release|Any CPU
+		{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}.Debug|x86.ActiveCfg = Debug|x86
+		{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}.Debug|x86.Build.0 = Debug|x86
+		{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}.Release|Any CPU.ActiveCfg = Release|x86
+		{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}.Release|Mixed Platforms.Build.0 = Release|x86
+		{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}.Release|x86.ActiveCfg = Release|x86
+		{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}.Release|x86.Build.0 = Release|x86
+		{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

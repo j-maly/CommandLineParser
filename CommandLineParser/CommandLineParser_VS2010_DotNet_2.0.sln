@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLineParser_VS2010", "CommandLineParser\CommandLineParser_VS2010.csproj", "{251387D3-9F28-4FB2-90A4-01DD05F1D2AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandLineParser_VS2010_DotNet_2.0", "CommandLineParser\CommandLineParser_VS2010_DotNet_2.0.csproj", "{251387D3-9F28-4FB2-90A4-01DD05F1D2AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserTest_VS2010", "ParserTest\ParserTest_VS2010.csproj", "{FBB83C7A-3BB4-45FC-8F69-9E912AD63821}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserTest_VS2010_DotNet_2.0", "ParserTest\ParserTest_VS2010_DotNet_2.0.csproj", "{FBB83C7A-3BB4-45FC-8F69-9E912AD63821}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{1D9E8E7F-60A0-4671-92CA-DD1717CD04A8}"
 EndProject
@@ -11,17 +11,17 @@ Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
 		SccNumberOfProjects = 4
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs10.codeplex.com/
+		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs10
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = ParserTest\\ParserTest_VS2010.csproj
-		SccProjectName1 = ParserTest
-		SccLocalPath1 = ParserTest
-		SccProjectUniqueName2 = CommandLineParser\\CommandLineParser_VS2010.csproj
+		SccProjectUniqueName1 = Tests\\Tests.csproj
+		SccProjectName1 = Tests
+		SccLocalPath1 = Tests
+		SccProjectUniqueName2 = CommandLineParser\\CommandLineParser_VS2010_DotNet_2.0.csproj
 		SccProjectName2 = CommandLineParser
 		SccLocalPath2 = CommandLineParser
-		SccProjectUniqueName3 = Tests\\Tests.csproj
-		SccProjectName3 = Tests
-		SccLocalPath3 = Tests
+		SccProjectUniqueName3 = ParserTest\\ParserTest_VS2010_DotNet_2.0.csproj
+		SccProjectName3 = ParserTest
+		SccLocalPath3 = ParserTest
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

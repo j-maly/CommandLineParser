@@ -256,7 +256,7 @@
     <value>All of these arguments: {0} must be used.</value>
   </data>
   <data name="GROUP_AT_LEAST_ONE_USED" xml:space="preserve">
-    <value>Only one of these arguments: {0} can be used.</value>
+    <value>At least one of these arguments: {0} must be used.</value>
   </data>
   <data name="GROUP_EXACTLY_ONE_USED" xml:space="preserve">
     <value>One (and only one) of these arguments: {0} must be used.</value>

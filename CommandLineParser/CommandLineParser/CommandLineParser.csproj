@@ -47,6 +47,7 @@
     <Compile Include="Arguments\DirectoryArgument.cs" />
     <Compile Include="Arguments\FieldArgumentBind.cs" />
     <Compile Include="Arguments\FileArgument.cs" />
+    <Compile Include="Arguments\IArgumentWithDefaultValue.cs" />
     <Compile Include="Arguments\IValueArgument.cs" />
     <Compile Include="CommandLineParser.cs" />
     <Compile Include="Arguments\BoundedValueArgument.cs" />

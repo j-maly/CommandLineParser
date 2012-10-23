@@ -266,6 +266,22 @@ namespace CommandLineParser.Arguments
                             targetCollection = (ICollection<TValue>)(info as FieldInfo).GetValue(Bind.Value.Object);
                         else if (info is PropertyInfo)
                             targetCollection = (ICollection<TValue>)(info as PropertyInfo).GetValue(Bind.Value.Object, null);
+
+
+						if (targetCollection == null)
+						{
+							if (info is FieldInfo)
+							{
+								targetCollection = (ICollection<TValue>)Activator.CreateInstance((info as FieldInfo).FieldType);
+								(info as FieldInfo).SetValue(Bind.Value.Object, targetCollection);
+							}
+							else if (info is PropertyInfo)
+							{
+								targetCollection = (ICollection<TValue>)Activator.CreateInstance((info as PropertyInfo).PropertyType);
+								(info as PropertyInfo).SetValue(Bind.Value.Object, targetCollection, null);
+							}
+						}
+
                         targetCollection.Clear();
                         foreach (TValue value in values)
                         {

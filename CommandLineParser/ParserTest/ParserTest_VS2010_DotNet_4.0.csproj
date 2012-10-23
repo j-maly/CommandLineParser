@@ -57,8 +57,8 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CommandLineParser\CommandLineParser_VS2010_DotNet_4.0.csproj">
-      <Project>{401387D3-9F28-4FB2-90A4-01DD05F1D2AF}</Project>
+    <ProjectReference Include="..\CommandLineParser_4.0\CommandLineParser_VS2010_DotNet_4.0.csproj">
+      <Project>{251387d3-9f28-4fb2-90a4-01dd05f1d2af}</Project>
       <Name>CommandLineParser_VS2010_DotNet_4.0</Name>
     </ProjectReference>
   </ItemGroup>

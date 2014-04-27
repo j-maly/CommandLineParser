@@ -117,7 +117,7 @@ namespace CommandLineParser.Arguments
         /// <exception cref="CommandLineArgumentOutOfRangeException">thrown when <paramref name="value"/> does not belong to the set of allowed values.</exception>
         internal override void Certify(TValue value)
         {
-            if (!allowedValues.Contains(Value))
+            if (!allowedValues.Contains(value))
                 throw new CommandLineArgumentOutOfRangeException(String.Format(
                                                                      Messages.EXC_ARG_ENUM_OUT_OF_RANGE, Value,
                                                                      Name), Name);

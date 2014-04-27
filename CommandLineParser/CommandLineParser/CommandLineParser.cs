@@ -52,6 +52,7 @@ namespace CommandLineParser
         private bool ignoreCase;
 
         private bool acceptEqualSignSyntaxForValueArguments;
+        private bool parsingSucceeded;
 
         #endregion
 
@@ -199,6 +200,15 @@ namespace CommandLineParser
         }
 
         /// <summary>
+        /// This property is set to true when <see cref="ParseCommandLine"/> finishes successfully. 
+        /// </summary>
+        public bool ParsingSucceeded
+        {
+            get { return parsingSucceeded; }
+            set { parsingSucceeded = value; }
+        }
+
+        /// <summary>
         /// Fills lookup dictionaries with arguments names and aliases 
         /// </summary>
         private void InitializeArgumentLookupDictionaries()
@@ -245,6 +255,7 @@ namespace CommandLineParser
         /// <param name="args">Command line arguments</param>
         public void ParseCommandLine(string[] args)
         {
+            ParsingSucceeded = false;
             arguments.ForEach(delegate(Argument a) { a.Init(); });
             List<string> argsList = new List<string>(args);
             InitializeArgumentLookupDictionaries();
@@ -289,6 +300,7 @@ namespace CommandLineParser
 
             PerformMandatoryArgumentsCheck();
             PerformCertificationCheck();
+            ParsingSucceeded = true; 
         }
 
         /// <summary>

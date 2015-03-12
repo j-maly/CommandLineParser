@@ -1,0 +1,47 @@
+﻿{
+    "version": "1.0.0-*",
+    "dependencies": {
+        "CommandLineParser": "2.7.0.0-*",
+
+        "xunit": "2.0.0-rc3-*",
+        "xunit.runner.aspnet": "2.0.0-rc3-*",
+        "xunit.runner.visualstudio": "2.0.0-rc4-build1049"
+    },
+
+    "compilationOptions": {
+        "define": [ "REFLECTIONBRIDGE" ]
+    },
+
+    "commands": {
+        //"test": "xunit.runner.visualstudio"
+        "test": "xunit.runner.aspnet"
+    },
+
+    "frameworks": {
+        /*"net45": {
+            "frameworkAssemblies": {
+                "System.Runtime": "4.0.0.0",
+                "System.Threading.Tasks": "4.0.0.0",
+                "System.Data": "4.0.0.0",
+                "System.Xml": "4.0.0.0"
+            }
+        },*/
+        "aspnet5": {
+        },
+        "aspnetcore50": {
+            "dependencies": {
+                "System.Runtime": "",
+                /*"System.Diagnostics.Debug": "4.0.10-beta-22523",
+                "System.Globalization": "4.0.10-beta-22523",
+                "System.ObjectModel": "4.0.10-beta-22523",
+                "System.Reflection": "4.0.10-beta-22523",
+                "System.Reflection.Extensions": "4.0.0-beta-22523",
+                "System.Runtime.Extensions": "4.0.10-beta-22523",
+                "System.Threading": "4.0.10-beta-22605",
+                "System.Threading.Thread": "4.0.0-beta-22523",
+                "System.Threading.ThreadPool": "4.0.10-beta-22605",
+                "System.Xml.XDocument": "4.0.0-beta-22605"*/
+            }
+        }
+    }
+}

@@ -1,0 +1,63 @@
+﻿{
+    // NuGet settings
+    "version": "2.7.0.0-*",
+    "authors": [ "Jakub Maly", "NTTAKR", "Stef Heyenrath" ],
+    "owners": [ "Stef Heyenrath" ],
+    "description": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
+    "summary": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
+    "tags": [ "commandline", "parse", "validate", "args", "arguments" ],
+    "projectUrl": "https://commandlineparser.codeplex.com",
+    "releasenotes": "AspNet v5",
+    // NuGet settings
+
+    "dependencies": {
+        "ReflectionBridge": "0.0.3"
+    },
+
+    "compilationOptions": {
+        "define": [ "REFLECTIONBRIDGE" ]
+    },
+
+    "frameworks": {
+        "net40": {
+            "frameworkAssemblies": {
+                "System.Data": "4.0.0.0",
+                "System.Xml": "4.0.0.0"
+            }
+        },
+        "net45": {
+            "frameworkAssemblies": {
+                "System.Data": "4.0.0.0",
+                "System.Xml": "4.0.0.0",
+                "System.IO": "4.0.0.0"
+            }
+        },
+        "aspnet50": {
+        },
+        "aspnetcore50": {
+            "dependencies": {
+                "System.Runtime": "4.0.20-beta-22523",
+                "System.Runtime.Extensions": "4.0.10-beta-22605",
+                "System.Runtime.Serialization.Primitives": "4.0.0-beta-22605",
+
+                "System.Console": "4.0.0-beta-22605",
+                //"System.Collections": "4.0.10-beta-22605",
+
+                "System.IO": "4.0.10-beta-22605",
+                "System.IO.FileSystem": "4.0.0-beta-22605",
+
+                "System.Globalization": "4.0.10-beta-22605",
+                //"System.Linq": "4.0.0-beta-22605",
+
+                "System.Resources.ResourceManager": "4.0.0-beta-22605",
+
+                //"System.Reflection": "4.0.10-beta-22605",
+                //"System.Reflection.TypeExtensions": "4.0.0-beta-22605",
+                //"System.Reflection.Primitives": "4.0.0-beta-22605",
+                //"System.Reflection.Extensions": "4.0.0-beta-22605",
+
+                "System.Text.RegularExpressions": "4.0.10-beta-22605"
+            }
+        }
+    }
+}

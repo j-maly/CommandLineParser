@@ -1,0 +1,34 @@
+{
+    "version": "1.0.0-*",
+    "authors": [ "Stef Heyenrath" ],
+    "dependencies": {
+        "CommandLineParser": "2.7.0.0-*"
+    },
+
+    "compilationOptions": {
+        "define": [ "REFLECTIONBRIDGE" ]
+    },
+
+    "commands": {
+        "ParserTest": "run"
+    },
+
+    "frameworks": {
+        "net40": {
+            "frameworkAssemblies": {
+            }
+        },
+        "net45": {
+            "frameworkAssemblies": {
+            }
+        },
+        "aspnet50": {
+
+        },
+        "aspnetcore50": {
+            "dependencies": {
+
+            }
+        }
+    }
+}

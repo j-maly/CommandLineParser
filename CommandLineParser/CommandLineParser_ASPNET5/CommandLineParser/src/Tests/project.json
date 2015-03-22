@@ -1,11 +1,11 @@
 ﻿{
     "version": "1.0.0-*",
     "dependencies": {
-        "CommandLineParser": "2.7.0.0-*",
+        "CommandLineParser": "2.7-*",
 
-        "xunit": "2.0.0-rc3-*",
-        "xunit.runner.aspnet": "2.0.0-rc3-*",
-        "xunit.runner.visualstudio": "2.0.0-rc4-build1049"
+        "xunit": "2.1-*",
+        "xunit.runner.aspnet": "2.1-*",
+        "xunit.runner.visualstudio": "2.1-*"
     },
 
     "compilationOptions": {
@@ -13,7 +13,7 @@
     },
 
     "commands": {
-        //"test": "xunit.runner.visualstudio"
+        "test-vs": "xunit.runner.visualstudio",
         "test": "xunit.runner.aspnet"
     },
 

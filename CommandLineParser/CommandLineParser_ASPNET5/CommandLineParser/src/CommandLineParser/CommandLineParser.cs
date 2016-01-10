@@ -7,7 +7,7 @@ using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
 using CommandLineParser.Validation;
 
-#if ASPNETCORE50
+#if DNXCORE50
 using ReflectionBridge.Extensions;
 #endif
 

@@ -1,17 +1,18 @@
 ﻿{
-    // NuGet settings
     "version": "2.7.0.0-*",
     "authors": [ "Trupik", "NTTAKR", "Stef Heyenrath" ],
     "owners": [ "Stef Heyenrath" ],
     "description": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
     "summary": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
     "tags": [ "commandline", "parse", "validate", "args", "arguments" ],
-    "projectUrl": "https://commandlineparser.codeplex.com",
+    "projectUrl": "https://github.com/j-maly/CommandLineParser/",
+    "tooling": {
+        "defaultNamespace": "CommandLineParser"
+    },
     "releasenotes": "AspNet v5",
-    // NuGet settings
 
     "dependencies": {
-        "ReflectionBridge": "0.0.3"
+        "ReflectionBridge": "0.0.6"
     },
 
     "compilationOptions": {
@@ -19,37 +20,40 @@
     },
 
     "frameworks": {
+        "net20": {
+        },
+        "net35": {
+        },
         "net40": {
-            "frameworkAssemblies": {
-                "System.Data": "4.0.0.0",
-                "System.Xml": "4.0.0.0"
-            }
         },
         "net45": {
-            "frameworkAssemblies": {
-                "System.Data": "4.0.0.0",
-                "System.Xml": "4.0.0.0",
-                "System.IO": "4.0.0.0"
-            }
         },
-        "aspnet50": {
+        "net451": {
         },
-        "aspnetcore50": {
+        "net452": {
+        },
+        "dnx451": {
+        },
+        "dnx452": {
+        },
+        "dnxcore5": {
             "dependencies": {
-                "System.Runtime": "4.0.20-beta-22523",
-                "System.Runtime.Extensions": "4.0.10-beta-22605",
-                "System.Runtime.Serialization.Primitives": "4.0.0-beta-22605",
+                "Microsoft.CSharp": "4.0.1-beta-*",
 
-                "System.Console": "4.0.0-beta-22605",
+                "System.Runtime": "4.0.21-beta-*",
+                "System.Runtime.Extensions": "4.0.11-beta-*",
+                "System.Runtime.Serialization.Primitives": "4.0.11-beta-*",
 
-                "System.IO": "4.0.10-beta-22605",
-                "System.IO.FileSystem": "4.0.0-beta-22605",
+                "System.Console": "4.0.0-beta-*",
 
-                "System.Globalization": "4.0.10-beta-22605",
+                "System.IO": "4.0.11-beta-*",
+                "System.IO.FileSystem": "4.0.1-beta-*",
 
-                "System.Resources.ResourceManager": "4.0.0-beta-22605",
+                "System.Globalization": "4.0.10",
 
-                "System.Text.RegularExpressions": "4.0.10-beta-22605"
+                "System.Resources.ResourceManager": "4.0.1-beta-23409",
+
+                "System.Text.RegularExpressions": "4.0.11-beta-*"
             }
         }
     }

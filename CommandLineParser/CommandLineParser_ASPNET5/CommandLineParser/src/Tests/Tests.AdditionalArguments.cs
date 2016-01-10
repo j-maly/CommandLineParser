@@ -1,5 +1,6 @@
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
+using ParserTest;
 using Xunit;
 
 namespace Tests

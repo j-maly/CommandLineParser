@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0-*",
+    "version": "2.7.0.0-*",
     "authors": [ "Stef Heyenrath" ],
     "dependencies": {
         "CommandLineParser": "2.7.0.0-*"
@@ -14,20 +14,40 @@
     },
 
     "frameworks": {
+        "net20": {
+        },
+        "net35": {
+        },
         "net40": {
-            "frameworkAssemblies": {
-            }
         },
         "net45": {
-            "frameworkAssemblies": {
-            }
         },
-        "aspnet50": {
-
+        "net451": {
         },
-        "aspnetcore50": {
+        "net452": {
+        },
+        "dnx451": {
+        },
+        "dnx452": {
+        },
+        "dnxcore5": {
             "dependencies": {
+                "Microsoft.CSharp": "4.0.1-beta-*",
 
+                "System.Runtime": "4.0.21-beta-*",
+                "System.Runtime.Extensions": "4.0.11-beta-*",
+                "System.Runtime.Serialization.Primitives": "4.0.11-beta-*",
+
+                "System.Console": "4.0.0-beta-*",
+
+                "System.IO": "4.0.11-beta-*",
+                "System.IO.FileSystem": "4.0.1-beta-*",
+
+                "System.Globalization": "4.0.10",
+
+                "System.Resources.ResourceManager": "4.0.1-beta-23409",
+
+                "System.Text.RegularExpressions": "4.0.11-beta-*"
             }
         }
     }

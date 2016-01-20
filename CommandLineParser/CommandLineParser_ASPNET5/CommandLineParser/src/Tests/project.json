@@ -5,9 +5,7 @@
         "ParserTest": "2.7-*",
 
         "xunit": "2.1.0",
-        "xunit.runner.dnx": "2.1.0-rc1-build204",
-        "xunit.runner.aspnet": "2.0.0-aspnet-rc2-*",
-        "xunit.runner.visualstudio": "2.1.0"
+        "xunit.runner.dnx": "2.1.0-rc1-build204"
     },
 
     "compilationOptions": {
@@ -15,9 +13,7 @@
     },
 
     "commands": {
-        "test-vs": "xunit.runner.visualstudio",
-        "test": "xunit.runner.aspnet",
-        "test-dnx": "xunit.runner.dnx"
+        "test": "xunit.runner.dnx"
     },
 
     "frameworks": {

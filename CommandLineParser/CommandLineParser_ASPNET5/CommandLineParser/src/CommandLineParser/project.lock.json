@@ -423,7 +423,7 @@
           "lib/DNXCore50/System.Reflection.TypeExtensions.dll": {}
         }
       },
-      "System.Resources.ResourceManager/4.0.1-beta-23409": {
+      "System.Resources.ResourceManager/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
           "System.Globalization": "4.0.0",
@@ -431,7 +431,7 @@
           "System.Runtime": "4.0.0"
         },
         "compile": {
-          "ref/dotnet/System.Resources.ResourceManager.dll": {}
+          "ref/dotnet5.1/System.Resources.ResourceManager.dll": {}
         },
         "runtime": {
           "lib/DNXCore50/System.Resources.ResourceManager.dll": {}
@@ -1207,7 +1207,7 @@
           "lib/DNXCore50/System.Reflection.TypeExtensions.dll": {}
         }
       },
-      "System.Resources.ResourceManager/4.0.1-beta-23409": {
+      "System.Resources.ResourceManager/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
           "System.Globalization": "4.0.0",
@@ -1215,7 +1215,7 @@
           "System.Runtime": "4.0.0"
         },
         "compile": {
-          "ref/dotnet/System.Resources.ResourceManager.dll": {}
+          "ref/dotnet5.1/System.Resources.ResourceManager.dll": {}
         },
         "runtime": {
           "lib/DNXCore50/System.Resources.ResourceManager.dll": {}
@@ -1669,7 +1669,7 @@
           "lib/DNXCore50/System.Reflection.TypeExtensions.dll": {}
         }
       },
-      "System.Resources.ResourceManager/4.0.1-beta-23409": {
+      "System.Resources.ResourceManager/4.0.1-beta-23516": {
         "type": "package",
         "dependencies": {
           "System.Globalization": "4.0.0",
@@ -1677,7 +1677,7 @@
           "System.Runtime": "4.0.0"
         },
         "compile": {
-          "ref/dotnet/System.Resources.ResourceManager.dll": {}
+          "ref/dotnet5.1/System.Resources.ResourceManager.dll": {}
         },
         "runtime": {
           "lib/DNXCore50/System.Resources.ResourceManager.dll": {}
@@ -2643,10 +2643,10 @@
         "System.Reflection.TypeExtensions.nuspec"
       ]
     },
-    "System.Resources.ResourceManager/4.0.1-beta-23409": {
+    "System.Resources.ResourceManager/4.0.1-beta-23516": {
       "type": "package",
       "serviceable": true,
-      "sha512": "WfQwSR/xhY2slMGaFeu6+psuGJrbqXZY5PQ/QJVqxck1cp1LMTiFXgUXvkYlIGWfbyPNDNjPy6P0bCBXT0suyQ==",
+      "sha512": "d1PiB1k57GP5EJZJKnJ+LgrOQCgHPnn5oySQAy4pL2MpEDDpTyTPKv+q9aRWUA25ICXaHkWJzeTkj898ePteWQ==",
       "files": [
         "lib/DNXCore50/System.Resources.ResourceManager.dll",
         "lib/net45/_._",
@@ -2654,25 +2654,35 @@
         "lib/win8/_._",
         "lib/wp80/_._",
         "lib/wpa81/_._",
-        "ref/dotnet/System.Resources.ResourceManager.dll",
+        "ref/dotnet5.1/de/System.Resources.ResourceManager.xml",
+        "ref/dotnet5.1/es/System.Resources.ResourceManager.xml",
+        "ref/dotnet5.1/fr/System.Resources.ResourceManager.xml",
+        "ref/dotnet5.1/it/System.Resources.ResourceManager.xml",
+        "ref/dotnet5.1/ja/System.Resources.ResourceManager.xml",
+        "ref/dotnet5.1/ko/System.Resources.ResourceManager.xml",
+        "ref/dotnet5.1/ru/System.Resources.ResourceManager.xml",
+        "ref/dotnet5.1/System.Resources.ResourceManager.dll",
+        "ref/dotnet5.1/System.Resources.ResourceManager.xml",
+        "ref/dotnet5.1/zh-hans/System.Resources.ResourceManager.xml",
+        "ref/dotnet5.1/zh-hant/System.Resources.ResourceManager.xml",
         "ref/net45/_._",
+        "ref/netcore50/de/System.Resources.ResourceManager.xml",
+        "ref/netcore50/es/System.Resources.ResourceManager.xml",
+        "ref/netcore50/fr/System.Resources.ResourceManager.xml",
+        "ref/netcore50/it/System.Resources.ResourceManager.xml",
+        "ref/netcore50/ja/System.Resources.ResourceManager.xml",
+        "ref/netcore50/ko/System.Resources.ResourceManager.xml",
+        "ref/netcore50/ru/System.Resources.ResourceManager.xml",
         "ref/netcore50/System.Resources.ResourceManager.dll",
+        "ref/netcore50/System.Resources.ResourceManager.xml",
+        "ref/netcore50/zh-hans/System.Resources.ResourceManager.xml",
+        "ref/netcore50/zh-hant/System.Resources.ResourceManager.xml",
         "ref/win8/_._",
         "ref/wp80/_._",
         "ref/wpa81/_._",
-        "runtimes/win8-aot/lib/netcore50/de/System.Resources.ResourceManager.xml",
-        "runtimes/win8-aot/lib/netcore50/es/System.Resources.ResourceManager.xml",
-        "runtimes/win8-aot/lib/netcore50/fr/System.Resources.ResourceManager.xml",
-        "runtimes/win8-aot/lib/netcore50/it/System.Resources.ResourceManager.xml",
-        "runtimes/win8-aot/lib/netcore50/ja/System.Resources.ResourceManager.xml",
-        "runtimes/win8-aot/lib/netcore50/ko/System.Resources.ResourceManager.xml",
-        "runtimes/win8-aot/lib/netcore50/ru/System.Resources.ResourceManager.xml",
         "runtimes/win8-aot/lib/netcore50/System.Resources.ResourceManager.dll",
-        "runtimes/win8-aot/lib/netcore50/System.Resources.ResourceManager.xml",
-        "runtimes/win8-aot/lib/netcore50/zh-hans/System.Resources.ResourceManager.xml",
-        "runtimes/win8-aot/lib/netcore50/zh-hant/System.Resources.ResourceManager.xml",
-        "System.Resources.ResourceManager.4.0.1-beta-23409.nupkg",
-        "System.Resources.ResourceManager.4.0.1-beta-23409.nupkg.sha512",
+        "System.Resources.ResourceManager.4.0.1-beta-23516.nupkg",
+        "System.Resources.ResourceManager.4.0.1-beta-23516.nupkg.sha512",
         "System.Resources.ResourceManager.nuspec"
       ]
     },
@@ -3247,7 +3257,7 @@
       "System.IO >= 4.0.11-beta-*",
       "System.IO.FileSystem >= 4.0.1-beta-*",
       "System.Globalization >= 4.0.10",
-      "System.Resources.ResourceManager >= 4.0.1-beta-23409",
+      "System.Resources.ResourceManager >= 4.0.1-beta-*",
       "System.Text.RegularExpressions >= 4.0.11-beta-*"
     ]
   }

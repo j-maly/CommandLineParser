@@ -1,0 +1,9 @@
+{
+  "profiles": [
+    {
+      "name": "ParserTest",
+      "commandName": "ParserTest",
+      "commandLineArgs": "-s x"
+    }
+  ]
+}

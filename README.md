@@ -13,6 +13,7 @@ Support for the following Frameworks:
 * net452
 * dnx451
 * dnx452
+* net46
 * dnxcore5 
 
 ## Motivational Example

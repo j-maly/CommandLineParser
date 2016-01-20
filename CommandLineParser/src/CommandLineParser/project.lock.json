@@ -113,6 +113,23 @@
         }
       }
     },
+    ".NETFramework,Version=v4.6": {
+      "ReflectionBridge/0.0.6": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net46/ReflectionBridge.dll": {}
+        },
+        "runtime": {
+          "lib/net46/ReflectionBridge.dll": {}
+        }
+      }
+    },
     "DNX,Version=v4.5.1": {
       "ReflectionBridge/0.0.6": {
         "type": "package",
@@ -766,6 +783,40 @@
         },
         "runtime": {
           "lib/net452/ReflectionBridge.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6/win7-x86": {
+      "ReflectionBridge/0.0.6": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net46/ReflectionBridge.dll": {}
+        },
+        "runtime": {
+          "lib/net46/ReflectionBridge.dll": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.6/win7-x64": {
+      "ReflectionBridge/0.0.6": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp",
+          "mscorlib",
+          "System",
+          "System.Core"
+        ],
+        "compile": {
+          "lib/net46/ReflectionBridge.dll": {}
+        },
+        "runtime": {
+          "lib/net46/ReflectionBridge.dll": {}
         }
       }
     },
@@ -3246,6 +3297,7 @@
     ".NETFramework,Version=v4.5": [],
     ".NETFramework,Version=v4.5.1": [],
     ".NETFramework,Version=v4.5.2": [],
+    ".NETFramework,Version=v4.6": [],
     "DNX,Version=v4.5.1": [],
     "DNX,Version=v4.5.2": [],
     "DNXCore,Version=v5.0": [

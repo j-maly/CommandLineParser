@@ -2,7 +2,18 @@
 
 * Now available as NuGet package: http://nuget.org/packages/CommandLineArgumentsParser
 
-CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects. 
+CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.
+
+Support for the following Frameworks:
+* net20 
+* net35 
+* net40
+* net45
+* net451
+* net452
+* dnx451
+* dnx452
+* dnxcore5 
 
 ## Motivational Example
 

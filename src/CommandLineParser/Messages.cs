@@ -94,7 +94,7 @@
 
         public static string GROUP_ALL_USED = "All of these arguments: {0} must be used.";
 
-        public static string GROUP_AT_LEAST_ONE_USED = "Only one of these arguments: {0} can be used.";
+        public static string GROUP_AT_LEAST_ONE_USED = "At least one of these arguments: {0} must be used.";
 
         public static string GROUP_EXACTLY_ONE_USED = "One (and only one) of these arguments: {0} must be used.";
 

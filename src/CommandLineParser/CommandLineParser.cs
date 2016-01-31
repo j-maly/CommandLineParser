@@ -51,6 +51,8 @@ namespace CommandLineParser
 
         private bool _ignoreCase;
 
+        private char[] equalsSignSyntaxValuesSeparators = new char[] { ',', ';' };
+
         #endregion
 
         /// <summary>
@@ -178,6 +180,21 @@ namespace CommandLineParser
         /// --output="somefile.txt"
         /// </example>
         public bool AcceptEqualSignSyntaxForValueArguments { get; set; }
+
+        public bool PreserveValueQuotesForEqualsSignSyntax { get; set; }
+
+        public char[] EqualsSignSyntaxValuesSeparators
+        {
+            get
+            {
+                return equalsSignSyntaxValuesSeparators;
+            }
+
+            set
+            {
+                equalsSignSyntaxValuesSeparators = value;
+            }
+        }
 
         /// <summary>
         /// Value is set to true after parsing finishes successfuly 
@@ -514,7 +531,7 @@ namespace CommandLineParser
                 {
                     string arg = argsList[i];
 
-                    Regex r = new Regex("(.*)=\"(.*)\"");
+                    Regex r = new Regex("(.*)=(.*)");
                     if (AcceptEqualSignSyntaxForValueArguments && r.IsMatch(arg))
                     {
                         Match m = r.Match(arg);
@@ -525,13 +542,36 @@ namespace CommandLineParser
                         while (argName.StartsWith("/") && AcceptSlash)
                             argName = argName.Substring(1);
                         string argValue = m.Groups[2].Value;
+                        if (!PreserveValueQuotesForEqualsSignSyntax && !string.IsNullOrEmpty(argValue) && argValue.StartsWith("\"") && argValue.EndsWith("\""))
+                        {
+                            argValue = argValue.Trim('"');
+                        }
+
                         Argument argument = LookupArgument(argName);
                         if (argument is IValueArgument)
                         {
                             argsList.RemoveAt(i);
-                            argsList.Insert(i, argNameWithSep);
-                            i++;
-                            argsList.Insert(i, argValue);
+                            if (argument.AllowMultiple)
+                            {
+                                var splitted = argValue.Split(equalsSignSyntaxValuesSeparators);
+                                foreach (var singleValue in splitted)
+                                {
+                                    argsList.Insert(i, argNameWithSep);
+                                    i++;
+                                    if (!string.IsNullOrEmpty(singleValue))
+                                    {
+                                        argsList.Insert(i, singleValue);
+                                        i++;
+                                    }                                    
+                                }
+                                i--;
+                            }
+                            else
+                            {
+                                argsList.Insert(i, argNameWithSep);
+                                i++;
+                                argsList.Insert(i, argValue);
+                            }                            
                         }
                     }
                 }

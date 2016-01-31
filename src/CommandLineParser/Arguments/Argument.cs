@@ -292,9 +292,6 @@ namespace CommandLineParser.Arguments
     /// <remarks>Use <see cref="CommandLineParser.ExtractArgumentAttributes"/> for each object 
     /// you where you have delcared argument attributes.
     /// </remarks>
-    /// <example>
-    /// <code source="Examples\AttributeExample.cs" lang="cs" title="Example of declaring argument attributes" />
-    /// </example>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
     public abstract class ArgumentAttribute: Attribute
     {

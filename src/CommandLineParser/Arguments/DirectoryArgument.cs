@@ -98,9 +98,6 @@ namespace CommandLineParser.Arguments
 	/// <remarks>Appliable to fields and properties (public).</remarks>
 	/// <remarks>Use <see cref="CommandLineParser.ExtractArgumentAttributes"/> for each object 
 	/// you where you have delcared argument attributes.</remarks>
-	/// <example>
-	/// <code source="Examples\AttributeExample.cs" lang="cs" title="Example of declaring argument attributes" />
-	/// </example>
 	public sealed class DirectoryArgumentAttribute : ArgumentAttribute
 	{
 		/// <summary>

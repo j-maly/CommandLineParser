@@ -133,9 +133,6 @@ namespace CommandLineParser.Arguments
     /// <remarks>Applicable to fields and properties (public).</remarks>
     /// <remarks>Use <see cref="CommandLineParser.ExtractArgumentAttributes"/> for each object 
     /// you where you have declared argument attributes.</remarks>
-    /// <example>
-    /// <code source="Examples\AttributeExample.cs" lang="cs" title="Example of declaring argument attributes" />
-    /// </example>
     public class SwitchArgumentAttribute : ArgumentAttribute
     {
         /// <summary>

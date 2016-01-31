@@ -180,6 +180,11 @@ namespace CommandLineParser
         public bool AcceptEqualSignSyntaxForValueArguments { get; set; }
 
         /// <summary>
+        /// Value is set to true after parsing finishes successfuly 
+        /// </summary>
+        public bool ParsingSucceeded { get; private set; }
+
+        /// <summary>
         /// Fills lookup dictionaries with arguments names and aliases 
         /// </summary>
         private void InitializeArgumentLookupDictionaries()
@@ -226,6 +231,7 @@ namespace CommandLineParser
         /// <param name="args">Command line arguments</param>
         public void ParseCommandLine(string[] args)
         {
+            ParsingSucceeded = false;
             _arguments.ForEach(action => action.Init());
             List<string> argsList = new List<string>(args);
             InitializeArgumentLookupDictionaries();
@@ -270,6 +276,7 @@ namespace CommandLineParser
 
             PerformMandatoryArgumentsCheck();
             PerformCertificationCheck();
+            ParsingSucceeded = true; 
         }
 
         /// <summary>

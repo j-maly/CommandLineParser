@@ -101,7 +101,6 @@ namespace Tests
         }
 
         [Fact]
-        //[ExpectedException(ExpectedException = typeof(CommandLineArgumentException), MatchType = MessageMatch.Contains, ExpectedMessage = "must be followed by a value")]
         public void DeclarativeArguments_CommandLineArgumentException()
         {
             string[] args = new[] { "-d" };

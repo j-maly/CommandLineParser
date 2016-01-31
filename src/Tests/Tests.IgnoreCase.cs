@@ -118,8 +118,7 @@ namespace Tests
             commandLineParser.ParseCommandLine(args);
         }
 
-        [Fact]
-        //[ExpectedException(ExpectedException = typeof(CommandLineArgumentException), MatchType = MessageMatch.Contains, ExpectedMessage = "must be followed by a value")]
+        [Fact]        
         public void IgnoreCase_MissingValueTest()
         {
             string[] args = new[] { "-d" };

@@ -78,8 +78,7 @@ namespace Tests
             return commandLineParser;
         }
 
-        [Fact]
-        //[ExpectedException(typeof(MissingAdditionalArgumentsException), ExpectedMessage = "Needed 2 additional arguments", MatchType = MessageMatch.Contains)]
+        [Fact]        
         public void AdditionalArguments_MissingAdditionalArgumentsException()
         {
             string[] args = new[] { "-d", "C:\\Input", "file1.txt" };

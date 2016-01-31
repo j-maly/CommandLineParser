@@ -69,8 +69,7 @@ namespace Tests
             commandLineParser.ParseCommandLine(args);
         }
 
-        [Fact]
-        //[ExpectedException(typeof(ArgumentConflictException), ExpectedMessage = "Only one of these arguments", MatchType = MessageMatch.Contains)]
+        [Fact]        
         public void GroupCertifications_ExactlyOneUsed2()
         {
             // exactly one of the arguments x, o, c must be used
@@ -86,8 +85,7 @@ namespace Tests
             Assert.Contains("Only one of these arguments", ex.Message);
         }
 
-        [Fact]
-        //[ExpectedException(typeof(ArgumentConflictException), ExpectedMessage = "One of these arguments", MatchType = MessageMatch.Contains)]
+        [Fact]        
         public void GroupCertifications_ExactlyOneUsed3()
         {
             // exactly one of the arguments x, o, c must be used
@@ -136,8 +134,7 @@ namespace Tests
             commandLineParser.ParseCommandLine(args);
         }
 
-        [Fact]
-        //[ExpectedException(typeof(ArgumentConflictException), ExpectedMessage = "These arguments can not be used together", MatchType = MessageMatch.StartsWith)]
+        [Fact]        
         public void GroupCertifications_OneOrNone3()
         {
             // exactly one of the arguments x, o, c must be used
@@ -177,8 +174,7 @@ namespace Tests
             commandLineParser.ParseCommandLine(args);
         }
 
-        [Fact]
-        //[ExpectedException(typeof(ArgumentConflictException), ExpectedMessage = "At least one of these", MatchType = MessageMatch.StartsWith)]
+        [Fact]        
         public void GroupCertifications_AtLeastOne2()
         {
             ArgumentGroupCertification oon = new ArgumentGroupCertification("f,u", EArgumentGroupCondition.AtLeastOneUsed);
@@ -216,7 +212,6 @@ namespace Tests
         }
 
         [Fact]
-        //[ExpectedException(typeof(ArgumentConflictException), ExpectedMessage = "All or none of these", MatchType = MessageMatch.StartsWith)]
         public void GroupCertifications_AllOrNone2()
         {
             ArgumentGroupCertification aon = new ArgumentGroupCertification("j,k", EArgumentGroupCondition.AllOrNoneUsed);
@@ -248,8 +243,7 @@ namespace Tests
             commandLineParser.ParseCommandLine(args);
         }
 
-        [Fact]
-        //[ExpectedException(typeof(ArgumentConflictException), ExpectedMessage = "All of these", MatchType = MessageMatch.StartsWith)]
+        [Fact]        
         public void GroupCertifications_All2()
         {
             ArgumentGroupCertification au = new ArgumentGroupCertification("j,k", EArgumentGroupCondition.AllUsed);
@@ -263,8 +257,7 @@ namespace Tests
             Assert.StartsWith("All of these", ex.Message);
         }
 
-        [Fact]
-        //[ExpectedException(typeof(ArgumentConflictException), ExpectedMessage = "All of these", MatchType = MessageMatch.StartsWith)]
+        [Fact]        
         public void GroupCertifications_All3()
         {
             ArgumentGroupCertification au = new ArgumentGroupCertification("j,k", EArgumentGroupCondition.AllUsed);
@@ -310,8 +303,7 @@ namespace Tests
             commandLineParser.ParseCommandLine(args);
         }
 
-        [Fact]
-        //[ExpectedException(typeof(ArgumentConflictException), ExpectedMessage = "None of these", MatchType = MessageMatch.StartsWith)]
+        [Fact]        
         public void GroupCertifications_Distinct2()
         {
             DistinctGroupsCertification d = new DistinctGroupsCertification("j,k", "l,m");
@@ -325,8 +317,7 @@ namespace Tests
             Assert.StartsWith("None of these", ex.Message);
         }
 
-        [Fact]
-        //[ExpectedException(typeof(ArgumentConflictException), ExpectedMessage = "None of these", MatchType = MessageMatch.StartsWith)]
+        [Fact]        
         public void GroupCertifications_Distinct3()
         {
             DistinctGroupsCertification d = new DistinctGroupsCertification("j,k", "l,m");
@@ -340,8 +331,7 @@ namespace Tests
             Assert.StartsWith("None of these", ex.Message);
         }
 
-        [Fact]
-        //[ExpectedException(typeof(ArgumentConflictException), ExpectedMessage = "None of these", MatchType = MessageMatch.StartsWith)]
+        [Fact]        
         public void GroupCertifications_Distinct4()
         {
             DistinctGroupsCertification d = new DistinctGroupsCertification("j,k", "l,m");

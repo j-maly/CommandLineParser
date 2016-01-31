@@ -212,13 +212,20 @@ namespace CommandLineParser
             }
 
             _ignoreCaseLookupDirectory.Clear();
-            foreach (KeyValuePair<char, Argument> keyValuePair in _shortNameLookup)
+            if (IgnoreCase)
             {
-                _ignoreCaseLookupDirectory.Add(keyValuePair.Key.ToString().ToUpper(), keyValuePair.Value);
-            }
-            foreach (KeyValuePair<string, Argument> keyValuePair in _longNameLookup)
-            {
-                _ignoreCaseLookupDirectory.Add(keyValuePair.Key.ToUpper(), keyValuePair.Value);
+                var allLookups = _shortNameLookup
+                    .Select(kvp => new KeyValuePair<string, Argument>(kvp.Key.ToString(), kvp.Value))
+                    .Concat(_longNameLookup);
+                foreach (KeyValuePair<string, Argument> keyValuePair in allLookups)
+                {
+                    var icString = keyValuePair.Key.ToString().ToUpper();
+                    if (_ignoreCaseLookupDirectory.ContainsKey(icString))
+                    {
+                        throw new ArgumentException("Clash in ignore case argument names: " + icString);
+                    }
+                    _ignoreCaseLookupDirectory.Add(icString, keyValuePair.Value);
+                }
             }
         }
 

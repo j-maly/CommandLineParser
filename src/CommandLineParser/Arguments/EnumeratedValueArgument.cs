@@ -11,8 +11,7 @@ namespace CommandLineParser.Arguments
     /// </summary>
     /// <typeparam name="TValue">Type of the value</typeparam>
     /// <include file='..\Doc\CommandLineParser.xml' path='CommandLineParser/Arguments/EnumeratedValueArgument/*'/>
-    public class EnumeratedValueArgument<TValue> :
-        CertifiedValueArgument<TValue>
+    public class EnumeratedValueArgument<TValue> : CertifiedValueArgument<TValue>
     {
         private ICollection<TValue> _allowedValues;
 

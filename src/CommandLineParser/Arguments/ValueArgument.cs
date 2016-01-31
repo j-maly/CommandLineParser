@@ -34,12 +34,8 @@ namespace CommandLineParser.Arguments
 
         private TValue _value;
 
-        private TValue _defaultValue;
-
         private readonly List<TValue> _values = new List<TValue>();
-
-        private ConvertValueDelegate<TValue> _convertValueHandler;
-
+        
         private CultureInfo _cultureInfo = CultureInfo.InvariantCulture;
 
         #endregion
@@ -117,13 +113,19 @@ namespace CommandLineParser.Arguments
         /// <summary>
         /// Default value of the argument. Restored each time <see cref="Init"/> is called.
         /// </summary>
-        public TValue DefaultValue
-        {
-            get { return _defaultValue; }
-            set { _defaultValue = value; }
-        }
+        public TValue DefaultValue { get; set; }
 
         object IArgumentWithDefaultValue.DefaultValue { get { return DefaultValue; } }
+
+        /// <summary>
+        /// When set to true, argument can appear on the command line with or without value, e.g. both is allowed: 
+        /// <code>
+        /// myexe.exe -Arg Value
+        /// OR
+        /// myexe.exe -Arg
+        /// </code>
+        /// </summary>
+        public bool ValueOptional { get; set; }
 
         /// <summary>
         /// Values of the ValueArgument - for arguments with multiple values allowed. 
@@ -175,12 +177,8 @@ namespace CommandLineParser.Arguments
         /// Function that converts string to <typeparamref name="TValue"/> type.
         /// Necessary when non-builtin type is used as <typeparamref name="TValue"/>.
         /// </summary>
-        public ConvertValueDelegate<TValue> ConvertValueHandler
-        {
-            get { return _convertValueHandler; }
-            set { _convertValueHandler = value; }
-        }
-
+        public ConvertValueDelegate<TValue> ConvertValueHandler { get; set; }
+        
         /// <summary>
         /// This method reads the argument and the following string representing the value of the argument. 
         /// This string is then converted to <typeparamref name="TValue"/> (using built-in <typeparamref name="TValue"/>.Parse
@@ -196,13 +194,23 @@ namespace CommandLineParser.Arguments
         {
             base.Parse(args, ref i);
 
-            i++; // move the cursor to the value EXC_ARG_VALUE_MISSING2
+            i++; // move the cursor to the value
             if (args.Count - 1 < i)
             {
+                if (ValueOptional)
+                {
+                    Parsed = true;
+                    return;
+                }
                 throw new CommandLineArgumentException(string.Format(Messages.EXC_ARG_VALUE_MISSING2, Name), Name);
             }
             if (args[i].StartsWith("-"))
             {
+                if (ValueOptional)
+                {
+                    Parsed = true;
+                    return;
+                }
                 throw new CommandLineArgumentException(string.Format(Messages.EXC_ARG_VALUE_MISSING, Name, args[i]), Name);
             }
             _stringValue = args[i];
@@ -317,9 +325,9 @@ namespace CommandLineParser.Arguments
         public virtual TValue Convert(string stringValue)
         {
             TValue tmpValue;
-            if (_convertValueHandler != null)
+            if (ConvertValueHandler != null)
             {
-                tmpValue = _convertValueHandler(stringValue);
+                tmpValue = ConvertValueHandler(stringValue);
             }
             else
             {
@@ -496,6 +504,18 @@ namespace CommandLineParser.Arguments
             {
                 underlyingValueArgument.SetPropertyValue("DefaultValue", Argument, value);
             }       
+        }
+
+        public bool ValueOptional
+        {
+            get
+            {
+                return underlyingValueArgument.GetPropertyValue<bool>("ValueOptional", Argument);
+            }
+            set
+            {
+                underlyingValueArgument.SetPropertyValue("ValueOptional", Argument, value);
+            }
         }
     }
 }

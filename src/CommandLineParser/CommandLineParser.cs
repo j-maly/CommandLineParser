@@ -478,6 +478,8 @@ namespace CommandLineParser
                     {
                         if (arg[0] == '/' && arg[1] != '/' && AcceptSlash && _longNameLookup.ContainsKey(arg.Substring(1)))
                             continue;
+                        if (arg.Contains('='))
+                            continue;
                         if (ShowUsageCommands.Contains(arg))
                             continue;
 

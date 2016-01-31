@@ -4,17 +4,10 @@
 
 CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.
 
+See [Quick Start](https://github.com/j-maly/CommandLineParser/wiki) on how to use the library. 
+
 Support for the following Frameworks:
-* net20 
-* net35 
-* net40
-* net45
-* net451
-* net452
-* dnx451
-* dnx452
-* net46
-* dnxcore5 
+* net20 net35 net40 net45 net451 net452 dnx451 dnx452 net46 dnxcore5 
 
 ## Motivational Example
 
@@ -65,7 +58,7 @@ catch (CommandLineException e)
     Console.WriteLine(e.Message);
 }
 ```
-You can find more examples of use in the documentation file.
+You can find more examples of use in the [wiki](https://github.com/j-maly/CommandLineParser/wiki).
 
 The other way to use the library is to declare arguments by using attributes and thus make your code even more elegant:
 ```csharp

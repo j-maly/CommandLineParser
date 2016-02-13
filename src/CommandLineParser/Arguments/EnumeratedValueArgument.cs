@@ -213,5 +213,25 @@ namespace CommandLineParser.Arguments
                 _argumentType.SetPropertyValue("DefaultValue", Argument, value);
             }
         }
+
+        /// <summary>
+        /// When set to true, argument can appear on the command line with or without value, e.g. both is allowed: 
+        /// <code>
+        /// myexe.exe -Arg Value
+        /// OR
+        /// myexe.exe -Arg
+        /// </code>
+        /// </summary>
+        public bool ValueOptional
+        {
+            get
+            {
+                return _argumentType.GetPropertyValue<bool>("ValueOptional", Argument);
+            }
+            set
+            {
+                _argumentType.SetPropertyValue("ValueOptional", Argument, value);
+            }
+        }
     }
 }

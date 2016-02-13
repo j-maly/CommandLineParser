@@ -16,7 +16,7 @@ namespace Tests
             [SwitchArgument('h', "hide", false, Description = "Set whether hide or not")]
             public bool Hide { get; set; }
 
-            [ValueArgument(typeof(decimal), 'v', "version", Description = "Set desired version")]
+            [ValueArgument(typeof(decimal), 'v', "version", Description = "Set desired version", Aliases = new [] { "w", "ver"})]
             public decimal version;
 
             [ValueArgument(typeof(string), 'l', "level", Description = "Set the level")]
@@ -108,6 +108,30 @@ namespace Tests
 
             var ex = Assert.Throws<CommandLineArgumentException>(() => commandLineParser.ParseCommandLine(args));
             Assert.Contains("must be followed by a value", ex.Message);
+        }
+
+        [Fact]
+        public void DeclarativeArguments_shouldRecognizeShortAlias()
+        {
+            string[] args = new[] { "-w", "3" };
+
+            var commandLineParser = InitImperativeArguments();
+
+            commandLineParser.ParseCommandLine(args);
+
+            Assert.Equal(3M, ((IValueArgument)commandLineParser.LookupArgument("v")).Value);
+        }
+
+        [Fact]
+        public void DeclarativeArguments_shouldRecognizeLongAlias()
+        {
+            string[] args = new[] { "--ver", "3" };
+
+            var commandLineParser = InitImperativeArguments();
+
+            commandLineParser.ParseCommandLine(args);
+
+            Assert.Equal(3M, ((IValueArgument)commandLineParser.LookupArgument("v")).Value);
         }
     }
 }

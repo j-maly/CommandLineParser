@@ -19,6 +19,9 @@ namespace Tests
             ValueArgument<string> level = new ValueArgument<string>('l', "level", "Set the level");
 
             ValueArgument<decimal> version = new ValueArgument<decimal>('v', "version", "Set desired version");
+            version.AddAlias("ver");
+            version.AddAlias('w');
+            
 
             ValueArgument<Point> point = new ValueArgument<Point>('p', "point", "specify the point");
 
@@ -125,6 +128,30 @@ namespace Tests
 
             var ex = Assert.Throws<CommandLineArgumentException>(() => commandLineParser.ParseCommandLine(args));
             Assert.Contains("must be followed by a value", ex.Message);
+        }
+
+        [Fact]
+        public void ImperativeArguments_shouldRecognizeShortAlias()
+        {
+            string[] args = new[] { "-w", "3" };
+
+            var commandLineParser = InitImperativeArguments();
+
+            commandLineParser.ParseCommandLine(args);
+
+            Assert.Equal(3M, ((IValueArgument)commandLineParser.LookupArgument("v")).Value);
+        }
+
+        [Fact]
+        public void ImperativeArguments_shouldRecognizeLongAlias()
+        {
+            string[] args = new[] { "--ver", "3" };
+
+            var commandLineParser = InitImperativeArguments();
+
+            commandLineParser.ParseCommandLine(args);
+
+            Assert.Equal(3M, ((IValueArgument)commandLineParser.LookupArgument("v")).Value);
         }
     }
 }

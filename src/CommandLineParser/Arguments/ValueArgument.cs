@@ -503,6 +503,14 @@ namespace CommandLineParser.Arguments
             }       
         }
 
+        /// <summary>
+        /// When set to true, argument can appear on the command line with or without value, e.g. both is allowed: 
+        /// <code>
+        /// myexe.exe -Arg Value
+        /// OR
+        /// myexe.exe -Arg
+        /// </code>
+        /// </summary>
         public bool ValueOptional
         {
             get

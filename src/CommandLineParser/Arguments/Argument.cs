@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommandLineParser.Exceptions;
+using System.Linq;
 
 #if DNXCORE50
 using ReflectionBridge.Extensions;
@@ -29,12 +30,12 @@ namespace CommandLineParser.Arguments
         /// <summary>
         /// List of short aliases.
         /// </summary>
-        private List<char> _shortAliases;
+        private List<char> _shortAliases = new List<char>();
 
         /// <summary>
         /// List of long aliases.
         /// </summary>
-        private List<string> _longAliases;
+        private List<string> _longAliases = new List<string>();
 
         private FieldArgumentBind? _bind;
 
@@ -173,42 +174,29 @@ namespace CommandLineParser.Arguments
         }
 
         /// <summary>
-        /// Defined short aliases of the parameter. Can appear on the command line in  -<i>shortAlias</i> format.
+        /// Defined short aliases of the parameter. The parameter can also appear on the command line in -<i>shortAlias</i> format.
         /// <see cref="AddAlias(char)"/>
         /// </summary>
         /// <seealso cref="LongAliases"/>
         public IEnumerable<char> ShortAliases
         {
-            get
-            {
-                if (_shortAliases != null)
-                {
-                    foreach (char c in _shortAliases)
-                    {
-                        yield return c;
-                    }
-                }
-            }
+            get { return _shortAliases; }                
         }
 
         /// <summary>
-        /// Defined long aliases of the parameter. Can appear on the command line in  --<i>longAlias</i> format.
+        /// Defined long aliases of the parameter. The parameter can also appear on the command line in --<i>longAlias</i> format.
         /// <see cref="AddAlias(string)"/>
         /// </summary>
         /// <seealso cref="ShortAliases"/>
         public IEnumerable<string> LongAliases
         {
-            get
-            {
-                if (_longAliases != null)
-                {
-                    foreach (string s in _longAliases)
-                    {
-                        yield return s;
-                    }
-                }
-            }
+            get { return _longAliases; }
         }
+
+        internal IEnumerable<string> AllAliases
+        {
+            get { return LongAliases.Concat(ShortAliases.Select(a => a.ToString())); }
+        }        
 
         /// <summary>
         /// Defines mapping of the value of the argument to a field of another object.
@@ -225,9 +213,7 @@ namespace CommandLineParser.Arguments
         /// <param name="alias">Short alias of the argument</param>
         /// </summary>
         public void AddAlias(char alias)
-        {
-            if (_shortAliases == null)
-                _shortAliases = new List<char>();
+        {            
             _shortAliases.Add(alias);
         }
 
@@ -237,9 +223,18 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public void AddAlias(string alias)
         {
-            if (_longAliases == null)
-                _longAliases = new List<string>();
-            _longAliases.Add(alias);
+            if (string.IsNullOrEmpty(alias))
+            {
+                throw new ArgumentNullException();
+            }
+            if (alias.Length == 1)
+            {
+                _shortAliases.Add(alias[0]);
+            }
+            else
+            {
+                _longAliases.Add(alias);
+            }
         }
 
         /// <summary>
@@ -382,12 +377,37 @@ namespace CommandLineParser.Arguments
         }
 
         /// <summary>
-        /// Example usage of the attribute.
+        /// Example usage of the argument.
         /// </summary>
         public string Example
         {
             get { return _argument.Example; }
             set { _argument.Example = value; }
+        }
+
+        /// <summary>
+        /// Set aliases for the argument.
+        /// </summary>
+        public string[] Aliases
+        {
+            get { return _argument.AllAliases.ToArray(); }
+            set
+            {
+                if (value != null)
+                {
+                    foreach (var alias in value)
+                    {
+                        if (alias.Length == 1)
+                        {
+                            _argument.AddAlias(alias.Single());
+                        }
+                        else
+                        {
+                            _argument.AddAlias(alias);
+                        }
+                    }
+                }
+            }
         }
 
 #endregion

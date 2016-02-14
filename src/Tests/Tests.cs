@@ -5,10 +5,6 @@
     /// </summary>
     public partial class Tests
     {
-        public enum MyEnum
-        {
-            One,
-            Two
-        }
+        
     }
 }

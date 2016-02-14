@@ -22,7 +22,7 @@
 
         public static string EXC_ARG_UNKNOWN = "Unknown argument found: {0}.";
 
-        public static string EXC_ARG_VALUE_MISSING = "Value argument {0} must be followed by a value, another argument({ 1}) found instead";
+        public static string EXC_ARG_VALUE_MISSING = "Value argument {0} must be followed by a value, another argument({1}) found instead";
 
         public static string EXC_ARG_VALUE_MISSING2 = "Value argument {0} must be followed by a value.";
 

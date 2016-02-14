@@ -204,7 +204,13 @@ namespace CommandLineParser.Arguments
                 }
                 throw new CommandLineArgumentException(string.Format(Messages.EXC_ARG_VALUE_MISSING2, Name), Name);
             }
-            if (args[i].StartsWith("-"))
+
+            _stringValue = args[i];
+            bool canParse = true;
+            try { Convert(_stringValue); }
+            catch { canParse = false; }
+
+            if (!canParse && args[i].StartsWith("-"))
             {
                 if (ValueOptional)
                 {
@@ -213,7 +219,6 @@ namespace CommandLineParser.Arguments
                 }
                 throw new CommandLineArgumentException(string.Format(Messages.EXC_ARG_VALUE_MISSING, Name, args[i]), Name);
             }
-            _stringValue = args[i];
 
             if (!AllowMultiple)
                 Value = Convert(_stringValue);

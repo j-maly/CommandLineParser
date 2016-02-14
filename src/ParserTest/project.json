@@ -1,8 +1,8 @@
 {
-    "version": "2.7.0.0-*",
+    "version": "3.0.0.0-*",
     "authors": [ "Stef Heyenrath" ],
     "dependencies": {
-        "CommandLineParser": "2.7.0.0-*"
+      "CommandLineParser": "3.0.0.0-*"
     },
 
     "compilationOptions": {

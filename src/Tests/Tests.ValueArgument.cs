@@ -33,7 +33,7 @@ namespace Tests
         public void ArgumentBoundToCollection_shouldCreateInstanceOfTheCollection()
         {
             // ARRANGE 
-            string[] args = new[] { "-i", "1", "-i", "2", "-i", "3" };
+            string[] args = { "-i", "1", "-i", "2", "-i", "3" };
             var commandLineParser = InitValueArgument();
             // ACT 
             commandLineParser.ParseCommandLine(args);
@@ -45,7 +45,7 @@ namespace Tests
         public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_whenValueNotUsed_valueArgumentIsInTheMiddle()
         {
             // ARRANGE 
-            string[] args = new[] { "-v", "-i", "1" };
+            string[] args = { "-v", "-i", "1" };
             var commandLineParser = InitValueArgument();
             // ACT 
             commandLineParser.ParseCommandLine(args);
@@ -57,7 +57,7 @@ namespace Tests
         public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_whenValueNotUsed_valueArgumentIsAtTheEnd()
         {
             // ARRANGE 
-            string[] args = new[] { "-i", "1", "-v" };
+            string[] args = { "-i", "1", "-v" };
             var commandLineParser = InitValueArgument();
             // ACT 
             commandLineParser.ParseCommandLine(args);
@@ -66,13 +66,25 @@ namespace Tests
         }
 
         [Fact]
-        public void ValueArgumentWithMandatoryValue_shouldFailParsing_whenValueNotFound()
+        public void ValueArgumentWithMandatoryValue_shouldFailParsing_whenValueNotFound_lastArgument()
         {
             // ARRANGE 
-            string[] args = new[] { "-l" };
+            string[] args = { "-l" };
             var commandLineParser = InitValueArgument();
             // ACT 
-            Assert.Throws<CommandLineArgumentException>(() => commandLineParser.ParseCommandLine(args));            
+            var e = Assert.Throws<CommandLineArgumentException>(() => commandLineParser.ParseCommandLine(args));            
+            Assert.Equal(e.Message, "Value argument l must be followed by a value."); 
+        }
+
+        [Fact]
+        public void ValueArgumentWithMandatoryValue_shouldFailParsing_whenValueNotFound_argumentInTheMiddle()
+        {
+            // ARRANGE 
+            string[] args = { "-l", "-v", "1" };
+            var commandLineParser = InitValueArgument();
+            // ACT 
+            var e = Assert.Throws<CommandLineArgumentException>(() => commandLineParser.ParseCommandLine(args));
+            Assert.Equal(e.Message, "Value argument l must be followed by a value, another argument(-v) found instead");
         }
 
 
@@ -80,7 +92,7 @@ namespace Tests
         public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_andValueNotUsed_whenUsingEqualsSyntax_andValueArgumentIsInTheMiddle()
         {
             // ARRANGE 
-            string[] args = new[] { "-v", "-i=\"1\"" };
+            string[] args = { "-v", "-i=\"1\"" };
             var commandLineParser = InitValueArgument();
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
             // ACT 
@@ -93,13 +105,39 @@ namespace Tests
         public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_whenValueNotUsed_whenUsingEqualsSyntax_andValueArgumentIsAtTheEnd()
         {
             // ARRANGE 
-            string[] args = new[] { "-i=\"1\"", "-v" };
+            string[] args = { "-i=\"1\"", "-v" };
             var commandLineParser = InitValueArgument();
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
             // ACT 
             commandLineParser.ParseCommandLine(args);
             // ASSERT
             Assert.Equal(2 /*default*/ , valueArgumentTarget.Version);
+        }
+
+        [Fact]
+        public void ValueArgument_shouldHandleNegativeIntegers_whenUsingEqualsSyntax()
+        {
+            // ARRANGE 
+            string[] args = { "-v=\"-1\""};
+            var commandLineParser = InitValueArgument();
+            commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
+            // ACT 
+            commandLineParser.ParseCommandLine(args);
+            // ASSERT
+            Assert.Equal(-1, valueArgumentTarget.Version);
+        }
+
+        [Fact]
+        public void ValueArgument_shouldHandleNegativeIntegers_whenNotUsingEqualsSyntax()
+        {
+            // ARRANGE 
+            string[] args = { "-v", "-1" };
+            var commandLineParser = InitValueArgument();
+            commandLineParser.AcceptEqualSignSyntaxForValueArguments = false;
+            // ACT 
+            commandLineParser.ParseCommandLine(args);
+            // ASSERT
+            Assert.Equal(-1, valueArgumentTarget.Version);
         }
     }
 }

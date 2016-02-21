@@ -378,16 +378,13 @@ namespace CommandLineParser.Arguments
                 if (valueType == typeof(uint)) return (TValue)(object)uint.Parse(stringValue, _cultureInfo);
                 if (valueType == typeof(ulong)) return (TValue)(object)ulong.Parse(stringValue, _cultureInfo);
                 if (valueType == typeof(ushort)) return (TValue)(object)ushort.Parse(stringValue, _cultureInfo);
+                if (valueType == typeof(DateTime)) return (TValue)(object)DateTime.Parse(stringValue, _cultureInfo);
+                if (valueType == typeof(TimeSpan)) return (TValue)(object)DateTime.Parse(stringValue, _cultureInfo);
 
-                MethodInfo mi = typeof(TValue).GetMethod("Parse");
+                MethodInfo mi = typeof(TValue).GetMethod("Parse", new [] { typeof(string), typeof(CultureInfo)});
                 if (mi != null)
                 {
-                    ParameterInfo[] pi = mi.GetParameters();
-                    if (mi.IsStatic
-                        && pi.Length == 2
-                        && pi[0].ParameterType == typeof(string)
-                        && pi[1].ParameterType == typeof(CultureInfo)
-                        && mi.ReturnType == typeof(TValue))
+                    if (mi.IsStatic && mi.ReturnType == typeof(TValue))
                         return (TValue)mi.Invoke(null, new object[] { stringValue, _cultureInfo });
                 }
             }

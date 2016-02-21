@@ -78,5 +78,18 @@ namespace Tests
 
             Assert.Equal("Ignore case can be used only for string arguments, type of TValue is System.Int32", e.Message);
         }
+        
+        [Fact]
+        public void ValueArgument_ShouldParseDate()
+        {
+            var commandLineParser = new CommandLineParser.CommandLineParser();
+            ValueArgument<DateTime> dateTime = new ValueArgument<DateTime>('d', "date");
+            commandLineParser.Arguments.Add(dateTime);
+
+            commandLineParser.ParseCommandLine(new [] {"-d", "2008-11-01" });
+
+            Assert.Equal(new DateTime(2008,11,01), dateTime.Value);
+        }
+        
     }
 }

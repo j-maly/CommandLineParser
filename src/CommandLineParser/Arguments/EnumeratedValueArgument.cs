@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CommandLineParser.Exceptions;
 using ReflectionBridge.Extensions;
 
@@ -14,6 +15,7 @@ namespace CommandLineParser.Arguments
     public class EnumeratedValueArgument<TValue> : CertifiedValueArgument<TValue>
     {
         private ICollection<TValue> _allowedValues;
+        private bool _ignoreCase;
 
         /// <summary>
         /// Set of values that are allowed for the argument.
@@ -39,6 +41,22 @@ namespace CommandLineParser.Arguments
                 i++;
             }
             AllowedValues = typedValues;
+        }
+
+        /// <summary>
+        /// String arguments will be accepted even with differences in capitalisation (e.g. INFO will be accepted for info).
+        /// </summary>
+        public bool IgnoreCase
+        {
+            get { return _ignoreCase; }
+            set
+            {
+                if (!(typeof(TValue) == typeof(string)) && value)
+                {
+                    throw new ArgumentException(string.Format("Ignore case can be used only for string arguments, type of TValue is {0}", typeof(TValue)));
+                }
+                _ignoreCase = value;
+            }
         }
 
         #region constructor
@@ -113,7 +131,18 @@ namespace CommandLineParser.Arguments
         /// <exception cref="CommandLineArgumentOutOfRangeException">thrown when <paramref name="value"/> does not belong to the set of allowed values.</exception>
         internal override void Certify(TValue value)
         {
-            if (!_allowedValues.Contains(value))
+            bool ok;
+            if (IgnoreCase && typeof(TValue) == typeof(string) && value is string)
+            {
+                TValue found = _allowedValues.FirstOrDefault(av => StringComparer.CurrentCultureIgnoreCase.Compare(value.ToString(), av.ToString()) == 0);
+                ok = found != null;
+                base.Value = found;
+            }
+            else
+            {
+                ok = _allowedValues.Contains(value);
+            }
+            if (!ok)
                 throw new CommandLineArgumentOutOfRangeException(String.Format(
                                                                      Messages.EXC_ARG_ENUM_OUT_OF_RANGE, Value,
                                                                      Name), Name);
@@ -231,6 +260,21 @@ namespace CommandLineParser.Arguments
             set
             {
                 _argumentType.SetPropertyValue("ValueOptional", Argument, value);
+            }
+        }
+
+        /// <summary>
+        /// String arguments will be accepted even with differences in capitalisation (e.g. INFO will be accepted for info).
+        /// </summary>
+        public bool IgnoreCase
+        {
+            get
+            {
+                return _argumentType.GetPropertyValue<bool>("IgnoreCase", Argument);
+            }
+            set
+            {
+                _argumentType.SetPropertyValue("IgnoreCase", Argument, value);
             }
         }
     }

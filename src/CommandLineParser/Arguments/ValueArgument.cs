@@ -367,7 +367,7 @@ namespace CommandLineParser.Arguments
                 if (valueType == typeof(int)) return (TValue)(object)int.Parse(stringValue, _cultureInfo);
                 if (valueType == typeof(decimal)) return (TValue)(object)decimal.Parse(stringValue, _cultureInfo);
                 if (valueType == typeof(long)) return (TValue)(object)long.Parse(stringValue, _cultureInfo);
-                if (typeof(Enum).IsAssignableFrom(valueType)) return (TValue)Enum.Parse(valueType, stringValue);
+                if (typeof(Enum).IsAssignableFrom(valueType)) return (TValue)Enum.Parse(valueType, stringValue, true);
                 if (valueType == typeof(short)) return (TValue)(object)short.Parse(stringValue, _cultureInfo);
                 if (valueType == typeof(char)) return (TValue)(object)char.Parse(stringValue);
                 if (valueType == typeof(bool)) return (TValue)(object)bool.Parse(stringValue);

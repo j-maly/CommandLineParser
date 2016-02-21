@@ -87,7 +87,6 @@ namespace Tests
             Assert.Equal(e.Message, "Value argument l must be followed by a value, another argument(-v) found instead");
         }
 
-
         [Fact]
         public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_andValueNotUsed_whenUsingEqualsSyntax_andValueArgumentIsInTheMiddle()
         {

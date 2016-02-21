@@ -1,6 +1,6 @@
 ﻿{
     "version": "3.0.0.0-*",
-    "authors": [ "Trupik", "NTTAKR", "Jakub Maly", "Stef Heyenrath" ],
+    "authors": [ "Jakub Maly", "Stef Heyenrath", "NTTAKR" ],
     "owners": [ "Stef Heyenrath" ],
     "description": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
     "summary": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
@@ -9,7 +9,7 @@
     "tooling": {
         "defaultNamespace": "CommandLineParser"
     },
-    "releasenotes": "Added more frameworks",
+    "releasenotes": "",
 
     "dependencies": {
         "ReflectionBridge": "0.0.6"

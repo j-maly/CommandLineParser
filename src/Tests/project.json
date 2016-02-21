@@ -1,7 +1,7 @@
 ﻿{
     "version": "1.0.0-*",
     "dependencies": {
-        "CommandLineParser": "3.0-*",
+        "CommandLineArgumentsParser": "3.0-*",
         "ParserTest": "3.0-*",
 
         "xunit": "2.1.0",

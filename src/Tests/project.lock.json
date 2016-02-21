@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     "DNX,Version=v4.5.1": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -144,7 +144,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "CommandLineParser": "3.0.0"
+          "CommandLineArgumentsParser": "3.0.0"
         }
       },
       "ReflectionBridge/0.0.6": {
@@ -273,7 +273,7 @@
       }
     },
     "DNX,Version=v4.5.2": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.2",
         "dependencies": {
@@ -414,7 +414,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.2",
         "dependencies": {
-          "CommandLineParser": "3.0.0"
+          "CommandLineArgumentsParser": "3.0.0"
         }
       },
       "ReflectionBridge/0.0.6": {
@@ -575,7 +575,7 @@
       }
     },
     "DNXCore,Version=v5.0": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -773,7 +773,7 @@
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "CommandLineParser": "3.0.0",
+          "CommandLineArgumentsParser": "3.0.0",
           "Microsoft.CSharp": "4.0.1-beta",
           "System.Console": "4.0.0-beta",
           "System.Globalization": "4.0.10",
@@ -1566,7 +1566,7 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -1707,7 +1707,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "CommandLineParser": "3.0.0"
+          "CommandLineArgumentsParser": "3.0.0"
         }
       },
       "ReflectionBridge/0.0.6": {
@@ -1836,7 +1836,7 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -1977,7 +1977,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
-          "CommandLineParser": "3.0.0"
+          "CommandLineArgumentsParser": "3.0.0"
         }
       },
       "ReflectionBridge/0.0.6": {
@@ -2106,7 +2106,7 @@
       }
     },
     "DNX,Version=v4.5.2/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.2",
         "dependencies": {
@@ -2247,7 +2247,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.2",
         "dependencies": {
-          "CommandLineParser": "3.0.0"
+          "CommandLineArgumentsParser": "3.0.0"
         }
       },
       "ReflectionBridge/0.0.6": {
@@ -2408,7 +2408,7 @@
       }
     },
     "DNX,Version=v4.5.2/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.2",
         "dependencies": {
@@ -2549,7 +2549,7 @@
         "type": "project",
         "framework": "DNX,Version=v4.5.2",
         "dependencies": {
-          "CommandLineParser": "3.0.0"
+          "CommandLineArgumentsParser": "3.0.0"
         }
       },
       "ReflectionBridge/0.0.6": {
@@ -2710,7 +2710,7 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -2926,7 +2926,7 @@
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "CommandLineParser": "3.0.0",
+          "CommandLineArgumentsParser": "3.0.0",
           "Microsoft.CSharp": "4.0.1-beta",
           "System.Console": "4.0.0-beta",
           "System.Globalization": "4.0.10",
@@ -4059,7 +4059,7 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -4275,7 +4275,7 @@
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
-          "CommandLineParser": "3.0.0",
+          "CommandLineArgumentsParser": "3.0.0",
           "Microsoft.CSharp": "4.0.1-beta",
           "System.Console": "4.0.0-beta",
           "System.Globalization": "4.0.10",
@@ -5409,9 +5409,9 @@
     }
   },
   "libraries": {
-    "CommandLineParser/3.0.0": {
+    "CommandLineArgumentsParser/3.0.0": {
       "type": "project",
-      "path": "../CommandLineParser/project.json"
+      "path": "../CommandLineArgumentsParser/project.json"
     },
     "ParserTest/3.0.0": {
       "type": "project",
@@ -8217,7 +8217,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "CommandLineParser >= 3.0.0-*",
+      "CommandLineArgumentsParser >= 3.0.0-*",
       "ParserTest >= 3.0.0-*",
       "xunit >= 2.1.0",
       "xunit.runner.dnx >= 2.1.0-rc1-build204"

@@ -136,7 +136,10 @@ namespace CommandLineParser.Arguments
             {
                 TValue found = _allowedValues.FirstOrDefault(av => StringComparer.CurrentCultureIgnoreCase.Compare(value.ToString(), av.ToString()) == 0);
                 ok = found != null;
-                base.Value = found;
+                if (ok)
+                {
+                    base.Value = found;
+                }
             }
             else
             {

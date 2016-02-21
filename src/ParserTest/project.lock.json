@@ -3,7 +3,7 @@
   "version": 2,
   "targets": {
     ".NETFramework,Version=v2.0": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v2.0",
         "dependencies": {
@@ -37,7 +37,7 @@
       }
     },
     ".NETFramework,Version=v3.5": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v3.5",
         "dependencies": {
@@ -60,7 +60,7 @@
       }
     },
     ".NETFramework,Version=v4.0": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.0",
         "dependencies": {
@@ -84,7 +84,7 @@
       }
     },
     ".NETFramework,Version=v4.5": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -108,7 +108,7 @@
       }
     },
     ".NETFramework,Version=v4.5.1": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -132,7 +132,7 @@
       }
     },
     ".NETFramework,Version=v4.5.2": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
@@ -156,7 +156,7 @@
       }
     },
     "DNX,Version=v4.5.1": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -180,7 +180,7 @@
       }
     },
     "DNX,Version=v4.5.2": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.2",
         "dependencies": {
@@ -236,7 +236,7 @@
       }
     },
     "DNXCore,Version=v5.0": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -621,7 +621,7 @@
       }
     },
     ".NETFramework,Version=v2.0/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v2.0",
         "dependencies": {
@@ -655,7 +655,7 @@
       }
     },
     ".NETFramework,Version=v2.0/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v2.0",
         "dependencies": {
@@ -689,7 +689,7 @@
       }
     },
     ".NETFramework,Version=v3.5/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v3.5",
         "dependencies": {
@@ -712,7 +712,7 @@
       }
     },
     ".NETFramework,Version=v3.5/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v3.5",
         "dependencies": {
@@ -735,7 +735,7 @@
       }
     },
     ".NETFramework,Version=v4.0/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.0",
         "dependencies": {
@@ -759,7 +759,7 @@
       }
     },
     ".NETFramework,Version=v4.0/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.0",
         "dependencies": {
@@ -783,7 +783,7 @@
       }
     },
     ".NETFramework,Version=v4.5/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -807,7 +807,7 @@
       }
     },
     ".NETFramework,Version=v4.5/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5",
         "dependencies": {
@@ -831,7 +831,7 @@
       }
     },
     ".NETFramework,Version=v4.5.1/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -855,7 +855,7 @@
       }
     },
     ".NETFramework,Version=v4.5.1/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -879,7 +879,7 @@
       }
     },
     ".NETFramework,Version=v4.5.2/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
@@ -903,7 +903,7 @@
       }
     },
     ".NETFramework,Version=v4.5.2/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.2",
         "dependencies": {
@@ -927,7 +927,7 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -951,7 +951,7 @@
       }
     },
     "DNX,Version=v4.5.1/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.1",
         "dependencies": {
@@ -975,7 +975,7 @@
       }
     },
     "DNX,Version=v4.5.2/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.2",
         "dependencies": {
@@ -1031,7 +1031,7 @@
       }
     },
     "DNX,Version=v4.5.2/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNX,Version=v4.5.2",
         "dependencies": {
@@ -1087,7 +1087,7 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x86": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -1566,7 +1566,7 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x64": {
-      "CommandLineParser/3.0.0": {
+      "CommandLineArgumentsParser/3.0.0": {
         "type": "project",
         "framework": "DNXCore,Version=v5.0",
         "dependencies": {
@@ -2046,9 +2046,9 @@
     }
   },
   "libraries": {
-    "CommandLineParser/3.0.0": {
+    "CommandLineArgumentsParser/3.0.0": {
       "type": "project",
-      "path": "../CommandLineParser/project.json"
+      "path": "../CommandLineArgumentsParser/project.json"
     },
     "LINQBridge/1.3.0": {
       "type": "package",
@@ -3461,7 +3461,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "CommandLineParser >= 3.0.0-*"
+      "CommandLineArgumentsParser >= 3.0.0-*"
     ],
     ".NETFramework,Version=v2.0": [],
     ".NETFramework,Version=v3.5": [],

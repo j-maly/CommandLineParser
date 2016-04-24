@@ -2,11 +2,10 @@
     "version": "3.0.0.0-*",
     "authors": [ "Stef Heyenrath" ],
     "dependencies": {
-      "CommandLineArgumentsParser": "3.0.0.0-*"
+      "CommandLineArgumentsParser": "3.0.0.2-*"
     },
 
     "compilationOptions": {
-        "define": [ "REFLECTIONBRIDGE" ]
     },
 
     "commands": {

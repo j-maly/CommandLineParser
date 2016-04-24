@@ -7,7 +7,14 @@ CommandLine Parser Library lets you easily define strongly typed command line ar
 See [Quick Start](https://github.com/j-maly/CommandLineParser/wiki) on how to use the library. 
 
 Support for the following Frameworks:
-* net20 net35 net40 net45 net451 net452 dnx451 dnx452 net46 dnxcore5 
+* net20
+* net35
+* net40
+* net45
+* net45x
+* net46
+* dnx45x
+* dnxcore5
 
 ## Motivational Example
 

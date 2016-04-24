@@ -7,10 +7,7 @@ using System.Text.RegularExpressions;
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
 using CommandLineParser.Validation;
-
-#if DNXCORE50
-using ReflectionBridge.Extensions;
-#endif
+using CommandLineParser.Extensions;
 
 namespace CommandLineParser
 {
@@ -335,7 +332,7 @@ namespace CommandLineParser
                 }
             }
 
-            object[] typeAttrs = targetType.GetCustomAttributes(typeof(ArgumentCertificationAttribute), true);
+            object[] typeAttrs = targetType.GetTypeInfo().GetCustomAttributes(typeof(ArgumentCertificationAttribute), true).ToArray();
             foreach (object certificationAttr in typeAttrs)
             {
                 Certifications.Add(((ArgumentCertificationAttribute)certificationAttr).Certification);

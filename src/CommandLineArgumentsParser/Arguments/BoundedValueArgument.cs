@@ -1,6 +1,6 @@
 using System;
 using CommandLineParser.Exceptions;
-using ReflectionBridge.Extensions;
+using CommandLineParser.Extensions;
 
 namespace CommandLineParser.Arguments
 {

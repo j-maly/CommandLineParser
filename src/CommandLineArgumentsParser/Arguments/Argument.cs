@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using CommandLineParser.Exceptions;
 using System.Linq;
-
-#if DNXCORE50
-using ReflectionBridge.Extensions;
-#endif
+using System.Reflection;
+using CommandLineParser.Extensions;
 
 namespace CommandLineParser.Arguments
 {
@@ -307,7 +305,7 @@ namespace CommandLineParser.Arguments
         /// <param name="constructorParams">Parameters of the constructor of underlying argument</param>
         protected ArgumentAttribute(Type underlyingArgumentType, params object[] constructorParams)
         {
-            if (!underlyingArgumentType.IsSubclassOf(typeof(Argument)))
+            if (!underlyingArgumentType.GetTypeInfo().IsSubclassOf(typeof(Argument)))
             {
                 throw new InvalidOperationException("Parameter underlyingArgumentType must be a subclass of Argument.");
             }

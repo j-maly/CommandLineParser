@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using CommandLineParser.Exceptions;
-using ReflectionBridge.Extensions;
-
-#if ASPNETCORE50
-using System.Linq;
-#endif
+using CommandLineParser.Extensions;
 
 namespace CommandLineParser.Arguments
 {

@@ -1,8 +1,6 @@
 using System;
-
-#if DNXCORE50
-using ReflectionBridge.Extensions;
-#endif
+using System.Reflection;
+using CommandLineParser.Extensions;
 
 namespace CommandLineParser.Validation
 {
@@ -56,7 +54,7 @@ namespace CommandLineParser.Validation
         /// <paramref name="underlyingCertificationType">certification</paramref>constructor</param>
         protected ArgumentCertificationAttribute(Type underlyingCertificationType, params object[] constructorParams)
         {
-            if (!underlyingCertificationType.IsSubclassOf(typeof(ArgumentCertification)))
+            if (!underlyingCertificationType.GetTypeInfo().IsSubclassOf(typeof(ArgumentCertification)))
             {
                 throw new InvalidOperationException("Parameter underlyingArgumentType must be a subclass of ArgumentCertification.");
             }

@@ -8,4 +8,4 @@ build:
   verbosity: minimal
 
 test_script:
-- cmd: dnx -p test/Linq.PropertyTranslator.Core.Tests test
+- cmd: dnx -p src/Tests test

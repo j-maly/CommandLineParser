@@ -1,0 +1,140 @@
+﻿<CommandLineParser>
+  <Parser>
+    <remarks>
+      <p>
+        CommandLineParser is the fundamental class of the whole library. It main purpose is
+        to find the defined arguments on the command line and for each such argument call
+        the <see cref="Argument.Parse">Parse</see> method that reads the value of the argument. 
+      </p>
+      <p>
+        CommandLineParser keeps the argument definitions in its 
+        <see cref="Arguments">Arguments</see> collection. This collection can 
+        be filled explicitly by creating proper <see cref="Argument" /> objects and adding them
+        to the collection. The other way is declaring <see cref="ArgumentAttribute">argument 
+        attributes</see> in some of your classes and then letting the CommandLineParser 
+        extract the argument from instances of these classes and bind the 
+        class' instances fields to the extracted
+        arguments (this is done in <see cref="ExtractArgumentAttributes" />.
+      </p>
+      <p>
+        For an example of using argument attributes, see <see cre="ArgumentAttribute"/>.
+      </p>
+      <p>
+        This is an example of using the CommandLineParser
+      </p>
+      <ul>
+        <li>creating an instance of the parser</li>
+        <li>defining the explicit arguments</li>
+        <li>adding the arguments to the parser</li>
+        <li>calling <see cref="ParseCommandLine" /> method to process the arguments</li>
+        <li>working with arguments' values</li>
+      </ul>
+    </remarks>
+    <example>
+      <code source="Examples\Parser.cs" lang="cs" title="Using the command line parser" />
+      
+    </example>
+  </Parser>
+  <Arguments>
+    <Argument>
+      <remarks>
+        <p>
+          Argument class is a base class for all the argument types.
+        </p>
+        <p>
+          To use the argument parser, you can either create your own
+          argument types by deriving from Argument class or you can
+          use some of the argument types provided out of the box that
+          cover the usual user scenarios. 
+        </p>
+        <p>
+          See:
+          <ul>
+            <li><see cref="ValueArgument{TValue}"/>
+            </li>
+            <li>
+              <see cref="SwitchArgument"/>
+            </li>
+            <li>
+              <see cref="CertifiedValueArgument{TValue}"/>
+            </li>
+            <li>
+              <see cref="BoundedValueArgument{TValue}"/>
+            </li>
+            <li>
+              <see cref="EnumeratedValueArgument{TValue}"/>
+            </li>
+          </ul>
+        </p>
+      </remarks>
+    </Argument>
+    <SwitchArgument>
+      <remarks>
+      
+      </remarks>
+      <example>
+        <code source="Examples\SwitchExample.cs"
+          lang="cs" title="Example of SwitchArgument" />
+      </example>
+    </SwitchArgument>
+    <ValueArgument>
+      <remarks>
+
+      </remarks>
+      <example>
+        <code source="Examples\ValueExample.cs"
+          lang="cs" title="Example of ValueArgument" />
+      </example>
+
+    </ValueArgument>
+    <CertifiedValueArgument>
+      <remarks>
+
+      </remarks>
+      <example>
+        <code source="Examples\CertifiedValueExample.cs"
+          lang="cs" title="Example of CertifiedValueArgument" />
+      </example>
+
+    </CertifiedValueArgument>
+    <BoundedValueArgument>
+      <remarks>
+  
+      </remarks>
+      <example>
+        <code source="Examples\BoundedValueExample.cs"
+          lang="cs" title="Example of BoundedValueExample" />
+      </example>
+    </BoundedValueArgument>
+    <EnumeratedValueArgument>
+      <remarks>
+
+      </remarks>
+      <example>
+        <code source="Examples\EnumeratedValueExample.cs"
+          lang="cs" title="Example of EnumeratedValueArgument" />
+      </example>
+    </EnumeratedValueArgument>
+  </Arguments>
+  <Certifications>
+    <Certification>
+      <remarks>
+        <p>
+          You can use certifications to define which arguments combinations are allowed and forbidden in your application. 
+          Use <see cref="ArgumentGroupCertification" /> and <see cref="DistinctGroupsCertification" /> for this purpose.
+        </p>
+        <p>
+          You can also create your own certification classes to test other conditions.
+        </p>
+      </remarks>
+      <example>
+        <code source="Examples\CertificationExample.cs" lang="cs" title="Defining conditions for the attributes." />
+      </example>
+    </Certification>
+    <CertificationAttribute>
+      <example>
+        <code source="Examples\CertificationExample.cs" lang="cs" title="Defining conditions for the attributes." />
+      </example>
+    </CertificationAttribute>
+  </Certifications>
+</CommandLineParser>

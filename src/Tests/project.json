@@ -1,26 +1,29 @@
 ﻿{
     "version": "1.0.0-*",
+    "authors": ["Stef Heyenrath"],
     "dependencies": {
-        "CommandLineArgumentsParser": "3.0-*",
-        "ParserTest": "3.0-*",
+        "Microsoft.NETCore.App": {
+            "type": "platform",
+            "version": "1.0.0-rc2-*"
+        },
+        "CommandLineArgumentsParser": { "target": "project" },
+		"ParserTest": { "target": "project" },
 
-        "xunit": "2.1.0",
-        "xunit.runner.dnx": "2.1.0-rc1-build204"
-    },
-
-    "compilationOptions": {
-    },
-
-    "commands": {
-        "test": "xunit.runner.dnx"
+        "xunit": "2.1.0-rc2-*",
+        "dotnet-test-xunit": "1.0.0-rc2-*"
     },
 
     "frameworks": {
-        "dnx451": {
-        },
-        "dnx452": {
-        },
-        "dnxcore50": {
+        "netcoreapp1.5": {
+            "buildOptions": { "define": [ "NETSTANDARD" ] },
+            "imports": [
+                "dotnet5.4",
+                "portable-net451+win8"
+            ],
+            "dependencies": {
+            }
         }
-    }
+    },
+
+    "testRunner": "xunit"
 }

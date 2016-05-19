@@ -46,7 +46,7 @@ namespace ParserTest
 
     public class Program
     {
-        public void Main(string[] args)
+        public static void Main(string[] args)
         {
             var parser = new CommandLineParser.CommandLineParser();
             parser.ShowUsageOnEmptyCommandline = true;

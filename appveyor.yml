@@ -1,11 +1,39 @@
 os: Visual Studio 2015
 
-install:
-- dnvm upgrade -r clr
-- dnu restore
+version: 3.0.1.{build}
 
-build:
-  verbosity: minimal
+configuration:
+- Debug
+- Release
+
+platform: Any CPU
+
+init:
+- ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
+
+install:
+- ps: Start-FileDownload 'https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/Latest/dotnet-dev-win-x64.latest.exe'
+- cmd: dotnet-dev-win-x64.latest.exe /quiet
+
+environment:
+  PATH: $(PATH);$(PROGRAMFILES)\dotnet\
+
+build_script:
+- appveyor-retry dotnet restore -v Minimal
+- appveyor-retry dotnet restore .\src\CommandLineArgumentsParser -v Minimal
+- appveyor-retry dotnet restore .\test\System.Linq.Dynamic.Core.Tests  -v Minimal
+
+- dotnet build .\src\CommandLineArgumentsParser\project.json -c %CONFIGURATION%
+- dotnet build .\src\ParserTest\project.json -c %CONFIGURATION%
+- dotnet build .\src\Tests\project.json -c %CONFIGURATION%
+
+- dotnet pack -c Release --no-build --version-suffix %LABEL% -o .\artifacts .\src\CommandLineArgumentsParser\project.json
 
 test_script:
-- cmd: dnx -p src/Tests test
+- dotnet test -c %CONFIGURATION% --no-build .\src\Tests
+
+artifacts:
+- path: artifacts\**\*.*
+
+cache:
+- '%USERPROFILE%\.nuget\packages'

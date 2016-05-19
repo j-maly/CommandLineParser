@@ -1,20 +1,25 @@
 ﻿{
-    "version": "3.0.0.2-*",
+    "version": "3.0.1-*",
     "authors": [ "Jakub Maly", "Stef Heyenrath", "NTTAKR" ],
-    "owners": [ "Jakub Maly", "Stef Heyenrath" ],
     "description": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
-    "summary": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
-    "tags": [ "commandline", "parse", "validate", "args", "arguments" ],
-    "projectUrl": "https://github.com/j-maly/CommandLineParser/",
-    "tooling": {
-        "defaultNamespace": "CommandLineParser"
-    },
-    "releasenotes": "Removed dependency from ReflectionBridge",
 
     "dependencies": {
     },
 
-    "compilationOptions": {
+    "buildOptions": {
+    },
+
+    "packOptions": {
+        "summary": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
+        "tags": [ "commandline", "parse", "validate", "args", "arguments" ],
+        "owners": [ "Jakub Maly", "Stef Heyenrath" ],
+        "repository": {
+            "type": "git",
+            "url": "https://github.com/j-maly/CommandLineParser"
+        },
+        "projectUrl": "https://github.com/j-maly/CommandLineParser",
+        "licenseUrl": "https://github.com/j-maly/CommandLineParser/todo.txt",
+        "releasenotes": "migrated to dotnet rc2",
     },
 
     "frameworks": {
@@ -37,26 +42,41 @@
         },
         "dnx451": {
         },
-        "dnx452": {
-        },
-        "dnxcore5": {
+        "netstandard1.3": {
+            "buildOptions": { "define": [ "NETSTANDARD" ] },
+            "NETStandard.Library": {
+                "version": "1.5.0-rc2-*"
+            },
+            "imports": [
+                "dotnet5.4",
+                "portable-win81+wp81",
+                "portable-net45+wp8",
+                "portable-net45+win8+wp8",
+                "portable-wp81+wpa81",
+                "portable-win81+wp81+wpa81",
+                "portable-net45+win8+wpa81+wp8",
+                "portable-net45+win8",
+                "portable-net45+win8+wpa81",
+                "portable-win81+wpa81",
+                "portable-net451+win81",
+                "portable-net451+win81+wpa81"
+            ],
             "dependencies": {
-                "Microsoft.CSharp": "4.0.1-beta-*",
-
-                "System.Runtime": "4.0.21-beta-*",
-                "System.Runtime.Extensions": "4.0.11-beta-*",
-                "System.Runtime.Serialization.Primitives": "4.0.11-beta-*",
-
-                "System.Console": "4.0.0-beta-*",
-
-                "System.IO": "4.0.11-beta-*",
-                "System.IO.FileSystem": "4.0.1-beta-*",
-
-                "System.Globalization": "4.0.10",
-
-                "System.Resources.ResourceManager": "4.0.1-beta-*",
-
-                "System.Text.RegularExpressions": "4.0.11-beta-*"
+                "Microsoft.CSharp": "4.0.1-rc2-*",
+                "System.Runtime": "4.1.0-rc2-*",
+                "System.Runtime.Extensions": "4.1.0-rc2-*",
+                "System.Runtime.Serialization.Primitives": "4.1.1-rc2-*",
+                "System.Collections": "4.0.11-rc2-*",
+                "System.Console": "4.0.0-rc2-*",
+                "System.Globalization": "4.0.11-rc2-*",
+                "System.IO": "4.1.0-rc2-*",
+                "System.IO.FileSystem": "4.0.1-rc2-*",
+                "System.Linq": "4.1.0-rc2-*",
+                "System.Reflection": "4.1.0-rc2-*",
+                "System.Reflection.TypeExtensions": "4.1.0-rc2-*",
+                "System.Reflection.Extensions": "4.0.1-rc2-*",
+                "System.Resources.ResourceManager": "4.0.1-rc2-*",
+                "System.Text.RegularExpressions": "4.0.12-rc2-*"
             }
         }
     }

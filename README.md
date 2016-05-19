@@ -1,5 +1,7 @@
 # CommandLineParser
 
+[![Build status](https://ci.appveyor.com/api/projects/status/y7m9gmr8f2pjukq8?svg=true)](https://ci.appveyor.com/project/StefH/commandlineparser)
+
 * Now available as NuGet package: http://nuget.org/packages/CommandLineArgumentsParser
 
 CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.
@@ -13,8 +15,8 @@ Support for the following Frameworks:
 * net45
 * net45x
 * net46
-* dnx45x
-* dnxcore5
+* dnx451
+* netstandard1.3
 
 ## Motivational Example
 

@@ -20,8 +20,6 @@ environment:
 
 build_script:
 - appveyor-retry dotnet restore -v Minimal
-- appveyor-retry dotnet restore .\src\CommandLineArgumentsParser -v Minimal
-- appveyor-retry dotnet restore .\test\System.Linq.Dynamic.Core.Tests  -v Minimal
 
 - dotnet build .\src\CommandLineArgumentsParser\project.json -c %CONFIGURATION%
 - dotnet build .\src\ParserTest\project.json -c %CONFIGURATION%

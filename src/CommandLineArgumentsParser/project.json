@@ -19,7 +19,7 @@
         },
         "projectUrl": "https://github.com/j-maly/CommandLineParser",
         "licenseUrl": "https://github.com/j-maly/CommandLineParser/todo.txt",
-        "releasenotes": "migrated to dotnet rc2",
+        "releasenotes": "migrated to dotnet rc2"
     },
 
     "frameworks": {

@@ -1,13 +1,7 @@
 ﻿{
-    "version": "3.0.1-*",
+    "version": "3.0.2-*",
     "authors": [ "Jakub Maly", "Stef Heyenrath", "NTTAKR" ],
     "description": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
-
-    "dependencies": {
-    },
-
-    "buildOptions": {
-    },
 
     "packOptions": {
         "summary": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
@@ -18,8 +12,14 @@
             "url": "https://github.com/j-maly/CommandLineParser"
         },
         "projectUrl": "https://github.com/j-maly/CommandLineParser",
-        "licenseUrl": "https://github.com/j-maly/CommandLineParser/todo.txt",
-        "releasenotes": "migrated to dotnet rc2"
+        "licenseUrl": "https://raw.githubusercontent.com/j-maly/CommandLineParser/master/LICENCE.md",
+        "releasenotes": ""
+    },
+
+    "dependencies": {
+    },
+
+    "buildOptions": {
     },
 
     "frameworks": {

@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{73FCE9C7-48AB-4261-998D-12CB868B0E12}"
+	ProjectSection(SolutionItems) = preProject
+		src\_build_nuget.cmd = src\_build_nuget.cmd
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AD004B93-9DD2-4EDF-9AA2-1B90DCA8FAAC}"
 	ProjectSection(SolutionItems) = preProject

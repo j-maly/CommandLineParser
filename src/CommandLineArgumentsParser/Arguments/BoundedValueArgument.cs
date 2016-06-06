@@ -219,7 +219,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         /// <param name="value">value to certify</param>
         /// <exception cref="CommandLineArgumentOutOfRangeException">Thrown when <paramref name="value"/> lies outside the interval. </exception>
-        internal override void Certify(TValue value)
+        protected override void Certify(TValue value)
         {
             if (UseMinValue && MinValue.CompareTo(value) == 1)
             {

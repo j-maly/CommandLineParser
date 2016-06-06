@@ -72,11 +72,11 @@ namespace CommandLineParser.Arguments
 			return new DirectoryInfo(stringValue);
 		}
 
-		/// <summary>
-		/// Checks whether directory exists in the file system
-		/// </summary>
-		/// <param name="value">value to certify - directory path</param>
-		internal override void Certify(DirectoryInfo value)
+        /// <summary>
+        /// Checks whether directory exists in the file system
+        /// </summary>
+        /// <param name="value">value to certify - directory path</param>
+        protected override void Certify(DirectoryInfo value)
 		{
 			if (DirectoryMustExist && !value.Exists)
 			{

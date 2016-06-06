@@ -129,7 +129,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         /// <param name="value">value to certify</param>
         /// <exception cref="CommandLineArgumentOutOfRangeException">thrown when <paramref name="value"/> does not belong to the set of allowed values.</exception>
-        internal override void Certify(TValue value)
+        protected override void Certify(TValue value)
         {
             bool ok;
             if (IgnoreCase && typeof(TValue) == typeof(string) && value is string)

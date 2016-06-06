@@ -79,6 +79,6 @@ namespace CommandLineParser.Arguments
         /// restriction and limitations. Exceptions are thrown when these are not met.
         /// </summary>
         /// <param name="value">value to certify</param>
-        internal abstract void Certify(TValue value);
+        protected abstract void Certify(TValue value);
     }
 }

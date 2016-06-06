@@ -91,11 +91,11 @@ namespace CommandLineParser.Arguments
 			return new FileInfo(stringValue);
 		}
 
-		/// <summary>
-		/// Checks whether file exists in the file system
-		/// </summary>
-		/// <param name="value">value to certify - file path</param>
-		internal override void Certify(FileInfo value)
+        /// <summary>
+        /// Checks whether file exists in the file system
+        /// </summary>
+        /// <param name="value">value to certify - file path</param>
+        protected override void Certify(FileInfo value)
 		{
 			if (FileMustExist && !value.Exists)
 			{

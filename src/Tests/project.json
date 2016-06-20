@@ -4,7 +4,7 @@
     "dependencies": {
         "Microsoft.NETCore.App": {
             "type": "platform",
-            "version": "1.0.0-rc2-*"
+            "version": "1.0.0-rc2-3002702"
         },
         "CommandLineArgumentsParser": { "target": "project" },
 		"ParserTest": { "target": "project" },
@@ -14,7 +14,7 @@
     },
 
     "frameworks": {
-        "netcoreapp1.5": {
+        "netcoreapp1.0": {
             "buildOptions": { "define": [ "NETSTANDARD" ] },
             "imports": [
                 "dotnet5.4",

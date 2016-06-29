@@ -155,30 +155,30 @@ namespace CommandLineParser.Validation
                 case EArgumentGroupCondition.AtLeastOneUsed:
                     if (usedArgsFromGroup == 0)
                         throw new ArgumentConflictException(
-                            string.Format(Messages.EXC_GROUP_AT_LEAST_ONE, _argumentGroupString));
+                            string.Format(Description, _argumentGroupString));
                     break;
                 case EArgumentGroupCondition.ExactlyOneUsed:
                     if (usedArgsFromGroup == 0)
                         throw new ArgumentConflictException(
-                            string.Format(Messages.EXC_GROUP_EXACTLY_ONE_NONE_USED, _argumentGroupString));
+                            string.Format(Description, _argumentGroupString));
                     if (usedArgsFromGroup > 1)
                         throw new ArgumentConflictException(
-                            string.Format(Messages.EXC_GROUP_EXACTLY_ONE_MORE_USED, _argumentGroupString));
+                            string.Format(Description, _argumentGroupString));
                     break;
                 case EArgumentGroupCondition.OneOreNoneUsed:
                     if (usedArgsFromGroup > 1)
                         throw new ArgumentConflictException(
-                            string.Format(Messages.EXC_GROUP_ONE_OR_NONE_MORE_USED, _argumentGroupString));
+                            string.Format(Description, _argumentGroupString));
                     break;
                 case EArgumentGroupCondition.AllUsed:
                     if (usedArgsFromGroup != _argumentGroup.Length)
                         throw new ArgumentConflictException(
-                            string.Format(Messages.EXC_GROUP_ALL_USED_NOT_ALL_USED, _argumentGroupString));
+                            string.Format(Description, _argumentGroupString));
                     break;
                 case EArgumentGroupCondition.AllOrNoneUsed:
                     if (usedArgsFromGroup != _argumentGroup.Length && usedArgsFromGroup != 0)
                         throw new ArgumentConflictException(
-                            string.Format(Messages.EXC_GROUP_ALL_OR_NONE_USED_NOT_ALL_USED, _argumentGroupString));
+                            string.Format(Description, _argumentGroupString));
                     break;
             }
         }

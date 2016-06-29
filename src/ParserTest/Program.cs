@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
+using CommandLineParser.Validation;
 
 namespace ParserTest
 {
+#pragma warning disable CS0649
     class ParsingTarget
     {
         [SwitchArgument('s', "show", true, Description = "Set whether show or not")]
@@ -43,6 +45,7 @@ namespace ParserTest
         [DirectoryArgument('d', "directory", Description = "Input directory", DirectoryMustExist = false)]
         public DirectoryInfo InputDirectory;
     }
+#pragma warning restore CS0649
 
     public class Program
     {
@@ -56,6 +59,7 @@ namespace ParserTest
             parser.ShowUsageHeader = "This is an interesting command";
             parser.ShowUsageFooter = "And that is all";
             parser.ExtractArgumentAttributes(p);
+            parser.Certifications.Add(new DistinctGroupsCertification("d", "color") { Description = "This is this"});
 
             var examples = new List<string[]>();
             examples.Add(new string[0]); //No arguments passed

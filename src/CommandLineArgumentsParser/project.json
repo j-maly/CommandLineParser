@@ -1,5 +1,5 @@
 {
-  "version": "3.0.3-*",
+  "version": "3.0.4-*",
     "authors": [ "Jakub Maly", "Stef Heyenrath", "NTTAKR" ],
     "description": "CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.",
 

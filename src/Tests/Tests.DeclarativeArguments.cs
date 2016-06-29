@@ -8,6 +8,7 @@ namespace Tests
 {
     public partial class Tests
     {
+#pragma warning disable CS0649
         class DeclarativeArgumentsParsingTarget
         {
             [SwitchArgument('s', "show", true, Description = "Set whether show or not")]
@@ -40,6 +41,7 @@ namespace Tests
             [DirectoryArgument('d', "directory", Description = "Input directory", DirectoryMustExist = false)]
             public DirectoryInfo InputDirectory;
         }
+#pragma warning restore CS0649
 
         private CommandLineParser.CommandLineParser InitDeclarativeArguments()
         {

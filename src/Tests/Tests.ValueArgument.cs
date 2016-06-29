@@ -7,6 +7,7 @@ namespace Tests
 {
     public partial class Tests
     {
+#pragma warning disable CS0649
         class ValueArgumentParsingTarget
         {
             [ValueArgument(typeof(int), 'i', AllowMultiple = true)]
@@ -18,6 +19,7 @@ namespace Tests
             [ValueArgument(typeof(int), 'l', DefaultValue = 0)]
             public int Length;
         }
+#pragma warning restore CS0649
 
         ValueArgumentParsingTarget valueArgumentTarget;
 

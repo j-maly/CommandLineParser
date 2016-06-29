@@ -667,7 +667,7 @@ namespace CommandLineParser
                 outputStream.WriteLine(Messages.CERT_REMARKS);
                 foreach (ArgumentCertification certification in Certifications)
                 {
-                    outputStream.WriteLine("\t" + certification.GetDescription);
+                    outputStream.WriteLine("\t" + certification.Description);
                 }
                 outputStream.WriteLine();
             }

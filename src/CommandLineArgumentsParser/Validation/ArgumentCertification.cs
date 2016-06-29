@@ -13,6 +13,7 @@ namespace CommandLineParser.Validation
     /// <include file='..\Doc\CommandLineParser.xml' path='CommandLineParser/Certifications/Certification/*'/>
     public abstract class ArgumentCertification
     {
+        protected string _description;
         /// <summary>
         /// Test the parser for the certification. This method should throw an exception if the condition
         /// is not met. 
@@ -24,9 +25,10 @@ namespace CommandLineParser.Validation
         /// <summary>
         /// Returns description of the certification.
         /// </summary>
-        public virtual string GetDescription
+        public virtual string Description
         {
-            get { return ToString(); }
+            get { return _description; }
+            set { _description = value; }
         }
     }
 
@@ -60,6 +62,11 @@ namespace CommandLineParser.Validation
             }
             //create certification object of proper type using reflection
             certification = (ArgumentCertification)Activator.CreateInstance(underlyingCertificationType, constructorParams);
+        }
+        public string Description
+        {
+            get { return Certification.Description; }
+            set { Certification.Description = value; }
         }
     }
 }

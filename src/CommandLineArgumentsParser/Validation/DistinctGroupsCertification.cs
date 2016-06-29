@@ -31,6 +31,10 @@ namespace CommandLineParser.Validation
 
             _argumentGroupString1 = ArgumentGroupCertification.GetGroupStringFromArguments(argumentGroup1);
             _argumentGroupString2 = ArgumentGroupCertification.GetGroupStringFromArguments(argumentGroup2);
+            if (_description == null)
+            {
+                _description = DefaultUsageDescription();
+            }
         }
 
         /// <summary>
@@ -45,6 +49,10 @@ namespace CommandLineParser.Validation
         {
             _argumentGroupString1 = argumentGroup1;
             _argumentGroupString2 = argumentGroup2;
+            if (_description == null)
+            {
+                _description = DefaultUsageDescription();
+            }
         }
 
         /// <summary>
@@ -82,6 +90,10 @@ namespace CommandLineParser.Validation
             {
                 throw new ArgumentConflictException(String.Format(Messages.EXC_GROUP_DISTINCT, _argumentGroupString1, _argumentGroupString2));
             }
+            if (Description == null)
+            {
+                Description = DefaultUsageDescription();
+            }
         }
 
         ///<summary>
@@ -92,7 +104,7 @@ namespace CommandLineParser.Validation
         ///A <see cref="T:System.String"></see> that represents the current <see cref="T:System.Object"></see>.
         ///</returns>
         ///<filterpriority>2</filterpriority>
-        public override string ToString()
+        private string DefaultUsageDescription()
         {
             return string.Format(Messages.EXC_GROUP_DISTINCT, _argumentGroupString1, _argumentGroupString2);
         }

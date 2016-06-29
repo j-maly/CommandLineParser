@@ -63,6 +63,10 @@ namespace CommandLineParser.Validation
             Condition = condition;
             if (arguments != null)
                 _argumentGroupString = GetGroupStringFromArguments(_argumentGroup);
+            if (_description == null && _argumentGroupString != null)
+            {
+                _description = DefaultUsageDescription();
+            }
         }
 
 
@@ -75,6 +79,10 @@ namespace CommandLineParser.Validation
             : this((Argument[])null, condition)
         {
             _argumentGroupString = arguments;
+            if (_description == null)
+            {
+                _description = DefaultUsageDescription();
+            }
         }
 
         /// <summary>
@@ -178,25 +186,22 @@ namespace CommandLineParser.Validation
         /// <summary>
         /// Returns description of the certification.
         /// </summary>
-        public override string GetDescription
+        private string DefaultUsageDescription()
         {
-            get
+            switch (Condition)
             {
-                switch (Condition)
-                {
-                    case EArgumentGroupCondition.AtLeastOneUsed:
-                        return string.Format(Messages.GROUP_AT_LEAST_ONE_USED, _argumentGroupString);
-                    case EArgumentGroupCondition.ExactlyOneUsed:
+                case EArgumentGroupCondition.AtLeastOneUsed:
+                    return string.Format(Messages.GROUP_AT_LEAST_ONE_USED, _argumentGroupString);
+                case EArgumentGroupCondition.ExactlyOneUsed:
                         return string.Format(Messages.GROUP_EXACTLY_ONE_USED, _argumentGroupString);
                     case EArgumentGroupCondition.OneOreNoneUsed:
                         return string.Format(Messages.GROUP_ONE_OR_NONE_USED, _argumentGroupString);
-                    case EArgumentGroupCondition.AllUsed:
-                        return string.Format(Messages.GROUP_ALL_USED, _argumentGroupString);
-                    case EArgumentGroupCondition.AllOrNoneUsed:
-                        return string.Format(Messages.GROUP_ALL_OR_NONE_USED, _argumentGroupString);
-                    default:
-                        return string.Empty;
-                }
+                case EArgumentGroupCondition.AllUsed:
+                    return string.Format(Messages.GROUP_ALL_USED, _argumentGroupString);
+                case EArgumentGroupCondition.AllOrNoneUsed:
+                    return string.Format(Messages.GROUP_ALL_OR_NONE_USED, _argumentGroupString);
+                default:
+                    return string.Empty;
             }
         }
     }

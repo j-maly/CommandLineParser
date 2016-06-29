@@ -82,7 +82,7 @@ namespace Tests
             string[] args = new[] { "-c", "file", "-x", "file2" };
 
             var ex = Assert.Throws<ArgumentConflictException>(() => commandLineParser.ParseCommandLine(args));
-            Assert.Contains("Only one of these arguments", ex.Message);
+            Assert.Contains("One (and only one) of these arguments", ex.Message);
         }
 
         [Fact]        
@@ -98,7 +98,24 @@ namespace Tests
             string[] args = new[] { "-j" };
 
             var ex = Assert.Throws<ArgumentConflictException>(() => commandLineParser.ParseCommandLine(args));
-            Assert.Contains("One of these arguments", ex.Message);
+            Assert.Contains("One (and only one) of these arguments", ex.Message);
+        }
+
+        [Fact]
+        public void GroupCertifications_ExactlyOneUsed_customError()
+        {
+            // exactly one of the arguments x, o, c must be used
+            ArgumentGroupCertification eou = new ArgumentGroupCertification("x,o,c", EArgumentGroupCondition.ExactlyOneUsed);
+            eou.Description = "my custom error";
+
+            var commandLineParser = InitGroupCertifications();
+            commandLineParser.Certifications.Clear();
+            commandLineParser.Certifications.Add(eou);
+
+            string[] args = new[] { "-j" };
+
+            var ex = Assert.Throws<ArgumentConflictException>(() => commandLineParser.ParseCommandLine(args));
+            Assert.Contains("my custom error", ex.Message);
         }
 
         #endregion

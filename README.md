@@ -37,9 +37,9 @@ CommandLineParser.CommandLineParser parser =
 //switch argument is meant for true/false logic
 SwitchArgument showArgument = new SwitchArgument(
     's', "show", "Set whether show or not", true);
-ValueArgument<decimal> version = new ValueArgument<decimal>
+ValueArgument<decimal> version = new ValueArgument<decimal> (
     'v', "version", "Set desired version");
-EnumeratedValueArgument<string> color = new EnumeratedValueArgument<string>
+EnumeratedValueArgument<string> color = new EnumeratedValueArgument<string> (
     'c', "color", new string[] { "red", "green", "blue" });
 
 parser.Arguments.Add(showArgument);

@@ -19,6 +19,9 @@ namespace Tests
                     defaultFalse = value;
                 }
             }
+
+            [ValueArgument(typeof(string), 'p')]
+            public string Path { get; set; }
         }
 
         public class TestOptionsTrue
@@ -82,6 +85,18 @@ namespace Tests
             parser.ParseCommandLine(new string[] { "-f" });
 
             Assert.True(options.DefaultFalse);
+        }
+
+        [Fact]
+        public void PathAsAnArgumentShouldNotBreakThings()
+        {
+            var parser = new CommandLineParser.CommandLineParser();
+            var options = new TestOptionsFalse();
+            parser.ExtractArgumentAttributes(options);
+
+            parser.ParseCommandLine(new string[] { "-p", "/root/folder" });
+
+            Assert.Equal("/root/folder", options.Path);
         }
     }
 }

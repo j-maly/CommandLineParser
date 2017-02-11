@@ -50,6 +50,8 @@ namespace CommandLineParser
 
         private char[] equalsSignSyntaxValuesSeparators = new char[] { ',', ';' };
 
+        private static Regex lettersOnly = new Regex("^[a-zA-Z]$");
+
         #endregion
 
         /// <summary>
@@ -498,8 +500,8 @@ namespace CommandLineParser
                             continue;
 
                         char sep = arg[0];
-                        if ((arg[0] == '-' && arg[1] != '-' && AcceptHyphen)
-                            || (arg[0] == '/' && arg[1] != '/' && AcceptSlash))
+                        if ((arg[0] == '-' && AcceptHyphen && lettersOnly.IsMatch(arg.Substring(1)))
+                            || (arg[0] == '/' && AcceptSlash && lettersOnly.IsMatch(arg.Substring(1))))
                         {
                             argsList.RemoveAt(i);
                             //arg ~ -xyz
@@ -518,7 +520,7 @@ namespace CommandLineParser
                     }
                 }
             }
-        }
+        }        
 
         private void ExpandValueArgumentsWithEqualSigns(IList<string> argsList)
         {

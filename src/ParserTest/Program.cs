@@ -44,6 +44,11 @@ namespace ParserTest
 
         [DirectoryArgument('d', "directory", Description = "Input directory", DirectoryMustExist = false)]
         public DirectoryInfo InputDirectory;
+
+        [ValueArgument(typeof(string), Argument.UnsetShortNameChar, "types", Optional = true, AllowMultiple = true,
+            Description = "The file-types to process")]
+        public string[] FileTypes { get; set; }
+
     }
 #pragma warning restore CS0649
 
@@ -59,7 +64,7 @@ namespace ParserTest
             parser.ShowUsageHeader = "This is an interesting command";
             parser.ShowUsageFooter = "And that is all";
             parser.ExtractArgumentAttributes(p);
-            parser.Certifications.Add(new DistinctGroupsCertification("d", "color") { Description = "This is this"});
+            parser.Certifications.Add(new DistinctGroupsCertification("d", "color") { Description = "This is this" });
 
             var examples = new List<string[]>();
             examples.Add(new string[0]); //No arguments passed
@@ -72,6 +77,7 @@ namespace ParserTest
             examples.Add(new[] { "/d" }); // error, missing value
             examples.Add(new[] { "/d", "C:\\Input" });
             examples.Add(new[] { "file1", "file2" });
+            examples.Add(new[] { "--types", "png", "jpg", "pdf", "/show" });
 
             foreach (string[] arguments in examples)
             {
@@ -126,6 +132,7 @@ namespace ParserTest
             parser.ShowParsedArguments();
             Console.WriteLine("RESULT: OK");
             Console.WriteLine();
+            Console.ReadKey();
         }
     }
 }

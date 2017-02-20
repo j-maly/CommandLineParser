@@ -209,7 +209,7 @@ namespace CommandLineParser
             _longNameLookup = new Dictionary<string, Argument>();
             foreach (Argument argument in _arguments)
             {
-                if (argument.ShortName != ' ')
+                if (argument.ShortName != Argument.UnsetShortNameChar)
                 {
                     _shortNameLookup.Add(argument.ShortName, argument);
                 }
@@ -299,7 +299,7 @@ namespace CommandLineParser
 
             PerformMandatoryArgumentsCheck();
             PerformCertificationCheck();
-            ParsingSucceeded = true; 
+            ParsingSucceeded = true;
         }
 
         /// <summary>
@@ -520,7 +520,7 @@ namespace CommandLineParser
                     }
                 }
             }
-        }        
+        }
 
         private void ExpandValueArgumentsWithEqualSigns(IList<string> argsList)
         {
@@ -561,7 +561,7 @@ namespace CommandLineParser
                                     {
                                         argsList.Insert(i, singleValue);
                                         i++;
-                                    }                                    
+                                    }
                                 }
                                 i--;
                             }
@@ -570,7 +570,7 @@ namespace CommandLineParser
                                 argsList.Insert(i, argNameWithSep);
                                 i++;
                                 argsList.Insert(i, argValue);
-                            }                            
+                            }
                         }
                     }
                 }
@@ -620,7 +620,7 @@ namespace CommandLineParser
             {
                 outputStream.Write("\t");
                 bool comma = false;
-                if (argument.ShortName != ' ')
+                if (argument.ShortName != Argument.UnsetShortNameChar)
                 {
                     outputStream.Write("-" + argument.ShortName);
                     comma = true;

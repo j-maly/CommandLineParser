@@ -21,6 +21,7 @@
     },
 
     "buildOptions": {
+      "xmlDoc": true
     },
 
     "frameworks": {

@@ -31,7 +31,7 @@ namespace CommandLineParser.Arguments
         private TValue _value;
 
         private readonly List<TValue> _values = new List<TValue>();
-        
+
         private CultureInfo _cultureInfo = CultureInfo.InvariantCulture;
 
         #endregion
@@ -174,7 +174,7 @@ namespace CommandLineParser.Arguments
         /// Necessary when non-builtin type is used as <typeparamref name="TValue"/>.
         /// </summary>
         public ConvertValueDelegate<TValue> ConvertValueHandler { get; set; }
-        
+
         /// <summary>
         /// This method reads the argument and the following string representing the value of the argument. 
         /// This string is then converted to <typeparamref name="TValue"/> (using built-in <typeparamref name="TValue"/>.Parse
@@ -189,40 +189,46 @@ namespace CommandLineParser.Arguments
         internal override void Parse(IList<string> args, ref int i)
         {
             base.Parse(args, ref i);
+            bool foundValue = false;
 
-            i++; // move the cursor to the value
-            if (args.Count - 1 < i)
+            while (true)
             {
-                if (ValueOptional)
+                i++; // move the cursor to the value
+                if (args.Count - 1 < i || IsArgument(args[i]))
                 {
-                    Parsed = true;
-                    return;
+                    if (ValueOptional || foundValue)
+                    {
+                        Parsed = true;
+                        return;
+                    }
+                    throw new CommandLineArgumentException(string.Format(Messages.EXC_ARG_VALUE_MISSING2, Name), Name);
                 }
-                throw new CommandLineArgumentException(string.Format(Messages.EXC_ARG_VALUE_MISSING2, Name), Name);
-            }
 
-            _stringValue = args[i];
-            bool canParse = true;
-            try { Convert(_stringValue); }
-            catch { canParse = false; }
-
-            if (!canParse && args[i].StartsWith("-"))
-            {
-                if (ValueOptional)
+                _stringValue = args[i];
+                try
                 {
+                    if (!AllowMultiple)
+                        Value = Convert(_stringValue);
+                    else
+                        Values.Add(Convert(_stringValue));
+                    foundValue = true;
                     Parsed = true;
-                    return;
                 }
-                throw new CommandLineArgumentException(string.Format(Messages.EXC_ARG_VALUE_MISSING, Name, args[i]), Name);
+                catch
+                {
+                    if (ValueOptional || foundValue)
+                    {
+                        Parsed = true;
+                        return;
+                    }
+                    throw new CommandLineArgumentException(string.Format(Messages.EXC_ARG_VALUE_MISSING, Name, args[i]), Name);
+                }
             }
+        }
 
-            if (!AllowMultiple)
-                Value = Convert(_stringValue);
-            else
-                Values.Add(Convert(_stringValue));
-
-            Parsed = true;
-            i++; // move to the next argument 
+        private bool IsArgument(string arg)
+        {
+            return arg.StartsWith("-") || arg.StartsWith("/");
         }
 
         /// <summary>
@@ -377,7 +383,7 @@ namespace CommandLineParser.Arguments
                 if (valueType == typeof(DateTime)) return (TValue)(object)DateTime.Parse(stringValue, _cultureInfo);
                 if (valueType == typeof(TimeSpan)) return (TValue)(object)DateTime.Parse(stringValue, _cultureInfo);
 
-                MethodInfo mi = typeof(TValue).GetMethod("Parse", new [] { typeof(string), typeof(CultureInfo)});
+                MethodInfo mi = typeof(TValue).GetMethod("Parse", new[] { typeof(string), typeof(CultureInfo) });
                 if (mi != null)
                 {
                     if (mi.IsStatic && mi.ReturnType == typeof(TValue))
@@ -498,7 +504,7 @@ namespace CommandLineParser.Arguments
             set
             {
                 underlyingValueArgument.SetPropertyValue("DefaultValue", Argument, value);
-            }       
+            }
         }
 
         /// <summary>

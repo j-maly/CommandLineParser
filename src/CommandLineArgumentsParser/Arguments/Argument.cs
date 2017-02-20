@@ -19,9 +19,11 @@ namespace CommandLineParser.Arguments
     /// <include file='..\Doc\CommandLineParser.xml' path='CommandLineParser/Arguments/Argument/*'/>
     public abstract class Argument
     {
-#region property backing fields
+        public const char UnsetShortNameChar = ' ';
 
-        private char _shortName = '_';
+        #region property backing fields
+
+        private char _shortName = UnsetShortNameChar;
 
         private string _longName;
 
@@ -37,9 +39,9 @@ namespace CommandLineParser.Arguments
 
         private FieldArgumentBind? _bind;
 
-#endregion
+        #endregion
 
-#region constructors
+        #region constructors
 
         /// <summary>
         /// Creates new command line argument with a <see cref="ShortName">short name</see>.
@@ -75,7 +77,7 @@ namespace CommandLineParser.Arguments
             ShortName = shortName;
         }
 
-#endregion
+        #endregion
 
         /// <summary>
         /// Mark argument optional. 
@@ -106,7 +108,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public string Description { get; set; }
 
-        private static readonly char[] BadChars = new char[] { '\r', '\n', ' ', '\t'};
+        private static readonly char[] BadChars = new char[] { '\r', '\n', ' ', '\t' };
 
         /// <summary>
         /// Long name of the argument. Can apear on the command line in --<i>longName</i> format.
@@ -135,10 +137,10 @@ namespace CommandLineParser.Arguments
             get { return _shortName; }
             set
             {
-                if (char.IsWhiteSpace(value))
-                {
-                    throw new FormatException(Messages.EXC_ARG_NOT_ONE_CHAR);
-                }
+                //if (char.IsWhiteSpace(value))
+                //{
+                //    throw new FormatException(Messages.EXC_ARG_NOT_ONE_CHAR);
+                //}
                 _shortName = value;
             }
         }
@@ -178,7 +180,7 @@ namespace CommandLineParser.Arguments
         /// <seealso cref="LongAliases"/>
         public IEnumerable<char> ShortAliases
         {
-            get { return _shortAliases; }                
+            get { return _shortAliases; }
         }
 
         /// <summary>
@@ -194,13 +196,13 @@ namespace CommandLineParser.Arguments
         internal IEnumerable<string> AllAliases
         {
             get { return LongAliases.Concat(ShortAliases.Select(a => a.ToString())); }
-        }        
+        }
 
         /// <summary>
         /// Defines mapping of the value of the argument to a field of another object.
         /// Bound field is updated after the value of the argument is parsed by <see cref="CommandLineParser"/>.
         /// </summary>
-        public FieldArgumentBind ? Bind
+        public FieldArgumentBind? Bind
         {
             get { return _bind; }
             set { _bind = value; }
@@ -211,7 +213,7 @@ namespace CommandLineParser.Arguments
         /// <param name="alias">Short alias of the argument</param>
         /// </summary>
         public void AddAlias(char alias)
-        {            
+        {
             _shortAliases.Add(alias);
         }
 
@@ -262,7 +264,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public virtual void Init()
         {
-            Parsed = false; 
+            Parsed = false;
         }
 
         /// <summary>
@@ -286,7 +288,7 @@ namespace CommandLineParser.Arguments
     /// you where you have delcared argument attributes.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
-    public abstract class ArgumentAttribute: Attribute
+    public abstract class ArgumentAttribute : Attribute
     {
         private readonly Argument _argument;
 
@@ -313,7 +315,7 @@ namespace CommandLineParser.Arguments
             _argument = (Argument)Activator.CreateInstance(underlyingArgumentType, constructorParams);
         }
 
-#region delegated argument members
+        #region delegated argument members
 
         /// <summary>
         /// Description of the argument 
@@ -408,7 +410,7 @@ namespace CommandLineParser.Arguments
             }
         }
 
-#endregion
+        #endregion
 
     }
 }

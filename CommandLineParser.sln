@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{73FCE9C7-48AB-4261-998D-12CB868B0E12}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,17 +11,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AD004B93-9DD2-4EDF-9AA2-1B90DCA8FAAC}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
-		global.json = global.json
 		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F15A1B98-C630-470E-BDC2-E1EA74A52E91}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "CommandLineArgumentsParser", "src\CommandLineArgumentsParser\CommandLineArgumentsParser.xproj", "{CAD8C186-3683-4942-9AEA-842A90B4DBAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommandLineArgumentsParser", "src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj", "{CAD8C186-3683-4942-9AEA-842A90B4DBAD}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "ParserTest", "src\ParserTest\ParserTest.xproj", "{FC3132B4-9F32-4AB5-998D-BC0AC8B07D34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParserTest", "src\ParserTest\ParserTest.csproj", "{FC3132B4-9F32-4AB5-998D-BC0AC8B07D34}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Tests", "src\Tests\Tests.xproj", "{ED48902C-B915-40EE-86A3-C9C21C774D12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "src\Tests\Tests.csproj", "{ED48902C-B915-40EE-86A3-C9C21C774D12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

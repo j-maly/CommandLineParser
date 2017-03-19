@@ -13,29 +13,29 @@ namespace CommandLineParser.Arguments
 		/// Creates new certified value argument with a <see cref="Argument.ShortName">short name</see>.
 		/// </summary>
 		/// <param name="shortName">Short name of the argument</param>
-		public DirectoryArgument(char shortName) : base(shortName)
-		{
-		}
+		public DirectoryArgument(char shortName) : base(shortName) { }
 
-		/// <summary>
+	    /// <summary>
+	    /// Creates new certified value argument with a <see cref="Argument.LongName">long name</see>.
+	    /// </summary>
+	    /// <param name="longName">Long name of the argument</param>
+	    public DirectoryArgument(string longName) : base(longName) { }
+
+	    /// <summary>
 		/// Creates new certified value argument with a <see cref="Argument.ShortName">short name</see>and <see cref="Argument.LongName">long name</see>.
 		/// </summary>
 		/// <param name="shortName">Short name of the argument</param>
 		/// <param name="longName">Long name of the argument </param>
-		public DirectoryArgument(char shortName, string longName) : base(shortName, longName)
-		{
-		}
+		public DirectoryArgument(char shortName, string longName) : base(shortName, longName) { }
 
-		/// <summary>
-		/// Creates new certified value argument with a <see cref="Argument.ShortName">short name</see>,
-		/// <see cref="Argument.LongName">long name</see> and <see cref="Argument.Description">description</see>
-		/// </summary>
-		/// <param name="shortName">Short name of the argument</param>
-		/// <param name="longName">Long name of the argument </param>
-		/// <param name="description">description of the argument</param>
-		public DirectoryArgument(char shortName, string longName, string description) : base(shortName, longName, description)
-		{
-		}
+	    /// <summary>
+        /// Creates new certified value argument with a <see cref="Argument.ShortName">short name</see>,
+        /// <see cref="Argument.LongName">long name</see> and <see cref="Argument.Description">description</see>
+        /// </summary>
+        /// <param name="shortName">Short name of the argument</param>
+        /// <param name="longName">Long name of the argument </param>
+        /// <param name="description">description of the argument</param>
+        public DirectoryArgument(char shortName, string longName, string description) : base(shortName, longName, description) { }
 		#endregion 
 	
 		private bool _directoryMustExist = true;
@@ -102,24 +102,25 @@ namespace CommandLineParser.Arguments
 	{
 		/// <summary>
 		/// Creates new instance of DirectoryArgumentAttribute. DirectoryArgumentAttribute
-		/// uses underlaying <see cref="DirectoryArgument"/>.
+		/// uses underlying <see cref="DirectoryArgument"/>.
 		/// </summary>
 		/// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>
-		public DirectoryArgumentAttribute(char shortName)
-			: base(typeof(DirectoryArgument), shortName)
-		{
-		}
+		public DirectoryArgumentAttribute(char shortName) : base(typeof(DirectoryArgument), shortName) { }
+
+        /// <summary>
+        /// Creates new instance of DirectoryArgumentAttribute. DirectoryArgumentAttribute
+        /// uses underlying <see cref="DirectoryArgument"/>.
+        /// </summary>
+        /// <param name="longName"><see cref="Argument.LongName">short name</see> of the underlying argument</param>
+        public DirectoryArgumentAttribute(string longName) : base(typeof(DirectoryArgument), longName) { }
 
 		/// <summary>
 		/// Creates new instance of DirectoryArgumentAttribute. DirectoryArgumentAttribute
-		/// uses underlaying <see cref="DirectoryArgument"/>.
+		/// uses underlying <see cref="DirectoryArgument"/>.
 		/// </summary>
 		/// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>
 		/// <param name="longName"><see cref="Argument.LongName">long name</see> of the underlying argument</param>
-		public DirectoryArgumentAttribute(char shortName, string longName)
-			: base(typeof(DirectoryArgument), shortName, longName)
-		{
-		}
+		public DirectoryArgumentAttribute(char shortName, string longName) : base(typeof(DirectoryArgument), shortName, longName) { }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether the directory must

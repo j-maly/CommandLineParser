@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using CommandLineParser.Exceptions;
 using System.Linq;
 using System.Reflection;
+using CommandLineParser.Exceptions;
 using CommandLineParser.Extensions;
 
 namespace CommandLineParser.Arguments
@@ -21,23 +21,21 @@ namespace CommandLineParser.Arguments
     {
 #region property backing fields
 
-        private char _shortName = '_';
+        private char? _shortName;
 
         private string _longName;
 
         /// <summary>
         /// List of short aliases.
         /// </summary>
-        private List<char> _shortAliases = new List<char>();
+        private readonly List<char> _shortAliases = new List<char>();
 
         /// <summary>
         /// List of long aliases.
         /// </summary>
-        private List<string> _longAliases = new List<string>();
+        private readonly List<string> _longAliases = new List<string>();
 
-        private FieldArgumentBind? _bind;
-
-#endregion
+        #endregion
 
 #region constructors
 
@@ -48,6 +46,15 @@ namespace CommandLineParser.Arguments
         protected Argument(char shortName)
         {
             ShortName = shortName;
+        }
+
+        /// <summary>
+        /// Creates new command line argument with a <see cref="LongName">long name</see>.
+        /// </summary>
+        /// <param name="longName">Long name of the argument</param>
+        protected Argument(string longName)
+        {
+            LongName = longName;
         }
 
         /// <summary>
@@ -106,7 +113,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public string Description { get; set; }
 
-        private static readonly char[] BadChars = new char[] { '\r', '\n', ' ', '\t'};
+        private static readonly char[] BadChars = { '\r', '\n', ' ', '\t'};
 
         /// <summary>
         /// Long name of the argument. Can apear on the command line in --<i>longName</i> format.
@@ -127,15 +134,15 @@ namespace CommandLineParser.Arguments
         }
 
         /// <summary>
-        /// Long name of the argument. Can apear on the command line in -<i>shortName</i> format.
+        /// Short name of the argument. Can apear on the command line in -<i>shortName</i> format.
         /// </summary>
         /// <exception cref="CommandLineFormatException">Name is invalid</exception>
-        public char ShortName
+        public char? ShortName
         {
             get { return _shortName; }
             set
             {
-                if (char.IsWhiteSpace(value))
+                if (value.HasValue && char.IsWhiteSpace(value.Value))
                 {
                     throw new FormatException(Messages.EXC_ARG_NOT_ONE_CHAR);
                 }
@@ -155,7 +162,7 @@ namespace CommandLineParser.Arguments
         {
             get
             {
-                if (_shortName != ' ' && !string.IsNullOrEmpty(_longName))
+                if (_shortName.HasValue && !string.IsNullOrEmpty(_longName))
                 {
                     return string.Format("{0}({1})", _shortName, _longName);
                 }
@@ -163,7 +170,7 @@ namespace CommandLineParser.Arguments
                 {
                     return _longName;
                 }
-                if (_shortName != ' ')
+                if (_shortName.HasValue)
                 {
                     return _shortName.ToString();
                 }
@@ -200,11 +207,7 @@ namespace CommandLineParser.Arguments
         /// Defines mapping of the value of the argument to a field of another object.
         /// Bound field is updated after the value of the argument is parsed by <see cref="CommandLineParser"/>.
         /// </summary>
-        public FieldArgumentBind ? Bind
-        {
-            get { return _bind; }
-            set { _bind = value; }
-        }
+        public FieldArgumentBind ? Bind { get; set; }
 
         /// <summary>
         /// Creates a short name alias for the parameter. The parameter is processed identically when the alias appears on the command line.
@@ -285,7 +288,7 @@ namespace CommandLineParser.Arguments
     /// <remarks>Use <see cref="CommandLineParser.ExtractArgumentAttributes"/> for each object 
     /// you where you have delcared argument attributes.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
     public abstract class ArgumentAttribute: Attribute
     {
         private readonly Argument _argument;
@@ -365,10 +368,10 @@ namespace CommandLineParser.Arguments
         }
 
         /// <summary>
-        /// Long name of the argument. Can apear on the command line in -<i>shortName</i> format.
+        /// Short name of the argument. Can apear on the command line in -<i>shortName</i> format.
         /// </summary>
         /// <exception cref="CommandLineFormatException">Name is invalid</exception>
-        public char ShortName
+        public char? ShortName
         {
             get { return _argument.ShortName; }
             set { _argument.ShortName = value; }

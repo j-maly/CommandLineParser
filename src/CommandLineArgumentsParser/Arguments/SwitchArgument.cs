@@ -19,6 +19,16 @@ namespace CommandLineParser.Arguments
         #region constructors
 
         /// <summary>
+        /// Creates new switch argument with a <see cref="Argument.LongName">long name</see>.
+        /// </summary>
+        /// <param name="longName">Long name of the argument</param>
+        public SwitchArgument(string longName, bool defaultValue) : base(longName)
+        {
+            DefaultValue = defaultValue;
+            Value = defaultValue;
+        }
+
+        /// <summary>
         /// Creates new switch argument with a <see cref="Argument.ShortName">short name</see>.
         /// </summary>
         /// <param name="shortName">Short name of the argument</param>
@@ -140,10 +150,16 @@ namespace CommandLineParser.Arguments
         /// </summary>
         /// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>
         /// <param name="defaultValue"><see cref="SwitchArgument.DefaultValue">default value</see> of the underlying argument</param>
-        public SwitchArgumentAttribute(char shortName, bool defaultValue)
-            : base(typeof(SwitchArgument), shortName, defaultValue)
-        {
-        }
+        public SwitchArgumentAttribute(char shortName, bool defaultValue) 
+            : base(typeof(SwitchArgument), shortName, defaultValue) { }
+
+        /// <summary>
+        /// Creates new instance of SwitchArgumentAttribute.
+        /// </summary>
+        /// <param name="longName"><see cref="Argument.LongName">long name</see> of the underlying argument</param>
+        /// <param name="defaultValue"><see cref="SwitchArgument.DefaultValue">default value</see> of the underlying argument</param>
+        public SwitchArgumentAttribute(string longName, bool defaultValue) 
+            : base(typeof(SwitchArgument), longName, defaultValue) { }
 
         /// <summary>
         /// Creates new instance of SwitchArgumentAttribute.
@@ -152,8 +168,6 @@ namespace CommandLineParser.Arguments
         /// <param name="longName"><see cref="Argument.LongName">long name</see> of the underlying argument</param>
         /// <param name="defaultValue"><see cref="SwitchArgument.DefaultValue">default value</see> of the underlying argument</param>
         public SwitchArgumentAttribute(char shortName, string longName, bool defaultValue)
-            : base(typeof(SwitchArgument), shortName, longName, defaultValue)
-        {
-        }
+            : base(typeof(SwitchArgument), shortName, longName, defaultValue) { }
     }
 }

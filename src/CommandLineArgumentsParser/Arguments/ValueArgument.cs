@@ -42,20 +42,20 @@ namespace CommandLineParser.Arguments
         /// Creates new value argument with a <see cref="Argument.ShortName">short name</see>.
         /// </summary>
         /// <param name="shortName">Short name of the argument</param>
-        public ValueArgument(char shortName)
-            : base(shortName)
-        {
-        }
+        public ValueArgument(char shortName) : base(shortName) { }
+
+        /// <summary>
+        /// Creates new value argument with a <see cref="Argument.LongName">long name</see>.
+        /// </summary>
+        /// <param name="longName">Long name of the argument</param>
+        public ValueArgument(string longName) : base(longName) { }
 
         /// <summary>
         /// Creates new value argument with a <see cref="Argument.ShortName">short name</see>and <see cref="Argument.LongName">long name</see>.
         /// </summary>
         /// <param name="shortName">Short name of the argument</param>
         /// <param name="longName">Long name of the argument </param>
-        public ValueArgument(char shortName, string longName)
-            : base(shortName, longName)
-        {
-        }
+        public ValueArgument(char shortName, string longName) : base(shortName, longName) { }
 
         /// <summary>
         /// Creates new value argument with a <see cref="Argument.ShortName">short name</see>,
@@ -65,9 +65,7 @@ namespace CommandLineParser.Arguments
         /// <param name="longName">Long name of the argument </param>
         /// <param name="description">description of the argument</param>
         public ValueArgument(char shortName, string longName, string description)
-            : base(shortName, longName, description)
-        {
-        }
+            : base(shortName, longName, description) { }
 
         #endregion
 
@@ -455,7 +453,7 @@ namespace CommandLineParser.Arguments
 
         /// <summary>
         /// Creates new instance of ValueArgument. ValueArgument
-        /// uses underlaying <see cref="ValueArgument{TValue}"/>.
+        /// uses underlying <see cref="ValueArgument{TValue}"/>.
         /// </summary>
         /// <param name="type">Type of the generic parameter of <see cref="ValueArgument{TValue}"/>. </param>
         /// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>
@@ -465,13 +463,25 @@ namespace CommandLineParser.Arguments
         /// method for reading the value from string.
         /// </remarks>
         public ValueArgumentAttribute(Type type, char shortName)
-            : base(CreateProperValueArgumentType(type), shortName)
-        {
-        }
+            : base(CreateProperValueArgumentType(type), shortName) { }
 
         /// <summary>
         /// Creates new instance of ValueArgument. ValueArgument
-        /// uses underlaying <see cref="ValueArgument{TValue}"/>.
+        /// uses underlying <see cref="ValueArgument{TValue}"/>.
+        /// </summary>
+        /// <param name="type">Type of the generic parameter of <see cref="ValueArgument{TValue}"/>. </param>
+        /// <param name="longName"><see cref="Argument.LongName">long name</see> of the underlying argument</param>
+        /// <remarks>
+        /// Parameter <paramref name="type"/> has to be either built-in 
+        /// type or has to define a static Parse(String, CultureInfo) 
+        /// method for reading the value from string.
+        /// </remarks>
+        public ValueArgumentAttribute(Type type, string longName)
+            : base(CreateProperValueArgumentType(type), longName) { }
+
+        /// <summary>
+        /// Creates new instance of ValueArgument. ValueArgument
+        /// uses underlying <see cref="ValueArgument{TValue}"/>.
         /// </summary>
         /// <param name="type">Type of the generic parameter of <see cref="ValueArgument{TValue}"/>.</param>
         /// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>
@@ -482,9 +492,7 @@ namespace CommandLineParser.Arguments
         /// method for reading the value from string.
         /// </remarks>
         public ValueArgumentAttribute(Type type, char shortName, string longName)
-            : base(CreateProperValueArgumentType(type), shortName, longName)
-        {
-        }
+            : base(CreateProperValueArgumentType(type), shortName, longName) { }
 
         /// <summary>
         /// Default value

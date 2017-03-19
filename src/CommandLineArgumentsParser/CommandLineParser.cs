@@ -209,9 +209,9 @@ namespace CommandLineParser
             _longNameLookup = new Dictionary<string, Argument>();
             foreach (Argument argument in _arguments)
             {
-                if (argument.ShortName != ' ')
+                if (argument.ShortName.HasValue)
                 {
-                    _shortNameLookup.Add(argument.ShortName, argument);
+                    _shortNameLookup.Add(argument.ShortName.Value, argument);
                 }
                 foreach (char aliasChar in argument.ShortAliases)
                 {
@@ -620,7 +620,7 @@ namespace CommandLineParser
             {
                 outputStream.Write("\t");
                 bool comma = false;
-                if (argument.ShortName != ' ')
+                if (argument.ShortName.HasValue)
                 {
                     outputStream.Write("-" + argument.ShortName);
                     comma = true;

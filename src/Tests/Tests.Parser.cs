@@ -47,7 +47,7 @@ namespace Tests
         }
 
         [Fact]
-        public void Parser_shoulFailWithArgsWithTheSameToUpperConversion_whenIgnoreCaseIsUsed()
+        public void Parser_shouldFailWithArgsWithTheSameToUpperConversion_whenIgnoreCaseIsUsed()
         {
             // ARRANGE 
             var parser = new CommandLineParser.CommandLineParser();
@@ -57,6 +57,22 @@ namespace Tests
 
             // ACT 
             var ex = Assert.Throws<ArgumentException>(() => parser.ParseCommandLine(new string[0]));
+        }
+
+        [Fact]
+        public void Parser_shouldAcceptSwitch_WithoutShortName()
+        {
+            // ARRANGE 
+            var parser = new CommandLineParser.CommandLineParser();
+            var switchArgument = new SwitchArgument("switch", false);
+            parser.Arguments.Add(switchArgument);
+
+            // ACT 
+            string[] args = { "--switch" };
+            parser.ParseCommandLine(args);
+
+            Assert.Equal(true, parser.ParsingSucceeded);
+            Assert.Equal(true, switchArgument.Value);
         }
     }
 }

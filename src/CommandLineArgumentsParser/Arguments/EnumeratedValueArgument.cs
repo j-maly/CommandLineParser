@@ -72,6 +72,12 @@ namespace CommandLineParser.Arguments
         }
 
         /// <summary>
+        /// Creates new command line argument with a <see cref="Argument.LongName">long name</see>.
+        /// </summary>
+        /// <param name="longName">Long name of the argument</param>
+        public EnumeratedValueArgument(string longName) : base(longName) { }
+
+        /// <summary>
         /// Creates new command line argument with a <see cref="Argument.ShortName">short name</see>
         /// and <see cref="Argument.LongName">long name</see>.
         /// </summary>
@@ -90,6 +96,17 @@ namespace CommandLineParser.Arguments
         /// <param name="allowedValues">Allowed values</param>
         public EnumeratedValueArgument(char shortName, ICollection<TValue> allowedValues)
             : base(shortName)
+        {
+            _allowedValues = allowedValues;
+        }
+
+        /// <summary>
+        /// Creates new command line argument with a <see cref="Argument.LongName">long name</see>.
+        /// </summary>
+        /// <param name="longName">Short name of the argument</param>
+        /// <param name="allowedValues">Allowed values</param>
+        public EnumeratedValueArgument(string longName, ICollection<TValue> allowedValues)
+            : base(longName)
         {
             _allowedValues = allowedValues;
         }
@@ -183,7 +200,7 @@ namespace CommandLineParser.Arguments
 
         /// <summary>
 		/// Creates new instance of EnumeratedValueArgumentAttribute. EnumeratedValueArgument
-		/// uses underlaying <see cref="EnumeratedValueArgument{TValue}"/>.
+		/// uses underlying <see cref="EnumeratedValueArgument{TValue}"/>.
         /// </summary>
         /// <param name="type">Type of the generic parameter of <see cref="EnumeratedValueArgument{TValue}"/>.</param>
         /// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>
@@ -199,8 +216,25 @@ namespace CommandLineParser.Arguments
         }
 
         /// <summary>
+		/// Creates new instance of EnumeratedValueArgumentAttribute. EnumeratedValueArgument
+		/// uses underlying <see cref="EnumeratedValueArgument{TValue}"/>.
+        /// </summary>
+        /// <param name="type">Type of the generic parameter of <see cref="EnumeratedValueArgument{TValue}"/>.</param>
+        /// <param name="longName"><see cref="Argument.LongName">short name</see> of the underlying argument</param>
+        /// <remarks>
+        /// Parameter <paramref name="type"/> has to be either built-in 
+        /// type or has to define a static Parse(String, CultureInfo) 
+        /// method for reading the value from string.
+        /// </remarks>
+        public EnumeratedValueArgumentAttribute(Type type, string longName)
+            : base(CreateProperValueArgumentType(type), longName)
+        {
+            _argumentType = CreateProperValueArgumentType(type);
+        }
+
+        /// <summary>
 		/// Creates new instance of EnumeratedValueArgument. EnumeratedValueArgument
-		/// uses underlaying <see cref="EnumeratedValueArgument{TValue}"/>.
+		/// uses underlying <see cref="EnumeratedValueArgument{TValue}"/>.
         /// </summary>
 		/// <param name="type">Type of the generic parameter of <see cref="EnumeratedValueArgument{TValue}"/>.</param>
         /// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>

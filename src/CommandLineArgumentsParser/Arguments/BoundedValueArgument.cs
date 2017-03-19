@@ -63,10 +63,13 @@ namespace CommandLineParser.Arguments
         /// Without any value bounds.
         /// </summary>
         /// <param name="shortName">Short name of the argument</param>
-        public BoundedValueArgument(char shortName)
-            : base(shortName)
-        {
-        }
+        public BoundedValueArgument(char shortName) : base(shortName) { }
+
+        /// <summary>
+        /// Creates new value argument with a <see cref="Argument.LongName">long name</see>.
+        /// </summary>
+        /// <param name="longName">Long name of the argument</param>
+        public BoundedValueArgument(string longName) : base(longName) { }
 
         /// <summary>
         /// Creates new value argument with a <see cref="Argument.ShortName">short name</see>
@@ -74,10 +77,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         /// <param name="shortName">Short name of the argument</param>
         /// <param name="longName">Long name of the argument </param>
-        public BoundedValueArgument(char shortName, string longName)
-            : base(shortName, longName)
-        {
-        }
+        public BoundedValueArgument(char shortName, string longName) : base(shortName, longName) { }
 
         /// <summary>
         /// Creates new value argument with a <see cref="Argument.ShortName">short name</see>
@@ -85,8 +85,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         /// <param name="shortName">Short name of the argument</param>
         /// <param name="maxValue">Maximal value of the argument</param>
-        public BoundedValueArgument(char shortName, TValue maxValue)
-            : base(shortName)
+        public BoundedValueArgument(char shortName, TValue maxValue) : base(shortName)
         {
             _maxValue = maxValue;
             UseMaxValue = true;
@@ -98,8 +97,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         /// <param name="shortName">Short name of the argument</param>
         /// <param name="minValue">Minimal value of the argument</param>
-        public BoundedValueArgument(TValue minValue, char shortName)
-            : base(shortName)
+        public BoundedValueArgument(TValue minValue, char shortName) : base(shortName)
         {
             _minValue = minValue;
             UseMinValue = true;
@@ -266,7 +264,7 @@ namespace CommandLineParser.Arguments
 
         /// <summary>
         /// Creates new instance of BoundedValueArgument. BoundedValueArgument
-        /// uses underlaying <see cref="BoundedValueArgument{TValue}"/>.
+        /// uses underlying <see cref="BoundedValueArgument{TValue}"/>.
         /// </summary>
         /// <param name="type">Type of the generic parameter of <see cref="BoundedValueArgument{TValue}"/>.</param>
         /// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>
@@ -283,7 +281,24 @@ namespace CommandLineParser.Arguments
 
         /// <summary>
         /// Creates new instance of BoundedValueArgument. BoundedValueArgument
-        /// uses underlaying <see cref="BoundedValueArgument{TValue}"/>.
+        /// uses underlying <see cref="BoundedValueArgument{TValue}"/>.
+        /// </summary>
+        /// <param name="type">Type of the generic parameter of <see cref="BoundedValueArgument{TValue}"/>.</param>
+        /// <param name="longName"><see cref="Argument.LongName">long name</see> of the underlying argument</param>
+        /// <remarks>
+        /// Parameter <paramref name="type"/> has to be either built-in 
+        /// type or has to define a static Parse(String, CultureInfo) 
+        /// method for reading the value from string.
+        /// </remarks>
+        public BoundedValueArgumentAttribute(Type type, string longName)
+            : base(CreateProperValueArgumentType(type), longName)
+        {
+            _argumentType = CreateProperValueArgumentType(type);
+        }
+
+        /// <summary>
+        /// Creates new instance of BoundedValueArgument. BoundedValueArgument
+        /// uses underlying <see cref="BoundedValueArgument{TValue}"/>.
         /// </summary>
         /// <param name="type">Type of the generic parameter of <see cref="BoundedValueArgument{TValue}"/>.</param>
         /// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>

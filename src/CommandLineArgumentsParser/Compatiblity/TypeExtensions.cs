@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace CommandLineParser.Extensions
@@ -23,7 +24,7 @@ namespace CommandLineParser.Extensions
         public static T GetPropertyValue<T>(this Type type, string propertyName, object target)
         {
 #if (!(NET40 || NET35 || NET20))
-            PropertyInfo property = type.GetTypeInfo().GetDeclaredProperty(propertyName);
+            PropertyInfo property = GetMember(type.GetTypeInfo(), propertyName, (ti, n) => ti.GetDeclaredProperty(n));
             return (T)property.GetValue(target);
 #else
             return (T)type.InvokeMember(propertyName, BindingFlags.GetProperty, null, target, null);
@@ -33,7 +34,7 @@ namespace CommandLineParser.Extensions
         public static void SetPropertyValue(this Type type, string propertyName, object target, object value)
         {
 #if (!(NET40 || NET35 || NET20))
-            PropertyInfo property = type.GetTypeInfo().GetDeclaredProperty(propertyName);
+            PropertyInfo property = GetMember(type.GetTypeInfo(), propertyName, (ti, n) => ti.GetDeclaredProperty(n));
             property.SetValue(target, value);
 #else
             type.InvokeMember(propertyName, BindingFlags.SetProperty, null, target, new object[] { value });
@@ -43,7 +44,7 @@ namespace CommandLineParser.Extensions
         public static void SetFieldValue(this Type type, string fieldName, object target, object value)
         {
 #if (!(NET40 || NET35 || NET20))
-            FieldInfo field = type.GetTypeInfo().GetDeclaredField(fieldName);
+            FieldInfo field = GetMember(type.GetTypeInfo(), fieldName, (ti, n) => ti.GetDeclaredField(n));
             if (field != null)
             {
                 field.SetValue(target, value);
@@ -60,11 +61,24 @@ namespace CommandLineParser.Extensions
         public static void InvokeMethod<T>(this Type type, string methodName, object target, T value)
         {
 #if (!(NET40 || NET35 || NET20))
-            MethodInfo method = type.GetTypeInfo().GetDeclaredMethod(methodName);
+            MethodInfo method = GetMember(type.GetTypeInfo(), methodName, (ti, n) => ti.GetDeclaredMethod(n)); 
             method.Invoke(target, new object[] { value });
 #else
             type.InvokeMember(methodName, BindingFlags.InvokeMethod, null, target, new object[] { value });
 #endif
         }
+
+#if (!(NET40 || NET35 || NET20))
+        private static T GetMember<T>(TypeInfo typeInfo, string memberName, Func<TypeInfo, string, T> getDeclaredMember)
+            where T: MemberInfo
+        {
+            T member = getDeclaredMember(typeInfo, memberName);
+            if (member != null)
+                return member;
+            if (typeInfo.BaseType != null)
+                return GetMember(typeInfo.BaseType.GetTypeInfo(), memberName, getDeclaredMember);
+            return null;
+        }
+#endif
     }
 }

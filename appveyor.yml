@@ -32,8 +32,5 @@ build_script:
 test_script:
  - cmd: dotnet test src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
 
-artifacts:
-- path: artifacts\**\*.*
-
 cache:
 - '%USERPROFILE%\.nuget\packages'

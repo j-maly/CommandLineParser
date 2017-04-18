@@ -12,23 +12,29 @@ init:
 - ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
 
 install:
-- ps: Start-FileDownload 'https://dotnetcli.blob.core.windows.net/dotnet/beta/Installers/Latest/dotnet-dev-win-x64.latest.exe'
-- cmd: dotnet-dev-win-x64.latest.exe /quiet
+ - ps: Start-FileDownload 'https://download.microsoft.com/download/8/F/9/8F9659B9-E628-4D1A-B6BF-C3004C8C954B/dotnet-1.1.1-sdk-win-x64.exe'
+ - cmd: dotnet-1.1.1-sdk-win-x64.exe /quiet
+ - ps: $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = "true"
 
 environment:
   PATH: $(PATH);$(PROGRAMFILES)\dotnet\
 
 build_script:
+ - cmd: dotnet --info
 - appveyor-retry dotnet restore -v Minimal
 
-- dotnet build .\src\CommandLineArgumentsParser\project.json -c %CONFIGURATION%
-- dotnet build .\src\ParserTest\project.json -c %CONFIGURATION%
-- dotnet build .\src\Tests\project.json -c %CONFIGURATION%
+ - cmd: dotnet restore src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj
+ - cmd: dotnet build src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj --configuration %CONFIGURATION% --framework netstandard1.0
+ - cmd: dotnet restore src\ParserTest\ParserTest.csproj
+ - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework netstandard1.0
+ - cmd: dotnet restore tests\Tests\Tests.csproj
+ - cmd: dotnet build tests\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
 
-- dotnet pack -c Release --no-build --version-suffix %LABEL% -o .\artifacts .\src\CommandLineArgumentsParser\project.json
+
+# - dotnet pack -c Release --no-build --version-suffix %LABEL% -o .\artifacts .\src\CommandLineArgumentsParser\project.json
 
 test_script:
-- dotnet test -c %CONFIGURATION% --no-build .\src\Tests
+ - cmd: dotnet test tests\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
 
 artifacts:
 - path: artifacts\**\*.*

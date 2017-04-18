@@ -404,7 +404,7 @@ namespace CommandLineParser.Arguments
         /// <summary>
         /// Prints information about the argument value to the console.
         /// </summary>
-        internal override void PrintValueInfo()
+        public override void PrintValueInfo()
         {
             if (!AllowMultiple)
                 Console.WriteLine(Messages.EXC_ARG_VALUE_PRINT, Name, _stringValue, _value, typeof(TValue).Name);

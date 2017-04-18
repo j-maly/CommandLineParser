@@ -115,7 +115,7 @@ namespace CommandLineParser.Arguments
         /// <summary>
         /// Prints information about the argument value to the console.
         /// </summary>
-        internal override void PrintValueInfo()
+        public override void PrintValueInfo()
         {
             Console.WriteLine(Messages.EXC_ARG_SWITCH_PRINT, Name, Value ? "1" : "0");
         }

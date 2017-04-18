@@ -1,6 +1,6 @@
 # CommandLineParser
 
-[![Build status](https://ci.appveyor.com/api/projects/status/y7m9gmr8f2pjukq8?svg=true)](https://ci.appveyor.com/project/StefH/commandlineparser)
+[![Build status](https://ci.appveyor.com/api/projects/status/gcg703cp9l4sf3fm/branch/master?svg=true)](https://ci.appveyor.com/project/j-maly/commandlineparser/branch/master)
 
 [![NuGet Badge](https://buildstats.info/nuget/CommandLineArgumentsParser)](https://www.nuget.org/packages/CommandLineArgumentsParser)
 

@@ -23,17 +23,14 @@ build_script:
  - cmd: dotnet --info
 
  - cmd: dotnet restore src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj
- - cmd: dotnet build src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj --configuration %CONFIGURATION% --framework netstandard1.1
-# - cmd: dotnet restore src\ParserTest\ParserTest.csproj
-# - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework netstandard1.0
-# - cmd: dotnet restore tests\Tests\Tests.csproj
-# - cmd: dotnet build tests\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
-
-
-# - dotnet pack -c Release --no-build --version-suffix %LABEL% -o .\artifacts .\src\CommandLineArgumentsParser\project.json
+ - cmd: dotnet build src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj --configuration %CONFIGURATION% --framework netstandard1.3
+ - cmd: dotnet restore src\ParserTest\ParserTest.csproj
+ - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework netcoreapp1.0
+ - cmd: dotnet restore src\Tests\Tests.csproj
+ - cmd: dotnet build src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp1.0
 
 test_script:
- - cmd: dotnet test tests\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
+ - cmd: dotnet test src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
 
 artifacts:
 - path: artifacts\**\*.*

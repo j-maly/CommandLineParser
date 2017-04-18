@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Authors>Stef Heyenrath</Authors>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <Authors>Jakub Maly;Stef Heyenrath</Authors>	
+    <TargetFramework>netcoreapp1.1</TargetFramework>
     <AssemblyName>Tests</AssemblyName>
     <PackageId>Tests</PackageId>
     <GenerateRuntimeConfigurationFiles>true</GenerateRuntimeConfigurationFiles>
@@ -25,7 +25,7 @@
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
     <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
   </PropertyGroup>
 

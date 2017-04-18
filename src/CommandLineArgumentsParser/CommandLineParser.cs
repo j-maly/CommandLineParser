@@ -688,7 +688,7 @@ namespace CommandLineParser
         /// <summary>
         /// Prints values of parsed arguments. Can be used for debugging. 
         /// </summary>
-        public void ShowParsedArguments()
+        public void ShowParsedArguments(bool showOmittedArguments = false)
         {
             Console.WriteLine(Messages.MSG_PARSING_RESULTS);
             Console.WriteLine("\t" + Messages.MSG_COMMAND_LINE);
@@ -704,6 +704,13 @@ namespace CommandLineParser
             foreach (Argument argument in _arguments)
             {
                 if (argument.Parsed)
+                    argument.PrintValueInfo();
+            }
+            Console.WriteLine();
+            Console.WriteLine("\t" + Messages.MSG_NOT_PARSED_ARGUMENTS);
+            foreach (Argument argument in _arguments)
+            {
+                if (!argument.Parsed)
                     argument.PrintValueInfo();
             }
             Console.WriteLine();

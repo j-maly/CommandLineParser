@@ -84,7 +84,7 @@ namespace ParserTest
 
                     parser.ParseCommandLine(arguments);
 
-                    parser.ShowParsedArguments();
+                    parser.ShowParsedArguments(true);
                     Console.WriteLine("RESULT: OK");
                     Console.WriteLine();
                 }

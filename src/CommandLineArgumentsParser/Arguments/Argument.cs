@@ -257,7 +257,7 @@ namespace CommandLineParser.Arguments
         /// <summary>
         /// Prints information about the argument value to the console.
         /// </summary>
-        internal abstract void PrintValueInfo();
+        public abstract void PrintValueInfo();
 
         /// <summary>
         /// Initializes the argument. Sets <see cref="Parsed"/> to false. Override in inherited classes 

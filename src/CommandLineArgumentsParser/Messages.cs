@@ -72,6 +72,8 @@
 
         public static string MSG_OPTIONAL = "[optional]";
 
+        public static string MSG_NOT_PARSED_ARGUMENTS = "Arguments not specified:";
+
         public static string MSG_PARSED_ARGUMENTS = "Parsed Arguments:";
 
         public static string MSG_PARSING_RESULTS = "Parsing results:";

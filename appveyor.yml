@@ -21,7 +21,6 @@ environment:
 
 build_script:
  - cmd: dotnet --info
-- appveyor-retry dotnet restore -v Minimal
 
  - cmd: dotnet restore src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj
  - cmd: dotnet build src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj --configuration %CONFIGURATION% --framework netstandard1.0

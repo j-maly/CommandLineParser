@@ -25,9 +25,9 @@ build_script:
  - cmd: dotnet restore src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj
  - cmd: dotnet build src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj --configuration %CONFIGURATION% --framework netstandard1.3
  - cmd: dotnet restore src\ParserTest\ParserTest.csproj
- - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework netcoreapp1.0
+ - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
  - cmd: dotnet restore src\Tests\Tests.csproj
- - cmd: dotnet build src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp1.0
+ - cmd: dotnet build src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
 
 test_script:
  - cmd: dotnet test src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1

@@ -20,7 +20,9 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
     <RootNamespace>CommandLineParser</RootNamespace>
-    <Version>3.0.8</Version>
+    <Version>3.0.8.1</Version>
+    <AssemblyVersion>3.0.8.1</AssemblyVersion>
+    <FileVersion>3.0.8.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net20' ">

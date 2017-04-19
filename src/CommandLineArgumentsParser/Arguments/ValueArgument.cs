@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
@@ -407,15 +408,12 @@ namespace CommandLineParser.Arguments
         public override void PrintValueInfo()
         {
             if (!AllowMultiple)
+            {
                 Console.WriteLine(Messages.EXC_ARG_VALUE_PRINT, Name, _stringValue, _value, typeof(TValue).Name);
+            }
             else
             {
-                string valuesString = String.Empty;
-                foreach (TValue tvalue in _values)
-                {
-                    valuesString += tvalue.ToString();
-
-                }
+                string valuesString = string.Join(", ", _values.Select(v => v.ToString()).ToArray());
                 Console.WriteLine(Messages.EXC_ARG_VALUE_PRINT_MULTIPLE, Name, Values.Count, valuesString, typeof(TValue).Name);
             }
         }

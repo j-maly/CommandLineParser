@@ -11,6 +11,7 @@ namespace CommandLineParser.Arguments
     public class RegexValueArgument : CertifiedValueArgument<string>
     {
         private Regex regex;
+        private string sampleValue;
 
         /// <summary>
         /// Regular expression which the value must match 
@@ -19,6 +20,16 @@ namespace CommandLineParser.Arguments
         {
             get { return regex; }
             set { regex = value; }
+        }
+        
+        /// <summary>
+        /// Sample value that would be displayed to the user as a suggestion when 
+        /// the user enters a wrong value. 
+        /// </summary>
+        public string SampleValue
+        {
+            get { return sampleValue; }
+            set { sampleValue = value; }
         }
 
         #region constructor
@@ -78,8 +89,16 @@ namespace CommandLineParser.Arguments
             {
                 if (!regex.IsMatch(value))
                 {
-                    throw new CommandLineArgumentOutOfRangeException(
-                        string.Format("Argument '{0}' does not match the regex pattern '{1}'.", value, regex), Name);
+                    if (SampleValue == null)
+                    {
+                        throw new CommandLineArgumentOutOfRangeException(
+                            string.Format("Argument '{0}' does not match the regex pattern '{1}'.", value, regex), Name);
+                    }
+                    else
+                    {
+                        throw new CommandLineArgumentOutOfRangeException(
+                            string.Format("Argument '{0}' does not match the regex pattern '{1}'. An example of a valid value would be '{2}'.", value, regex, SampleValue), Name);
+                    }                    
                 }
             }
         }
@@ -151,6 +170,22 @@ namespace CommandLineParser.Arguments
             set
             {
                 _argumentType.SetPropertyValue("DefaultValue", Argument, value);
+            }
+        }
+
+        /// <summary>
+        /// Sample value that would be displayed to the user as a suggestion when 
+        /// the user enters a wrong value. 
+        /// </summary>
+        public string SampleValue
+        {
+            get
+            {
+                return _argumentType.GetPropertyValue<string>("SampleValue", Argument);
+            }
+            set
+            {
+                _argumentType.SetPropertyValue("SampleValue", Argument, value);
             }
         }
 

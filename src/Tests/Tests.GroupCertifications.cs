@@ -1,5 +1,6 @@
 using CommandLineParser.Arguments;
 using CommandLineParser.Validation;
+using CommandLineParser.Exceptions;
 using Xunit;
 
 namespace Tests
@@ -363,9 +364,51 @@ namespace Tests
         }
 
         #endregion
-        //// only one of the arguments f, u must be used
-        //[ArgumentGroupCertification("f,u", EArgumentGroupCondition.OneOreNoneUsed)]
-        //// arguments j and k can not be used together with arguments l or m
-        //[DistinctGroupsCertification("j,k", "l,m")]
+
+        #region argument requires other arguments 
+
+        [Fact]
+        public void ArgumentRequiresOtherArgumentsCertification_shouldPass_whenRequiredArgumentsPresent()
+        {
+            ArgumentRequiresOtherArgumentsCertification d = new ArgumentRequiresOtherArgumentsCertification("j", "l,m");
+
+            var commandLineParser = InitGroupCertifications();
+            commandLineParser.Certifications.Clear();
+            commandLineParser.Certifications.Add(d);
+
+            string[] args = new[] { "-j", "-l", "-m" };
+            commandLineParser.ParseCommandLine(args);
+            Assert.Equal(true, commandLineParser.ParsingSucceeded);            
+        }
+
+        [Fact]
+        public void ArgumentRequiresOtherArgumentsCertification_shouldFail_whenRequiredArgumentsNotPresent()
+        {
+            ArgumentRequiresOtherArgumentsCertification d = new ArgumentRequiresOtherArgumentsCertification("j", "l,m");
+
+            var commandLineParser = InitGroupCertifications();
+            commandLineParser.Certifications.Clear();
+            commandLineParser.Certifications.Add(d);
+
+            string[] args = new[] { "-j", "-l" };
+            var ex = Assert.Throws<MandatoryArgumentNotSetException>(() => commandLineParser.ParseCommandLine(args));
+            Assert.StartsWith("None of these", ex.Message);
+        }
+        [Fact]
+        public void ArgumentRequiresOtherArgumentsCertification_shouldPass_whenMainArgumentNotPresent()
+        {
+            ArgumentRequiresOtherArgumentsCertification d = new ArgumentRequiresOtherArgumentsCertification("j", "l,m");
+
+            var commandLineParser = InitGroupCertifications();
+            commandLineParser.Certifications.Clear();
+            commandLineParser.Certifications.Add(d);
+
+            string[] args = new[] { "-m" };
+            commandLineParser.ParseCommandLine(args);
+            Assert.Equal(true, commandLineParser.ParsingSucceeded);
+
+        }
+
+        #endregion 
     }
 }

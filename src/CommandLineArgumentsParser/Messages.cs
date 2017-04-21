@@ -64,6 +64,8 @@
 
         public static string EXC_GROUP_ONE_OR_NONE_MORE_USED = "These arguments can not be used together: {0}.";
 
+        public static string EXC_GROUP_ARGUMENTS_REQUIRED_BY_ANOTHER_ARGUMENT = "Argument: {0} requires the following arguments: {1}.";
+
         public static string EXC_NONNEGATIVE = "The value must be non negative.";
 
         public static string MSG_ADDITIONAL_ARGUMENTS = "Additional arguments:";

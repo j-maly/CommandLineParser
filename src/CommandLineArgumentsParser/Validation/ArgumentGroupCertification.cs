@@ -182,10 +182,7 @@ namespace CommandLineParser.Validation
                     break;
             }
         }
-
-        /// <summary>
-        /// Returns description of the certification.
-        /// </summary>
+        
         private string DefaultUsageDescription()
         {
             switch (Condition)

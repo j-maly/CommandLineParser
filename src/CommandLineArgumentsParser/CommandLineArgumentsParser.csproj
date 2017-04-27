@@ -20,9 +20,11 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
     <RootNamespace>CommandLineParser</RootNamespace>
-    <Version>3.0.9</Version>
-    <AssemblyVersion>3.0.9.0</AssemblyVersion>
-    <FileVersion>3.0.9.0</FileVersion>
+    <Version>3.0.10</Version>
+    <AssemblyVersion>3.0.10.0</AssemblyVersion>
+    <FileVersion>3.0.10.0</FileVersion>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>CommandLineArgumentsParser.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net20' ">

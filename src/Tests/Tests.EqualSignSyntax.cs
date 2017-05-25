@@ -199,5 +199,14 @@ namespace Tests
             // ASSERT
             Assert.Equal(new List<int>(), lines.Values);
         }
+         
+        [Fact]
+        public void EqualSignSyntax_ShouldSplitFromFirstEqualSignFound()
+        {
+            string[] args = new[] { "--level=ABCDEFGHI=+FTRWEQASD" };
+
+            var commandLineParser = InitEqualSignSyntax();
+            commandLineParser.ParseCommandLine(args);
+        }
     }
 }

@@ -529,8 +529,8 @@ namespace CommandLineParser
                 for (int i = 0; i < argsList.Count; i++)
                 {
                     string arg = argsList[i];
-
-                    Regex r = new Regex("(.*)=(.*)");
+				
+                    Regex r = new Regex("([^=]*)=(.*)");
                     if (AcceptEqualSignSyntaxForValueArguments && r.IsMatch(arg))
                     {
                         Match m = r.Match(arg);

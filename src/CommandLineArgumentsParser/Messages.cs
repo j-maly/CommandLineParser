@@ -56,7 +56,7 @@
 
         public static string EXC_GROUP_AT_LEAST_ONE = "At least one of these arguments: {0} must be used.";
 
-        public static string EXC_GROUP_DISTINCT = "None of these argumens: {0} can be used together with any of these: {1}.";
+        public static string EXC_GROUP_DISTINCT = "None of these arguments: {0} can be used together with any of these: {1}.";
 
         public static string EXC_GROUP_EXACTLY_ONE_MORE_USED = "Only one of these arguments: {0} can be used.";
 

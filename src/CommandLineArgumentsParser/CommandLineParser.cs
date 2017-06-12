@@ -467,8 +467,9 @@ namespace CommandLineParser
                 }
                 AdditionalArgumentsSettings.ProcessArguments();
             }
-            else
+            else if(i < argsList.Count)
             {
+                // only throw when there are any additional arguments
                 throw new CommandLineFormatException(
                     Messages.EXC_ADDITIONAL_ARGUMENTS_FOUND);
             }

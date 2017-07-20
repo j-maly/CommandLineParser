@@ -375,6 +375,7 @@ namespace CommandLineParser.Arguments
                 if (valueType == typeof(ushort)) return (TValue)(object)ushort.Parse(stringValue, _cultureInfo);
                 if (valueType == typeof(DateTime)) return (TValue)(object)DateTime.Parse(stringValue, _cultureInfo);
                 if (valueType == typeof(TimeSpan)) return (TValue)(object)DateTime.Parse(stringValue, _cultureInfo);
+                if (valueType == typeof(Guid)) return (TValue)(object)Guid.Parse(stringValue);
 
                 MethodInfo mi = typeof(TValue).GetMethod("Parse", new [] { typeof(string), typeof(CultureInfo)});
                 if (mi != null)

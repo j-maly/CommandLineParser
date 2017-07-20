@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Reflection;
 using CommandLineParser.Exceptions;
 using CommandLineParser.Extensions;
+using System.Text.RegularExpressions;
 
 namespace CommandLineParser.Arguments
 {
@@ -375,7 +376,14 @@ namespace CommandLineParser.Arguments
                 if (valueType == typeof(ushort)) return (TValue)(object)ushort.Parse(stringValue, _cultureInfo);
                 if (valueType == typeof(DateTime)) return (TValue)(object)DateTime.Parse(stringValue, _cultureInfo);
                 if (valueType == typeof(TimeSpan)) return (TValue)(object)DateTime.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(Guid)) return (TValue)(object)Guid.Parse(stringValue);
+                if (valueType == typeof(Guid))
+                {
+#if NET20 || NET35                           
+                    return (TValue)(object)new Guid(stringValue);
+#else
+                    return (TValue)(object)Guid.Parse(stringValue);
+#endif                    
+                }
 
                 MethodInfo mi = typeof(TValue).GetMethod("Parse", new [] { typeof(string), typeof(CultureInfo)});
                 if (mi != null)

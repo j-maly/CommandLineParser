@@ -80,7 +80,12 @@ namespace CommandLineParser.Validation
                 {
                     if (!requiredArgument.Parsed)
                     {
-                        throw new MandatoryArgumentNotSetException(String.Format(Messages.EXC_GROUP_DISTINCT, _mainArgumentString, _argumentsRequiredForMainArgumentString), requiredArgument.Name);
+                        var withDefaultValue = requiredArgument as IArgumentWithDefaultValue;
+                        if (withDefaultValue?.DefaultValue != null)
+                        {
+                            continue;
+                        }
+                        throw new MandatoryArgumentNotSetException(String.Format(Messages.EXC_GROUP_ARGUMENTS_REQUIRED_BY_ANOTHER_ARGUMENT, _mainArgumentString, _argumentsRequiredForMainArgumentString), requiredArgument.Name);
                     }
                 }
             }            
@@ -106,7 +111,7 @@ namespace CommandLineParser.Validation
         /// <param name="argumentsRequiredForMainArgument">arguments required by <paramref name="mainArgument"/> - names of the 
         /// arguments separated by commas, semicolons or '|' character</param>
         public ArgumentRequiresOtherArgumentsCertificationAttribute(string mainArgument, string argumentsRequiredForMainArgument)
-            : base(typeof(DistinctGroupsCertification), mainArgument, argumentsRequiredForMainArgument)
+            : base(typeof(ArgumentRequiresOtherArgumentsCertification), mainArgument, argumentsRequiredForMainArgument)
         {
         }
     }

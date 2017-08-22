@@ -5,7 +5,6 @@ using System.Globalization;
 using System.Reflection;
 using CommandLineParser.Exceptions;
 using CommandLineParser.Extensions;
-using System.Text.RegularExpressions;
 
 namespace CommandLineParser.Arguments
 {
@@ -33,7 +32,7 @@ namespace CommandLineParser.Arguments
         private TValue _value;
 
         private readonly List<TValue> _values = new List<TValue>();
-        
+
         private CultureInfo _cultureInfo = CultureInfo.InvariantCulture;
 
         #endregion
@@ -174,7 +173,7 @@ namespace CommandLineParser.Arguments
         /// Necessary when non-builtin type is used as <typeparamref name="TValue"/>.
         /// </summary>
         public ConvertValueDelegate<TValue> ConvertValueHandler { get; set; }
-        
+
         /// <summary>
         /// This method reads the argument and the following string representing the value of the argument. 
         /// This string is then converted to <typeparamref name="TValue"/> (using built-in <typeparamref name="TValue"/>.Parse
@@ -356,26 +355,30 @@ namespace CommandLineParser.Arguments
         /// <exception cref="InvalidConversionException">String cannot be converted to <typeparamref name="TValue"/>.</exception>
         protected virtual TValue DefaultConvert(string stringValue)
         {
+            // If not provided, just return default value.
+            if (stringValue == null)
+            {
+                return default(TValue);
+            }
+
             Type valueType = typeof(TValue);
+
+            // If the TValue is a nullable type, get the underlying type.
+            if (valueType.GetTypeInfo().IsGenericType && valueType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                valueType = Nullable.GetUnderlyingType(valueType);
+            }
+
             try
             {
-                if (valueType == typeof(String)) return (TValue)(object)stringValue;
-                if (valueType == typeof(int)) return (TValue)(object)int.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(decimal)) return (TValue)(object)decimal.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(long)) return (TValue)(object)long.Parse(stringValue, _cultureInfo);
-                if (typeof(Enum).IsAssignableFrom(valueType)) return (TValue)Enum.Parse(valueType, stringValue, true);
-                if (valueType == typeof(short)) return (TValue)(object)short.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(char)) return (TValue)(object)char.Parse(stringValue);
-                if (valueType == typeof(bool)) return (TValue)(object)bool.Parse(stringValue);
-                if (valueType == typeof(byte)) return (TValue)(object)byte.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(sbyte)) return (TValue)(object)sbyte.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(double)) return (TValue)(object)double.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(float)) return (TValue)(object)float.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(uint)) return (TValue)(object)uint.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(ulong)) return (TValue)(object)ulong.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(ushort)) return (TValue)(object)ushort.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(DateTime)) return (TValue)(object)DateTime.Parse(stringValue, _cultureInfo);
-                if (valueType == typeof(TimeSpan)) return (TValue)(object)DateTime.Parse(stringValue, _cultureInfo);
+                if (valueType == typeof(String))
+                {
+                    return (TValue)(object)stringValue;
+                }
+                if (typeof(Enum).IsAssignableFrom(valueType))
+                {
+                    return (TValue)Enum.Parse(valueType, stringValue, true);
+                }
                 if (valueType == typeof(Guid))
                 {
 #if NET20 || NET35                           
@@ -385,11 +388,22 @@ namespace CommandLineParser.Arguments
 #endif                    
                 }
 
-                MethodInfo mi = typeof(TValue).GetMethod("Parse", new [] { typeof(string), typeof(CultureInfo)});
-                if (mi != null)
+                MethodInfo parseMethod2 = valueType.GetMethod("Parse", new[] { typeof(string), typeof(CultureInfo) });
+                if (parseMethod2 != null)
                 {
-                    if (mi.IsStatic && mi.ReturnType == typeof(TValue))
-                        return (TValue)mi.Invoke(null, new object[] { stringValue, _cultureInfo });
+                    if (parseMethod2.IsStatic && parseMethod2.ReturnType == valueType)
+                    {
+                        return (TValue)parseMethod2.Invoke(null, new object[] { stringValue, _cultureInfo });
+                    }
+                }
+
+                MethodInfo parseMethod1 = valueType.GetMethod("Parse", new[] { typeof(string) });
+                if (parseMethod1 != null)
+                {
+                    if (parseMethod1.IsStatic && parseMethod1.ReturnType == valueType)
+                    {
+                        return (TValue)parseMethod1.Invoke(null, new object[] { stringValue });
+                    }
                 }
             }
             catch (FormatException)
@@ -513,7 +527,7 @@ namespace CommandLineParser.Arguments
             set
             {
                 underlyingValueArgument.SetPropertyValue("DefaultValue", Argument, value);
-            }       
+            }
         }
 
         /// <summary>

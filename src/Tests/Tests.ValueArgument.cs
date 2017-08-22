@@ -15,7 +15,13 @@ namespace Tests
 
             [ValueArgument(typeof(int), 'v', DefaultValue = 2, ValueOptional = true)]
             public int Version;
-            
+
+            [ValueArgument(typeof(int?), 'n', Optional = true)]
+            public int? NullableInt;
+
+            [ValueArgument(typeof(bool?), 'b', Optional = true)]
+            public bool? NullableBool;
+
             [ValueArgument(typeof(int), 'l', DefaultValue = 0)]
             public int Length;
         }
@@ -25,7 +31,7 @@ namespace Tests
 
         public CommandLineParser.CommandLineParser InitValueArgument()
         {
-            var commandLineParser = new CommandLineParser.CommandLineParser();            
+            var commandLineParser = new CommandLineParser.CommandLineParser();
             valueArgumentTarget = new ValueArgumentParsingTarget();
             commandLineParser.ExtractArgumentAttributes(valueArgumentTarget);
             return commandLineParser;
@@ -41,6 +47,32 @@ namespace Tests
             commandLineParser.ParseCommandLine(args);
             // ASSERT
             Assert.Equal(new List<int> { 1, 2, 3 }, valueArgumentTarget.Numbers);
+        }
+
+        [Fact]
+        public void ValueArgumentWithOptionalNullableValue_shouldReturnDefaultValue_whenValueNotSpecified()
+        {
+            // ARRANGE 
+            string[] args = { };
+            var commandLineParser = InitValueArgument();
+            // ACT 
+            commandLineParser.ParseCommandLine(args);
+            // ASSERT
+            Assert.Equal(null, valueArgumentTarget.NullableInt);
+            Assert.Equal(null, valueArgumentTarget.NullableBool);
+        }
+
+        [Fact]
+        public void ValueArgumentWithOptionalNullableValue_shouldReturnCorrectValue_whenValueIsSpecified()
+        {
+            // ARRANGE 
+            string[] args = { "-n", "42", "-b", "true" };
+            var commandLineParser = InitValueArgument();
+            // ACT 
+            commandLineParser.ParseCommandLine(args);
+            // ASSERT
+            Assert.Equal(42, valueArgumentTarget.NullableInt);
+            Assert.Equal(true, valueArgumentTarget.NullableBool);
         }
 
         [Fact]
@@ -74,8 +106,8 @@ namespace Tests
             string[] args = { "-l" };
             var commandLineParser = InitValueArgument();
             // ACT 
-            var e = Assert.Throws<CommandLineArgumentException>(() => commandLineParser.ParseCommandLine(args));            
-            Assert.Equal(e.Message, "Value argument l must be followed by a value."); 
+            var e = Assert.Throws<CommandLineArgumentException>(() => commandLineParser.ParseCommandLine(args));
+            Assert.Equal(e.Message, "Value argument l must be followed by a value.");
         }
 
         [Fact]
@@ -119,7 +151,7 @@ namespace Tests
         public void ValueArgument_shouldHandleNegativeIntegers_whenUsingEqualsSyntax()
         {
             // ARRANGE 
-            string[] args = { "-v=\"-1\""};
+            string[] args = { "-v=\"-1\"" };
             var commandLineParser = InitValueArgument();
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
             // ACT 

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jakub Maly")]
 [assembly: AssemblyProduct("Commandline Parser")]
-[assembly: AssemblyCopyright("Copyright Jakub Maly & Stef Heyenrath © 2016")]
+[assembly: AssemblyCopyright("Copyright Jakub Maly & Stef Heyenrath © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

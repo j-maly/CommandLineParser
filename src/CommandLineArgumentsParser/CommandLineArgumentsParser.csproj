@@ -25,6 +25,7 @@
     <DebugType>portable</DebugType>
     <!--<SignAssembly>True</SignAssembly>-->
     <AssemblyOriginatorKeyFile>CommandLineArgumentsParser.pfx</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net20' ">

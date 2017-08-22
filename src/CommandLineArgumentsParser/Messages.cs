@@ -32,11 +32,11 @@
 
         public static string EXC_ARG_VALUE_PRINT_MULTIPLE = "Argument: {0}, type: {3}, occured {1}x values: {2}";
 
-        public static string EXC_ARG_VALUE_STANDARD_CONVERT_FAILED = "Failed to convert string {0} to type {1} using standard {1}.ParseCommandLine.Use strings in accepted format or define custom conversion using ConvertValueHandler.";
+        public static string EXC_ARG_VALUE_STANDARD_CONVERT_FAILED = "Failed to convert string {0} to type {1}. Use strings in accepted format or define custom conversion using ConvertValueHandler.";
 
         public static string EXC_ARG_VALUE_STRINGVALUE_ACCESS = "Arguments StringValue can be read after ParseCommandLine is called.";
 
-        public static string EXC_ARG_VALUE_USER_CONVERT_MISSING = "Type {0} of argument {1} is not a built-in type.Set ConvertValueHandler to a conversion routine for this type or define static method Parse(string stringValue, CultureInfo cultureInfo) that can Parse your type from string. ";
+        public static string EXC_ARG_VALUE_USER_CONVERT_MISSING = "Type {0} of argument {1} is not a built-in type. Set ConvertValueHandler to a conversion routine for this type or define static method Parse(string stringValue, CultureInfo cultureInfo) that can Parse your type from string. ";
 
         public static string EXC_BAD_ARG_IN_GROUP = "Grouping of multiple short name arguments in one word(e.g. -a -b into -ab) is allowed only for switch arguments.Argument {0} is not a switch argument.";
 
@@ -107,6 +107,5 @@
         public static string EXC_FORMAT_DOUBLESLASH = "Invalid sequence \"//\" in the command line.";
 
         public static string EXC_FORMAT_SINGLESLASH = "Found character '/' not followed by an argument.";
-
     }
 }

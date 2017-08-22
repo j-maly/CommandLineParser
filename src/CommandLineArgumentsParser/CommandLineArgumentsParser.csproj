@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <Description>CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.</Description>
-    <AssemblyTitle>CommandLine Parser Library</AssemblyTitle>    
+    <AssemblyTitle>CommandLine Parser Library</AssemblyTitle>
     <Authors>Jakub Maly;Stef Heyenrath;NTTAKR</Authors>
     <TargetFrameworks>net20;net35;net40;net45;netstandard1.3</TargetFrameworks>
     <AssemblyName>CommandLineArgumentsParser</AssemblyName>
@@ -12,7 +12,6 @@
     <PackageLicenseUrl>https://raw.githubusercontent.com/j-maly/CommandLineParser/master/LICENCE.md</PackageLicenseUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/j-maly/CommandLineParser</RepositoryUrl>
-    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.3' ">$(PackageTargetFallback);dotnet5.4</PackageTargetFallback>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
@@ -20,10 +19,11 @@
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
     <RootNamespace>CommandLineParser</RootNamespace>
-    <Version>3.0.14</Version>
-    <AssemblyVersion>3.0.14.0</AssemblyVersion>
-    <FileVersion>3.0.14.0</FileVersion>
-    <SignAssembly>True</SignAssembly>
+    <Version>3.0.15</Version>
+    <AssemblyVersion>3.0.15.0</AssemblyVersion>
+    <FileVersion>3.0.15.0</FileVersion>
+    <DebugType>portable</DebugType>
+    <!--<SignAssembly>True</SignAssembly>-->
     <AssemblyOriginatorKeyFile>CommandLineArgumentsParser.pfx</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 

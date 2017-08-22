@@ -30,6 +30,9 @@ namespace ParserTest
         [ValueArgument(typeof(Point), 'p', "point", Description = "Specify the point", Example = "[0,1]")]
         public Point point;
 
+        [ValueArgument(typeof(int?), 'n', "nullableint", Description = "Nullable Integer", Optional = true)]
+        public int? NullableInt;
+
         [BoundedValueArgument(typeof(int), 'o', "optimization", MinValue = 0, MaxValue = 3, Description = "Level of optimization")]
         public int optimization;
 
@@ -59,12 +62,13 @@ namespace ParserTest
             parser.ShowUsageHeader = "This is an interesting command";
             parser.ShowUsageFooter = "And that is all";
             parser.ExtractArgumentAttributes(p);
-            parser.Certifications.Add(new DistinctGroupsCertification("d", "color") { Description = "This is this"});
+            parser.Certifications.Add(new DistinctGroupsCertification("d", "color") { Description = "This is this" });
 
             var examples = new List<string[]>();
             examples.Add(new string[0]); //No arguments passed
             examples.Add(new[] { "/help" }); //show usage 
             examples.Add(new[] { "/version", "1.3" }); //parses OK 
+            examples.Add(new[] { "/nullableint", "42" }); //parses OK
             examples.Add(new[] { "/color", "red", "/version", "1.2" }); //parses OK 
             examples.Add(new[] { "/point", "[1;3]", "/o", "2" }); //parses OK 
             examples.Add(new[] { "/d", "C:\\Input", "/i", "in.txt", "/x", "out.txt" }); //parses OK 

@@ -85,7 +85,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         /// <param name="args">command line arguments</param>
         /// <param name="i">index to the args array, where this argument occurred. </param>
-        internal override void Parse(IList<string> args, ref int i)
+        public override void Parse(IList<string> args, ref int i)
         {
             base.Parse(args, ref i);
             Value = !Value;

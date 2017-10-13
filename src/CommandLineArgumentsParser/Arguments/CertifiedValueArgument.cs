@@ -57,7 +57,7 @@ namespace CommandLineParser.Arguments
         /// <param name="i">index to the args array, where this argument occured. The index to the next argument 
         /// after the argument is processed. </param>
         /// <seealso cref="ValueArgument{TValue}.ConvertValueHandler"/>
-        internal override void Parse(IList<string> args, ref int i)
+        public override void Parse(IList<string> args, ref int i)
         {
             base.Parse(args, ref i);
             if (AllowMultiple)

@@ -185,7 +185,7 @@ namespace CommandLineParser.Arguments
         /// <seealso cref="ConvertValueHandler"/>
         /// <exception cref="CommandLineArgumentException">Incorrect format of the command line
         /// or multiple useage of an argument that is not <see cref="Argument.AllowMultiple"/> found.</exception>
-        internal override void Parse(IList<string> args, ref int i)
+        public override void Parse(IList<string> args, ref int i)
         {
             base.Parse(args, ref i);
 

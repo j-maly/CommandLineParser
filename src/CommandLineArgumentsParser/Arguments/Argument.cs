@@ -247,7 +247,7 @@ namespace CommandLineParser.Arguments
         /// <remarks>It is up to the argument class how many words it will consume from the command line. 
         /// At the end, it should just point the <paramref name="i"/> index to the correct place where the
         /// argument class passes the control back to the <see cref="CommandLineParser"/></remarks>
-        internal virtual void Parse(IList<string> args, ref int i)
+        public virtual void Parse(IList<string> args, ref int i)
         {
             //check for invalid multiple occurences
             if (Parsed && !AllowMultiple)

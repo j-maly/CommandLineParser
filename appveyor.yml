@@ -11,14 +11,6 @@ platform: Any CPU
 init:
 - ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
 
-install:
- - ps: Start-FileDownload 'https://download.microsoft.com/download/4/0/9/40920432-3302-47a8-b13c-bbc4848ad114/dotnet-sdk-2.1.302-win-x64.exe'
- - cmd: dotnet-sdk-2.1.302-win-x64.exe /quiet
- - ps: $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = "true"
-
-environment:
-  PATH: $(PATH);$(PROGRAMFILES)\dotnet\
-
 build_script:
  - cmd: dotnet --info
 

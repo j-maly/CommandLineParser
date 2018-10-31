@@ -1,11 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properites of your objects.</Description>
+    <Description>CommandLine Parser Library lets you easily define strongly typed command line arguments, allows automatic parsing of command line arguments and mapping the values to properties of your objects.</Description>
     <AssemblyTitle>CommandLine Parser Library</AssemblyTitle>
     <Authors>Jakub Maly;Stef Heyenrath;NTTAKR</Authors>
+    <Copyright>Copyright Jakub Maly &amp; Stef Heyenrath © 2018</Copyright>
+    <Company>Jakub Maly</Company>
     <TargetFrameworks>net20;net35;net40;net45;net452;netstandard1.3;netstandard2.0</TargetFrameworks>
     <AssemblyName>CommandLineArgumentsParser</AssemblyName>
+    <RootNamespace>CommandLineParser</RootNamespace>
     <PackageId>CommandLineArgumentsParser</PackageId>
     <PackageTags>commandline;parse;validate;args;arguments</PackageTags>
     <PackageProjectUrl>https://github.com/j-maly/CommandLineParser</PackageProjectUrl>
@@ -13,13 +16,6 @@
     <PackageReleaseNotes>See ReleaseNotes.md</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/j-maly/CommandLineParser</RepositoryUrl>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <RootNamespace>CommandLineParser</RootNamespace>
     <Version>3.0.19</Version>
     <DebugType>full</DebugType>
     <!--<SignAssembly>True</SignAssembly>-->

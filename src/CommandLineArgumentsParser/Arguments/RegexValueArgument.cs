@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
-using CommandLineParser.Extensions;
 
 namespace CommandLineParser.Arguments
 {

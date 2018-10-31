@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
 
-namespace CommandLineParser.Extensions
+namespace CommandLineParser.Compatibility
 {
     public static class TypeExtensions
     {
 #if NET20 || NET35 || NET40
-        //https://github.com/castleproject/Core/blob/netcore/src/Castle.Core/Compatibility/IntrospectionExtensions.cs
+        // https://github.com/castleproject/Core/blob/netcore/src/Castle.Core/Compatibility/IntrospectionExtensions.cs
         // This allows us to use the new reflection API which separates Type and TypeInfo
         // while still supporting .NET 3.5 and 4.0. This class matches the API of the same
         // class in .NET 4.5+, and so is only needed on .NET Framework versions before that.

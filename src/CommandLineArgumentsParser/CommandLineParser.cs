@@ -5,9 +5,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using CommandLineParser.Arguments;
+using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
 using CommandLineParser.Validation;
-using CommandLineParser.Extensions;
 
 namespace CommandLineParser
 {

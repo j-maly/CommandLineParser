@@ -3,8 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
-using CommandLineParser.Extensions;
 
 namespace CommandLineParser.Arguments
 {

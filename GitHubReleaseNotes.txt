@@ -1,3 +1,3 @@
 See https://github.com/StefH/GitHubReleaseNotes for more information.
 
-GitHubReleaseNotes.exe . --output ReleaseNotes.md --skip-empty-releases --version 3.0.19
+GitHubReleaseNotes.exe --output ReleaseNotes.md --skip-empty-releases --version 3.0.19

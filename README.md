@@ -8,17 +8,19 @@ CommandLine Parser Library lets you easily define strongly typed command line ar
 
 See [Quick Start](https://github.com/j-maly/CommandLineParser/wiki) on how to use the library. 
 
-Support for the following Frameworks:
+Supports the following Frameworks:
 * NET 2.0
 * NET 3.5
 * NET 4.0
-* NET 4.5 to NET 4.6.x
-* NETStandard 1.3
+* NET 4.5
+* NET 4.5.2 and higher
+* NETStandard 1.3 and higher
+* NETStandard 2.0
 
 ## Motivational Example
 
 Although console applications are more common in UNIX environment, maybe you will one day need to write one for windows too. It is common for command line applications to accept arguments in a time-tested format that can look like this: 
-```
+``` cmd
 Finder.exe -s 3 --distinct directory1 directory2 directory3
 ```
 You probably get it already - arguments can be short or long, short arguments consist of '-' prefix and a single character, long arguments consist of '--' prefix and a single word. 
@@ -29,15 +31,11 @@ For application with one or two arguments, you could probably manage with some s
 
 This is the way you define arguments for your application:
 ```csharp
-CommandLineParser.CommandLineParser parser = 
-    new CommandLineParser.CommandLineParser();
+CommandLineParser.CommandLineParser parser = new CommandLineParser.CommandLineParser();
 //switch argument is meant for true/false logic
-SwitchArgument showArgument = new SwitchArgument(
-    's', "show", "Set whether show or not", true);
-ValueArgument<decimal> version = new ValueArgument<decimal> (
-    'v', "version", "Set desired version");
-EnumeratedValueArgument<string> color = new EnumeratedValueArgument<string> (
-    'c', "color", new string[] { "red", "green", "blue" });
+SwitchArgument showArgument = new SwitchArgument('s', "show", "Set whether show or not", true);
+ValueArgument<decimal> version = new ValueArgument<decimal>('v', "version", "Set desired version");
+EnumeratedValueArgument<string> color = new EnumeratedValueArgument<string>('c', "color", new string[] { "red", "green", "blue" });
 
 parser.Arguments.Add(showArgument);
 parser.Arguments.Add(version);

@@ -1,6 +1,6 @@
-os: Visual Studio 2015
+os: Visual Studio 2017
 
-version: 3.0.0.{build}
+version: 3.0.19.{build}
 
 configuration:
 - Debug
@@ -11,26 +11,23 @@ platform: Any CPU
 init:
 - ps: $Env:LABEL = "CI" + $Env:APPVEYOR_BUILD_NUMBER.PadLeft(5, "0")
 
-install:
- - ps: Start-FileDownload 'https://download.microsoft.com/download/8/F/9/8F9659B9-E628-4D1A-B6BF-C3004C8C954B/dotnet-1.1.1-sdk-win-x64.exe'
- - cmd: dotnet-1.1.1-sdk-win-x64.exe /quiet
- - ps: $env:DOTNET_SKIP_FIRST_TIME_EXPERIENCE = "true"
-
-environment:
-  PATH: $(PATH);$(PROGRAMFILES)\dotnet\
-
 build_script:
  - cmd: dotnet --info
 
  - cmd: dotnet restore src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj
+ - cmd: dotnet build src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj --configuration %CONFIGURATION% --framework net452
  - cmd: dotnet build src\CommandLineArgumentsParser\CommandLineArgumentsParser.csproj --configuration %CONFIGURATION% --framework netstandard1.3
+
  - cmd: dotnet restore src\ParserTest\ParserTest.csproj
+ - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework net452
  - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
+ - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework netcoreapp2.1
+ 
  - cmd: dotnet restore src\Tests\Tests.csproj
- - cmd: dotnet build src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
+ - cmd: dotnet build src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp2.1
 
 test_script:
- - cmd: dotnet test src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
+ - cmd: dotnet test src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp2.1
 
 cache:
 - '%USERPROFILE%\.nuget\packages'

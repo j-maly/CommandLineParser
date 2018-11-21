@@ -1,6 +1,6 @@
 using System;
 using System.Reflection;
-using CommandLineParser.Extensions;
+using CommandLineParser.Compatibility;
 
 namespace CommandLineParser.Validation
 {

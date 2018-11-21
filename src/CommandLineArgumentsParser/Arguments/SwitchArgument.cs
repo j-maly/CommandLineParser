@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
-using CommandLineParser.Extensions;
 
 namespace CommandLineParser.Arguments
 {

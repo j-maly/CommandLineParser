@@ -1,9 +1,6 @@
-using System.IO;
 using CommandLineParser.Arguments;
-using CommandLineParser.Exceptions;
-using ParserTest;
-using Xunit;
 using System;
+using Xunit;
 
 namespace Tests
 {
@@ -17,7 +14,7 @@ namespace Tests
 
             string[] args = new string[0];
             commandLineParser.ParseCommandLine(args);
-            
+
             Assert.Equal(false, commandLineParser.ParsingSucceeded);
         }
 
@@ -40,7 +37,7 @@ namespace Tests
             var parser = new CommandLineParser.CommandLineParser();
             parser.Arguments.Add(new SwitchArgument('a', "switch", false));
             parser.Arguments.Add(new SwitchArgument('b', "SWiTCH", false));
-            parser.IgnoreCase = false; 
+            parser.IgnoreCase = false;
 
             // ACT 
             parser.ParseCommandLine(new string[0]);

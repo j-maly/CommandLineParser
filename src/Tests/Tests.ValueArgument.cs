@@ -1,6 +1,5 @@
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
-using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -14,7 +13,7 @@ namespace Tests
             [ValueArgument(typeof(int), 'i', AllowMultiple = true)]
             public List<int> Numbers;
 
-            [ValueArgument(typeof(int), 'v', DefaultValue = 2, StrongDefaultValue = 1, ValueOptional = true)]
+            [ValueArgument(typeof(int), 'v', DefaultValue = 2, ForcedDefaultValue = 1, ValueOptional = true)]
             public int Version;
 
             [ValueArgument(typeof(int?), 'n', Optional = true)]

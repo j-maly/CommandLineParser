@@ -1,10 +1,10 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Reflection;
 using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Reflection;
 
 namespace CommandLineParser.Arguments
 {
@@ -23,7 +23,7 @@ namespace CommandLineParser.Arguments
     /// Can be either builtin type or any user type (for which specific
     /// conversion routine is provided - <see cref="ConvertValueHandler"/></typeparam>
     /// <include file='..\Doc\CommandLineParser.xml' path='CommandLineParser/Arguments/ValueArgument/*'/>
-    public class ValueArgument<TValue> : Argument, IValueArgument, IArgumentWithDefaultValue, IArgumentWithForceDefaultValue
+    public class ValueArgument<TValue> : Argument, IValueArgument, IArgumentWithDefaultValue, IArgumentWithForcedDefaultValue
     {
         #region property backing fields
 
@@ -74,16 +74,7 @@ namespace CommandLineParser.Arguments
         /// String read from command line as arguments <see cref="Value"/>. Available after <see cref="Parse"/> is called. 
         /// </summary>
         /// <exception cref="InvalidOperationException">String value was read before ParseCommandLine was called or when</exception>
-        public string StringValue
-        {
-            get
-            {
-                if (Parsed)
-                    return _stringValue;
-                else
-                    return null;
-            }
-        }
+        public string StringValue => Parsed ? _stringValue : null;
 
         /// <summary>
         /// Value of the ValueArgument, for arguments with single value.
@@ -110,11 +101,11 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public TValue DefaultValue { get; set; }
 
-        public TValue StrongDefaultValue { get; set; }
+        public TValue ForcedDefaultValue { get; set; }
 
-        object IArgumentWithDefaultValue.DefaultValue { get { return DefaultValue; } }
+        object IArgumentWithDefaultValue.DefaultValue => DefaultValue;
 
-        object IArgumentWithForceDefaultValue.DefaultValue { get { return StrongDefaultValue; } }
+        object IArgumentWithForcedDefaultValue.DefaultValue => ForcedDefaultValue;
 
         /// <summary>
         /// When set to true, argument can appear on the command line with or without value, e.g. both is allowed: 
@@ -147,8 +138,8 @@ namespace CommandLineParser.Arguments
         /// <value></value>
         object IValueArgument.Value
         {
-            get { return Value; }
-            set { Value = (TValue)value; }
+            get => Value;
+            set => Value = (TValue)value;
         }
 
         IList<object> IValueArgument.Values
@@ -324,8 +315,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public CultureInfo CultureInfo
         {
-            get { return _cultureInfo; }
-            set { _cultureInfo = value; }
+            get => _cultureInfo;
+            set => _cultureInfo = value;
         }
 
         /// <summary>
@@ -434,7 +425,7 @@ namespace CommandLineParser.Arguments
         public override void Init()
         {
             base.Init();
-            _value = StrongDefaultValue;
+            _value = ForcedDefaultValue;
             _values.Clear();
             _stringValue = string.Empty;
         }
@@ -466,12 +457,12 @@ namespace CommandLineParser.Arguments
     /// attribute and let the CommandLineParse take care of binding the attribute to the field.
     /// </para>
     /// </summary>
-    /// <remarks>Appliable to fields and properties (public).</remarks>
+    /// <remarks>Applicable to fields and properties (public).</remarks>
     /// <remarks>Use <see cref="CommandLineParser.ExtractArgumentAttributes"/> for each object 
     /// you where you have delcared argument attributes.</remarks>
     public class ValueArgumentAttribute : ArgumentAttribute
     {
-        private static Type underlyingValueArgument;
+        private static Type _underlyingValueArgument;
 
         /// <summary>
         /// Creates proper generic <see cref="ValueArgument{TValue}"/> type for <paramref name="type"/>.
@@ -482,8 +473,8 @@ namespace CommandLineParser.Arguments
         {
             Type genericType = typeof(ValueArgument<>);
             Type constructedType = genericType.MakeGenericType(type);
-            underlyingValueArgument = constructedType;
-            return underlyingValueArgument;
+            _underlyingValueArgument = constructedType;
+            return _underlyingValueArgument;
         }
 
         /// <summary>
@@ -534,29 +525,17 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public object DefaultValue
         {
-            get
-            {
-                return underlyingValueArgument.GetPropertyValue<object>("DefaultValue", Argument);
-            }
-            set
-            {
-                underlyingValueArgument.SetPropertyValue("DefaultValue", Argument, value);
-            }
+            get => _underlyingValueArgument.GetPropertyValue<object>("DefaultValue", Argument);
+            set => _underlyingValueArgument.SetPropertyValue("DefaultValue", Argument, value);
         }
 
         /// <summary>
-        /// Strong default value
+        /// Forced default value
         /// </summary>
-        public object StrongDefaultValue
+        public object ForcedDefaultValue
         {
-            get
-            {
-                return underlyingValueArgument.GetPropertyValue<object>("StrongDefaultValue", Argument);
-            }
-            set
-            {
-                underlyingValueArgument.SetPropertyValue("StrongDefaultValue", Argument, value);
-            }
+            get => _underlyingValueArgument.GetPropertyValue<object>("ForcedDefaultValue", Argument);
+            set => _underlyingValueArgument.SetPropertyValue("ForcedDefaultValue", Argument, value);
         }
 
         /// <summary>
@@ -569,14 +548,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public bool ValueOptional
         {
-            get
-            {
-                return underlyingValueArgument.GetPropertyValue<bool>("ValueOptional", Argument);
-            }
-            set
-            {
-                underlyingValueArgument.SetPropertyValue("ValueOptional", Argument, value);
-            }
+            get => _underlyingValueArgument.GetPropertyValue<bool>("ValueOptional", Argument);
+            set => _underlyingValueArgument.SetPropertyValue("ValueOptional", Argument, value);
         }
     }
 }

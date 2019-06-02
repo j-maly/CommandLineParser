@@ -50,7 +50,7 @@
 
         public static string EXC_FORMAT_LONGNAME_PREFIX = "Only short argument names(single character) are allowed after single '-' character(e.g. -v). For long names use double '-' format(e.g. '--ver'). Wrong argument is: {0}";
 
-        public static string EXC_FORMAT_SHORTNAME_PREFIX = "If short name argument is used, it must be prefixed with single '-' character.Wrong argument is: {0}";
+        public static string EXC_FORMAT_SHORTNAME_PREFIX = "If short name argument is used, it must be prefixed with single '-' character. Wrong argument is: {0}";
 
         public static string EXC_FORMAT_SINGLEHYPHEN = "Found character '-' not followed by an argument.";
 

@@ -1,3 +1,10 @@
+# 3.0.20 (02 June 2019)
+- [#57](https://github.com/j-maly/CommandLineParser/pull/57) - #55 Added StrongDefaultValue for ValueArgument contributed by [eapyl](https://github.com/eapyl)
+- [#62](https://github.com/j-maly/CommandLineParser/issues/62) - getopt_long syntax
+- [#63](https://github.com/j-maly/CommandLineParser/issues/63) - CheckMandatoryArguments not being evaluated
+- [#64](https://github.com/j-maly/CommandLineParser/issues/64) - Message typo
+- [#65](https://github.com/j-maly/CommandLineParser/issues/65) - Setup Code Shown On Documentation Page Missing Needed Parentheses [Documentation]
+
 # 3.0.19 (21 November 2018)
 - [#61](https://github.com/j-maly/CommandLineParser/pull/61) - netstandard2.0 and added ReleaseNotes.md contributed by [StefH](https://github.com/StefH)
 - [#51](https://github.com/j-maly/CommandLineParser/issues/51) - Can't override Argument.Parse in my own argument class
@@ -6,8 +13,6 @@
 - [#56](https://github.com/j-maly/CommandLineParser/issues/56) - EnumeratedValueArgument w/ Enum
 - [#58](https://github.com/j-maly/CommandLineParser/issues/58) - Error in the wiki - &quot;Show Usage&quot; section
 - [#60](https://github.com/j-maly/CommandLineParser/issues/60) - Support for Folder Argument
-
-# 3.0.18 (13 October 2017)
 
 # 3.0.15 (22 August 2017)
 - [#50](https://github.com/j-maly/CommandLineParser/pull/50) - Fix for Nullable contributed by [StefH](https://github.com/StefH)
@@ -22,8 +27,6 @@
 - [#41](https://github.com/j-maly/CommandLineParser/issues/41) - Spelling error
 - [#45](https://github.com/j-maly/CommandLineParser/issues/45) - Using AcceptAdditionalArguments=false always throws exception
 - [#46](https://github.com/j-maly/CommandLineParser/issues/46) - Extend argument for supporting Guid values
-
-# 3.0.11 (27 May 2017)
 
 # 3.0.10 (27 May 2017)
 - [#43](https://github.com/j-maly/CommandLineParser/pull/43) - Parsing fails when there is equal sign (=) in argument contributed by [prog-rajkamal](https://github.com/prog-rajkamal)
@@ -57,8 +60,6 @@
 - [#33](https://github.com/j-maly/CommandLineParser/issues/33) - How to write out ALL arguments and their values?
 - [#34](https://github.com/j-maly/CommandLineParser/issues/34) - Missing docu 'multiple values with declarative syntax'
 - [#35](https://github.com/j-maly/CommandLineParser/issues/35) - Regex
-
-# 3.0.0.2 (24 April 2016)
 
 # 3.0.0.0 (21 February 2016)
 - [#1](https://github.com/j-maly/CommandLineParser/pull/1) - Added support for more frameworks contributed by [StefH](https://github.com/StefH)

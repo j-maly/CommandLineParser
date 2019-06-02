@@ -1,13 +1,13 @@
+using CommandLineParser.Arguments;
+using CommandLineParser.Compatibility;
+using CommandLineParser.Exceptions;
+using CommandLineParser.Validation;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using CommandLineParser.Arguments;
-using CommandLineParser.Compatibility;
-using CommandLineParser.Exceptions;
-using CommandLineParser.Validation;
 
 namespace CommandLineParser
 {
@@ -297,14 +297,22 @@ namespace CommandLineParser
                 }
             }
 
-            PerformMandatoryArgumentsCheck();
-            PerformCertificationCheck();
-            ParsingSucceeded = true; 
+            if (CheckMandatoryArguments)
+            {
+                PerformMandatoryArgumentsCheck();
+            }
+
+            if (CheckArgumentCertifications)
+            {
+                PerformCertificationCheck();
+            }
+
+            ParsingSucceeded = true;
         }
 
         /// <summary>
         /// Searches <paramref name="parsingTarget"/> for fields with 
-        /// <see cref="ArgumentAttribute">ArgumentAttributes</see> or some of its descendats. Adds new argument
+        /// <see cref="ArgumentAttribute">ArgumentAttributes</see> or some of its descendants. Adds new argument
         /// for each such a field and defines binding of the argument to the field. 
         /// Also adds <see cref="ArgumentCertification"/> object to <see cref="Certifications"/> collection 
         /// for each <see cref="ArgumentCertificationAttribute"/> of <paramref name="parsingTarget"/>.
@@ -364,10 +372,8 @@ namespace CommandLineParser
                             argName = curArg.Substring(2);
                             if (argName.Length == 1)
                             {
-                                throw new CommandLineFormatException(String.Format(
-                                    Messages.EXC_FORMAT_SHORTNAME_PREFIX, argName));
+                                throw new CommandLineFormatException(string.Format(Messages.EXC_FORMAT_SHORTNAME_PREFIX, argName));
                             }
-
                         }
                         else
                         {
@@ -375,25 +381,26 @@ namespace CommandLineParser
                             argName = curArg.Substring(1);
                             if (argName.Length != 1)
                             {
-                                throw new CommandLineFormatException(
-                                    String.Format(Messages.EXC_FORMAT_LONGNAME_PREFIX, argName));
+                                throw new CommandLineFormatException(string.Format(Messages.EXC_FORMAT_LONGNAME_PREFIX, argName));
                             }
                         }
 
                         Argument argument = LookupArgument(argName);
-                        if (argument != null) return argument;
-                        else
-                            throw new UnknownArgumentException(string.Format(Messages.EXC_ARG_UNKNOWN, argName), argName);
+                        if (argument != null)
+                        {
+                            return argument;
+                        }
+
+                        throw new UnknownArgumentException(string.Format(Messages.EXC_ARG_UNKNOWN, argName), argName);
                     }
-                    else
-                    {
-                        throw new CommandLineFormatException(Messages.EXC_FORMAT_SINGLEHYPHEN);
-                    }
+
+                    throw new CommandLineFormatException(Messages.EXC_FORMAT_SINGLEHYPHEN);
                 }
-                else
-                    return null;
+
+                return null;
             }
-            else if (curArg[0] == '/')
+
+            if (curArg[0] == '/')
             {
                 if (AcceptSlash)
                 {
@@ -405,37 +412,39 @@ namespace CommandLineParser
                         }
                         string argName = curArg.Substring(1);
                         Argument argument = LookupArgument(argName);
-                        if (argument != null) return argument;
-                        else throw new UnknownArgumentException(string.Format(Messages.EXC_ARG_UNKNOWN, argName), argName);
+                        if (argument != null)
+                        {
+                            return argument;
+                        }
+
+                        throw new UnknownArgumentException(string.Format(Messages.EXC_ARG_UNKNOWN, argName), argName);
                     }
-                    else
-                    {
-                        throw new CommandLineFormatException(Messages.EXC_FORMAT_DOUBLESLASH);
-                    }
+
+                    throw new CommandLineFormatException(Messages.EXC_FORMAT_DOUBLESLASH);
                 }
-                else
-                    return null;
-            }
-            else
-                /*
-                 * curArg does not start with '-' character and therefore it is considered additional argument.
-                 * Argument parsing ends here.
-                 */
+
                 return null;
+            }
+
+            /*
+             * curArg does not start with '-' character and therefore it is considered additional argument.
+             * Argument parsing ends here.
+             */
+            return null;
         }
 
         /// <summary>
-        /// Checks whether or non-optional arguments were defined on the command line. 
+        /// Checks whether non-optional arguments were defined on the command line. 
         /// </summary>
         /// <exception cref="MandatoryArgumentNotSetException"><see cref="Argument.Optional">Non-optional</see> argument not defined.</exception>
         /// <seealso cref="CheckMandatoryArguments"/>, <seealso cref="Argument.Optional"/>
         private void PerformMandatoryArgumentsCheck()
         {
             _arguments.ForEach(delegate (Argument arg)
-                                  {
-                                      if (!arg.Optional && !arg.Parsed)
-                                          throw new MandatoryArgumentNotSetException(string.Format(Messages.EXC_MISSING_MANDATORY_ARGUMENT, arg.Name), arg.Name);
-                                  });
+            {
+                if (!arg.Optional && !arg.Parsed)
+                    throw new MandatoryArgumentNotSetException(string.Format(Messages.EXC_MISSING_MANDATORY_ARGUMENT, arg.Name), arg.Name);
+            });
         }
 
         /// <summary>
@@ -467,7 +476,7 @@ namespace CommandLineParser
                 }
                 AdditionalArgumentsSettings.ProcessArguments();
             }
-            else if(i < argsList.Count)
+            else if (i < argsList.Count)
             {
                 // only throw when there are any additional arguments
                 throw new CommandLineFormatException(
@@ -521,7 +530,7 @@ namespace CommandLineParser
                     }
                 }
             }
-        }        
+        }
 
         private void ExpandValueArgumentsWithEqualSigns(IList<string> argsList)
         {
@@ -530,7 +539,7 @@ namespace CommandLineParser
                 for (int i = 0; i < argsList.Count; i++)
                 {
                     string arg = argsList[i];
-                
+
                     Regex r = new Regex("([^=]*)=(.*)");
                     if (AcceptEqualSignSyntaxForValueArguments && r.IsMatch(arg))
                     {
@@ -562,7 +571,7 @@ namespace CommandLineParser
                                     {
                                         argsList.Insert(i, singleValue);
                                         i++;
-                                    }                                    
+                                    }
                                 }
                                 i--;
                             }
@@ -571,7 +580,7 @@ namespace CommandLineParser
                                 argsList.Insert(i, argNameWithSep);
                                 i++;
                                 argsList.Insert(i, argValue);
-                            }                            
+                            }
                         }
                     }
                 }
@@ -633,7 +642,7 @@ namespace CommandLineParser
                     outputStream.Write("-" + c);
                     comma = true;
                 }
-                if (!String.IsNullOrEmpty(argument.LongName))
+                if (!string.IsNullOrEmpty(argument.LongName))
                 {
                     if (comma)
                         outputStream.Write(", ");
@@ -652,12 +661,12 @@ namespace CommandLineParser
                     outputStream.Write(Messages.MSG_OPTIONAL);
                 outputStream.WriteLine("... {0} ", argument.Description);
 
-                if (!String.IsNullOrEmpty(argument.Example))
+                if (!string.IsNullOrEmpty(argument.Example))
                 {
                     outputStream.WriteLine(Messages.MSG_EXAMPLE_FORMAT, argument.Example);
                 }
 
-                if (!String.IsNullOrEmpty(argument.FullDescription))
+                if (!string.IsNullOrEmpty(argument.FullDescription))
                 {
                     outputStream.WriteLine();
                     outputStream.WriteLine(argument.FullDescription);

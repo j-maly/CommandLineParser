@@ -16,7 +16,7 @@
     <PackageReleaseNotes>See ReleaseNotes.md</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/j-maly/CommandLineParser</RepositoryUrl>
-    <Version>3.0.19</Version>
+    <Version>3.0.20</Version>
     <DebugType>full</DebugType>
     <!--<SignAssembly>True</SignAssembly>-->
     <AssemblyOriginatorKeyFile>CommandLineArgumentsParser.pfx</AssemblyOriginatorKeyFile>

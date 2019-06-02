@@ -7,7 +7,7 @@ namespace CommandLineParser.Arguments
     /// with the value of <see cref="DefaultValue" /> 
     /// when they do not appear on the command line. 
     /// </summary>
-    public interface IArgumentWithForceDefaultValue
+    public interface IArgumentWithForcedDefaultValue
     {
         ///<summary>
         /// Default value of the argument.

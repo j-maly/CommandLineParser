@@ -1,5 +1,6 @@
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
+using System;
 using System.Collections.Generic;
 using Xunit;
 
@@ -13,7 +14,7 @@ namespace Tests
             [ValueArgument(typeof(int), 'i', AllowMultiple = true)]
             public List<int> Numbers;
 
-            [ValueArgument(typeof(int), 'v', DefaultValue = 2, ValueOptional = true)]
+            [ValueArgument(typeof(int), 'v', DefaultValue = 2, StrongDefaultValue = 1, ValueOptional = true)]
             public int Version;
 
             [ValueArgument(typeof(int?), 'n', Optional = true)]
@@ -132,6 +133,19 @@ namespace Tests
             commandLineParser.ParseCommandLine(args);
             // ASSERT
             Assert.Equal(2 /*default*/ , valueArgumentTarget.Version);
+        }
+
+        [Fact]
+        public void ValueArgumentWithOptionalValue_shouldReturnStrongDefaultValue_andValueNotUsed_whenUsingEqualsSyntax_andValueArgumentDoesNotExist()
+        {
+            // ARRANGE 
+            string[] args = { "-i=\"1\"" };
+            var commandLineParser = InitValueArgument();
+            commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
+            // ACT 
+            commandLineParser.ParseCommandLine(args);
+            // ASSERT
+            Assert.Equal(1 /*strong default*/ , valueArgumentTarget.Version);
         }
 
         [Fact]

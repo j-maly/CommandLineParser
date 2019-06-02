@@ -23,7 +23,7 @@ namespace CommandLineParser.Arguments
     /// Can be either builtin type or any user type (for which specific
     /// conversion routine is provided - <see cref="ConvertValueHandler"/></typeparam>
     /// <include file='..\Doc\CommandLineParser.xml' path='CommandLineParser/Arguments/ValueArgument/*'/>
-    public class ValueArgument<TValue> : Argument, IValueArgument, IArgumentWithDefaultValue
+    public class ValueArgument<TValue> : Argument, IValueArgument, IArgumentWithDefaultValue, IArgumentWithForceDefaultValue
     {
         #region property backing fields
 
@@ -110,7 +110,11 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public TValue DefaultValue { get; set; }
 
+        public TValue StrongDefaultValue { get; set; }
+
         object IArgumentWithDefaultValue.DefaultValue { get { return DefaultValue; } }
+
+        object IArgumentWithForceDefaultValue.DefaultValue { get { return StrongDefaultValue; } }
 
         /// <summary>
         /// When set to true, argument can appear on the command line with or without value, e.g. both is allowed: 
@@ -194,6 +198,11 @@ namespace CommandLineParser.Arguments
             {
                 if (ValueOptional)
                 {
+                    if (DefaultValue != null)
+                    {
+                        _value = DefaultValue;
+                    }
+
                     Parsed = true;
                     return;
                 }
@@ -209,6 +218,11 @@ namespace CommandLineParser.Arguments
             {
                 if (ValueOptional)
                 {
+                    if (DefaultValue != null)
+                    {
+                        _value = DefaultValue;
+                    }
+
                     Parsed = true;
                     return;
                 }
@@ -337,11 +351,11 @@ namespace CommandLineParser.Arguments
         }
 
         /// <summary>
-		/// Non-generic access to <see cref="ValueArgument{TValue}.Convert"/>
-		/// </summary>
-		/// <param name="stringValue">string representing the value</param>
-		/// <returns>parsed value</returns>
-		public object Convert_obj(string stringValue)
+        /// Non-generic access to <see cref="ValueArgument{TValue}.Convert"/>
+        /// </summary>
+        /// <param name="stringValue">string representing the value</param>
+        /// <returns>parsed value</returns>
+        public object Convert_obj(string stringValue)
         {
             return Convert(stringValue);
         }
@@ -420,7 +434,7 @@ namespace CommandLineParser.Arguments
         public override void Init()
         {
             base.Init();
-            _value = DefaultValue;
+            _value = StrongDefaultValue;
             _values.Clear();
             _stringValue = string.Empty;
         }
@@ -527,6 +541,21 @@ namespace CommandLineParser.Arguments
             set
             {
                 underlyingValueArgument.SetPropertyValue("DefaultValue", Argument, value);
+            }
+        }
+
+        /// <summary>
+        /// Strong default value
+        /// </summary>
+        public object StrongDefaultValue
+        {
+            get
+            {
+                return underlyingValueArgument.GetPropertyValue<object>("StrongDefaultValue", Argument);
+            }
+            set
+            {
+                underlyingValueArgument.SetPropertyValue("StrongDefaultValue", Argument, value);
             }
         }
 

@@ -247,8 +247,8 @@ namespace CommandLineParser
 
         /// <summary>
         /// Resolves arguments from the command line and calls <see cref="Argument.Parse"/> on each argument. 
-		/// Additional arguments are stored in AdditionalArgumentsSettings.AdditionalArguments 
-		/// if AdditionalArgumentsSettings.AcceptAdditionalArguments is set to true. 
+        /// Additional arguments are stored in AdditionalArgumentsSettings.AdditionalArguments 
+        /// if AdditionalArgumentsSettings.AcceptAdditionalArguments is set to true. 
         /// </summary>
         /// <exception cref="CommandLineFormatException">Command line arguments are not in correct format</exception>
         /// <param name="args">Command line arguments</param>
@@ -530,7 +530,7 @@ namespace CommandLineParser
                 for (int i = 0; i < argsList.Count; i++)
                 {
                     string arg = argsList[i];
-				
+                
                     Regex r = new Regex("([^=]*)=(.*)");
                     if (AcceptEqualSignSyntaxForValueArguments && r.IsMatch(arg))
                     {

@@ -185,7 +185,7 @@ namespace CommandLineParser.Arguments
         /// <seealso cref="LongAliases"/>
         public IEnumerable<char> ShortAliases
         {
-            get { return _shortAliases; }                
+            get { return _shortAliases; }
         }
 
         /// <summary>

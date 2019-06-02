@@ -25,7 +25,7 @@ namespace Tests
         {
             private bool defaultTrue;
 
-            [ValueArgument(typeof(bool), 't', StrongDefaultValue = true)]
+            [ValueArgument(typeof(bool), 't', ForcedDefaultValue = true)]
             public bool DefaultTrue
             {
                 get { return defaultTrue; }

@@ -35,6 +35,9 @@ namespace CommandLineParser.Arguments
 
         private CultureInfo _cultureInfo = CultureInfo.InvariantCulture;
 
+        private TValue _forcedDefaultValue;
+        private bool _hasForcedDefaultValue;
+
         #endregion
 
         #region constructor
@@ -101,7 +104,15 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public TValue DefaultValue { get; set; }
 
-        public TValue ForcedDefaultValue { get; set; }
+        public TValue ForcedDefaultValue
+        {
+            get => _forcedDefaultValue;
+            set
+            {
+                _forcedDefaultValue = value;
+                _hasForcedDefaultValue = true;
+            }
+        }
 
         object IArgumentWithDefaultValue.DefaultValue => DefaultValue;
 
@@ -425,7 +436,7 @@ namespace CommandLineParser.Arguments
         public override void Init()
         {
             base.Init();
-            _value = ForcedDefaultValue;
+            _value = _hasForcedDefaultValue ? ForcedDefaultValue : DefaultValue;
             _values.Clear();
             _stringValue = string.Empty;
         }

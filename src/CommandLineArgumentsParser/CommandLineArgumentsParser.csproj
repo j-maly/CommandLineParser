@@ -6,13 +6,13 @@
     <Authors>Jakub Maly;Stef Heyenrath;NTTAKR</Authors>
     <Copyright>Copyright Jakub Maly &amp; Stef Heyenrath © 2018-2020</Copyright>
     <Company>Jakub Maly</Company>
-    <TargetFrameworks>net20;net35;net40;net45;net452;netstandard1.3;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net20;net35;net40;net45;net452;netstandard1.3;netstandard2.0</TargetFrameworks>
     <AssemblyName>CommandLineArgumentsParser</AssemblyName>
     <RootNamespace>CommandLineParser</RootNamespace>
     <PackageId>CommandLineArgumentsParser</PackageId>
     <PackageTags>commandline;parse;validate;args;arguments</PackageTags>
     <PackageProjectUrl>https://github.com/j-maly/CommandLineParser</PackageProjectUrl>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/j-maly/CommandLineParser/master/LICENCE.md</PackageLicenseUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>See ReleaseNotes.md</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/j-maly/CommandLineParser</RepositoryUrl>

@@ -1,6 +1,6 @@
-os: Visual Studio 2017
+os: Visual Studio 2019
 
-version: 3.0.19.{build}
+version: 3.0.21.{build}
 
 configuration:
 - Debug

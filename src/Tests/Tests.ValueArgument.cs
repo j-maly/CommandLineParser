@@ -24,6 +24,9 @@ namespace Tests
 
             [ValueArgument(typeof(int), 'l', DefaultValue = 0)]
             public int Length;
+
+            [ValueArgument(typeof(int), 'd', DefaultValue = 9, ValueOptional = true)]
+            public int Duration;
         }
 #pragma warning restore CS0649
 
@@ -35,6 +38,42 @@ namespace Tests
             valueArgumentTarget = new ValueArgumentParsingTarget();
             commandLineParser.ExtractArgumentAttributes(valueArgumentTarget);
             return commandLineParser;
+        }
+
+        [Fact]
+        public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_whenParameterNotPassed_andForcedDefaultValueNotSet()
+        {
+            // ARRANGE 
+            string[] args = { " " };
+            var commandLineParser = InitValueArgument();
+            // ACT 
+            commandLineParser.ParseCommandLine(args);
+            // ASSERT
+            Assert.Equal(9, valueArgumentTarget.Duration);
+        }
+
+        [Fact]
+        public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_whenParameterPassedWithoutValue_andForcedDefaultValueNotSet()
+        {
+            // ARRANGE 
+            string[] args = { "-d" };
+            var commandLineParser = InitValueArgument();
+            // ACT 
+            commandLineParser.ParseCommandLine(args);
+            // ASSERT
+            Assert.Equal(9, valueArgumentTarget.Duration);
+        }
+
+        [Fact]
+        public void ValueArgumentWithOptionalValue_shouldReturnValue_whenParameterPassedWithValue_andForcedDefaultValueNotSet()
+        {
+            // ARRANGE 
+            string[] args = { "-d", "7" };
+            var commandLineParser = InitValueArgument();
+            // ACT 
+            commandLineParser.ParseCommandLine(args);
+            // ASSERT
+            Assert.Equal(7, valueArgumentTarget.Duration);
         }
 
         [Fact]

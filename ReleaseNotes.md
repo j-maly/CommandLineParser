@@ -1,5 +1,11 @@
+# 3.0.21 (01 December 2020)
+- [#67](https://github.com/j-maly/CommandLineParser/issues/67) - v3.0.20 binary is not signed [bug]
+- [#72](https://github.com/j-maly/CommandLineParser/pull/72) - Sign Assembly + add Microsoft.SourceLink.GitHub [enhancement] contributed by [StefH](https://github.com/StefH)
+- [#55](https://github.com/j-maly/CommandLineParser/issues/55) - Default value for non-existing argument [bug]
+
 # 3.0.20 (02 June 2019)
 - [#57](https://github.com/j-maly/CommandLineParser/pull/57) - #55 Added StrongDefaultValue for ValueArgument contributed by [eapyl](https://github.com/eapyl)
+- [#66](https://github.com/j-maly/CommandLineParser/pull/66) - Solved issues [bug] contributed by [StefH](https://github.com/StefH)
 - [#62](https://github.com/j-maly/CommandLineParser/issues/62) - getopt_long syntax
 - [#63](https://github.com/j-maly/CommandLineParser/issues/63) - CheckMandatoryArguments not being evaluated
 - [#64](https://github.com/j-maly/CommandLineParser/issues/64) - Message typo

@@ -8,6 +8,11 @@ namespace Tests
     public partial class Tests
     {
 #pragma warning disable CS0649
+        enum OptionsFlag
+        {
+            O1, O2, O3
+        }
+
         class ValueArgumentParsingTarget
         {
             [ValueArgument(typeof(int), 'i', AllowMultiple = true)]
@@ -27,6 +32,9 @@ namespace Tests
 
             [ValueArgument(typeof(int), 'd', DefaultValue = 9, ValueOptional = true)]
             public int Duration;
+
+            [ValueArgument(typeof(OptionsFlag), 'f', "flag", DefaultValue = OptionsFlag.O3)]
+            public OptionsFlag Flag;
         }
 #pragma warning restore CS0649
 
@@ -41,62 +49,76 @@ namespace Tests
         }
 
         [Fact]
-        public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_whenParameterNotPassed_andForcedDefaultValueNotSet()
+        public void ValueArgumentWithOptionalValue_shouldReturnDefaultEnumValue_whenParameterNotPassed_andForcedDefaultValueNotSet()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { " " };
             var commandLineParser = InitValueArgument();
-            // ACT 
+
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+
+            // Assert
+            Assert.Equal(OptionsFlag.O3, valueArgumentTarget.Flag);
+        }
+
+        [Fact]
+        public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_whenParameterNotPassed_andForcedDefaultValueNotSet()
+        {
+            // Arrange
+            string[] args = { " " };
+            var commandLineParser = InitValueArgument();
+            // Act
+            commandLineParser.ParseCommandLine(args);
+            // Assert
             Assert.Equal(9, valueArgumentTarget.Duration);
         }
 
         [Fact]
         public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_whenParameterPassedWithoutValue_andForcedDefaultValueNotSet()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-d" };
             var commandLineParser = InitValueArgument();
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(9, valueArgumentTarget.Duration);
         }
 
         [Fact]
         public void ValueArgumentWithOptionalValue_shouldReturnValue_whenParameterPassedWithValue_andForcedDefaultValueNotSet()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-d", "7" };
             var commandLineParser = InitValueArgument();
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(7, valueArgumentTarget.Duration);
         }
 
         [Fact]
         public void ArgumentBoundToCollection_shouldCreateInstanceOfTheCollection()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-i", "1", "-i", "2", "-i", "3" };
             var commandLineParser = InitValueArgument();
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(new List<int> { 1, 2, 3 }, valueArgumentTarget.Numbers);
         }
 
         [Fact]
         public void ValueArgumentWithOptionalNullableValue_shouldReturnDefaultValue_whenValueNotSpecified()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { };
             var commandLineParser = InitValueArgument();
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(null, valueArgumentTarget.NullableInt);
             Assert.Equal(null, valueArgumentTarget.NullableBool);
         }
@@ -104,12 +126,12 @@ namespace Tests
         [Fact]
         public void ValueArgumentWithOptionalNullableValue_shouldReturnCorrectValue_whenValueIsSpecified()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-n", "42", "-b", "true" };
             var commandLineParser = InitValueArgument();
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(42, valueArgumentTarget.NullableInt);
             Assert.Equal(true, valueArgumentTarget.NullableBool);
         }
@@ -117,34 +139,34 @@ namespace Tests
         [Fact]
         public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_whenValueNotUsed_valueArgumentIsInTheMiddle()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-v", "-i", "1" };
             var commandLineParser = InitValueArgument();
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(2 /*default*/ , valueArgumentTarget.Version);
         }
 
         [Fact]
         public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_whenValueNotUsed_valueArgumentIsAtTheEnd()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-i", "1", "-v" };
             var commandLineParser = InitValueArgument();
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(2 /*default*/ , valueArgumentTarget.Version);
         }
 
         [Fact]
         public void ValueArgumentWithMandatoryValue_shouldFailParsing_whenValueNotFound_lastArgument()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-l" };
             var commandLineParser = InitValueArgument();
-            // ACT 
+            // Act
             var e = Assert.Throws<CommandLineArgumentException>(() => commandLineParser.ParseCommandLine(args));
             Assert.Equal(e.Message, "Value argument l must be followed by a value.");
         }
@@ -152,10 +174,10 @@ namespace Tests
         [Fact]
         public void ValueArgumentWithMandatoryValue_shouldFailParsing_whenValueNotFound_argumentInTheMiddle()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-l", "-v", "1" };
             var commandLineParser = InitValueArgument();
-            // ACT 
+            // Act
             var e = Assert.Throws<CommandLineArgumentException>(() => commandLineParser.ParseCommandLine(args));
             Assert.Equal(e.Message, "Value argument l must be followed by a value, another argument(-v) found instead");
         }
@@ -163,65 +185,65 @@ namespace Tests
         [Fact]
         public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_andValueNotUsed_whenUsingEqualsSyntax_andValueArgumentIsInTheMiddle()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-v", "-i=\"1\"" };
             var commandLineParser = InitValueArgument();
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(2 /*default*/ , valueArgumentTarget.Version);
         }
 
         [Fact]
         public void ValueArgumentWithOptionalValue_shouldReturnStrongDefaultValue_andValueNotUsed_whenUsingEqualsSyntax_andValueArgumentDoesNotExist()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-i=\"1\"" };
             var commandLineParser = InitValueArgument();
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(1 /*strong default*/ , valueArgumentTarget.Version);
         }
 
         [Fact]
         public void ValueArgumentWithOptionalValue_shouldReturnDefaultValue_whenValueNotUsed_whenUsingEqualsSyntax_andValueArgumentIsAtTheEnd()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-i=\"1\"", "-v" };
             var commandLineParser = InitValueArgument();
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(2 /*default*/ , valueArgumentTarget.Version);
         }
 
         [Fact]
         public void ValueArgument_shouldHandleNegativeIntegers_whenUsingEqualsSyntax()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-v=\"-1\"" };
             var commandLineParser = InitValueArgument();
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(-1, valueArgumentTarget.Version);
         }
 
         [Fact]
         public void ValueArgument_shouldHandleNegativeIntegers_whenNotUsingEqualsSyntax()
         {
-            // ARRANGE 
+            // Arrange
             string[] args = { "-v", "-1" };
             var commandLineParser = InitValueArgument();
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = false;
-            // ACT 
+            // Act
             commandLineParser.ParseCommandLine(args);
-            // ASSERT
+            // Assert
             Assert.Equal(-1, valueArgumentTarget.Version);
         }
     }

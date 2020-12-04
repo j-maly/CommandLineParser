@@ -16,7 +16,7 @@
     <PackageReleaseNotes>See ReleaseNotes.md</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/j-maly/CommandLineParser</RepositoryUrl>
-    <Version>3.0.22-preview-01</Version>
+    <Version>3.0.22</Version>
     <DebugType>full</DebugType>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>CommandLineArgumentsParser.snk</AssemblyOriginatorKeyFile>

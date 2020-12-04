@@ -1,7 +1,12 @@
+# 3.0.22 (04 December 2020)
+- [#68](https://github.com/j-maly/CommandLineParser/pull/68) - Fixed ForcedDefaultValue regression. contributed by [alexandre-lecoq](https://github.com/alexandre-lecoq)
+- [#73](https://github.com/j-maly/CommandLineParser/pull/73) - Add some extra unit-tests for #70 [enhancement] contributed by [StefH](https://github.com/StefH)
+- [#70](https://github.com/j-maly/CommandLineParser/issues/70) - Default values are being ignored - regression [bug]
+
 # 3.0.21 (01 December 2020)
-- [#67](https://github.com/j-maly/CommandLineParser/issues/67) - v3.0.20 binary is not signed [bug]
 - [#72](https://github.com/j-maly/CommandLineParser/pull/72) - Sign Assembly + add Microsoft.SourceLink.GitHub [enhancement] contributed by [StefH](https://github.com/StefH)
 - [#55](https://github.com/j-maly/CommandLineParser/issues/55) - Default value for non-existing argument [bug]
+- [#67](https://github.com/j-maly/CommandLineParser/issues/67) - v3.0.20 binary is not signed [bug]
 
 # 3.0.20 (02 June 2019)
 - [#57](https://github.com/j-maly/CommandLineParser/pull/57) - #55 Added StrongDefaultValue for ValueArgument contributed by [eapyl](https://github.com/eapyl)

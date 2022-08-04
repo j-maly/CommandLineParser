@@ -103,8 +103,7 @@ public sealed class RegexValueArgumentAttribute : ArgumentAttribute
     private readonly Type _argumentType;
 
     /// <summary>
-    /// Creates new instance of RegexValueArgumentAttribute. RegexValueArgumentAttribute
-    /// uses underlying <see cref="RegexValueArgument"/>.
+    /// Creates new instance of RegexValueArgumentAttribute which uses underlying <see cref="RegexValueArgument"/>.
     /// </summary>
     /// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>
     /// <param name="pattern">Regex pattern</param>
@@ -115,8 +114,7 @@ public sealed class RegexValueArgumentAttribute : ArgumentAttribute
     }
 
     /// <summary>
-    /// Creates new instance of RegexValueArgumentAttribute. RegexValueArgumentAttribute
-    /// uses underlying <see cref="RegexValueArgument"/>.
+    /// Creates new instance of RegexValueArgumentAttribute which uses underlying <see cref="RegexValueArgument"/>.
     /// </summary>
     /// <param name="longName"><see cref="Argument.LongName">short name</see> of the underlying argument</param>
     /// <param name="pattern">Regex pattern</param>
@@ -127,8 +125,7 @@ public sealed class RegexValueArgumentAttribute : ArgumentAttribute
     }
 
     /// <summary>
-    /// Creates new instance of RegexValueArgument. RegexValueArgumentAttribute
-    /// uses underlying <see cref="RegexValueArgument"/>.
+    /// Creates new instance of RegexValueArgumentAttribute which uses underlying <see cref="RegexValueArgument"/>.
     /// </summary>
     /// <param name="shortName"><see cref="Argument.ShortName">short name</see> of the underlying argument</param>
     /// <param name="longName"><see cref="Argument.LongName">long name</see> of the underlying argument</param>
@@ -136,7 +133,7 @@ public sealed class RegexValueArgumentAttribute : ArgumentAttribute
     public RegexValueArgumentAttribute(char shortName, string longName, string pattern)
         : base(typeof(RegexValueArgument), shortName, longName, new Regex(pattern))
     {
-        _argumentType = typeof(RegexValueArgumentAttribute);
+        _argumentType = typeof(RegexValueArgument);
     }
 
     /// <summary>

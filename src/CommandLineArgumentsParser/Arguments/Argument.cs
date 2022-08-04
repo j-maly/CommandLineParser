@@ -19,21 +19,23 @@ namespace CommandLineParser.Arguments;
 /// <include file='..\Doc\CommandLineParser.xml' path='CommandLineParser/Arguments/Argument/*'/>
 public abstract class Argument
 {
+    private static readonly char[] BadChars = { '\r', '\n', ' ', '\t' };
+
     #region property backing fields
 
     private char? _shortName;
 
-    private string _longName;
+    private string? _longName;
 
     /// <summary>
     /// List of short aliases.
     /// </summary>
-    private readonly List<char> _shortAliases = new List<char>();
+    private readonly List<char> _shortAliases = new();
 
     /// <summary>
     /// List of long aliases.
     /// </summary>
-    private readonly List<string> _longAliases = new List<string>();
+    private readonly List<string> _longAliases = new();
 
     #endregion
 
@@ -106,29 +108,28 @@ public abstract class Argument
     /// <summary>
     /// Long, full description of the argument. 
     /// </summary>
-    public string FullDescription { get; set; }
+    public string? FullDescription { get; set; }
 
     /// <summary>
     /// Description of the argument 
     /// </summary>
-    public string Description { get; set; }
-
-    private static readonly char[] BadChars = { '\r', '\n', ' ', '\t' };
+    public string? Description { get; set; }
 
     /// <summary>
     /// Long name of the argument. Can appear on the command line in --<i>longName</i> format.
     /// Must be one word. 
     /// </summary>
     /// <exception cref="CommandLineFormatException">Name is invalid</exception>
-    public string LongName
+    public string? LongName
     {
         get => _longName;
         set
         {
-            if (value.IndexOfAny(BadChars) > -1)
+            if (value?.IndexOfAny(BadChars) > -1)
             {
                 throw new FormatException(Messages.EXC_ARG_NOT_ONE_WORD);
             }
+
             _longName = value;
         }
     }
@@ -153,7 +154,7 @@ public abstract class Argument
     /// <summary>
     /// Example usage of the attribute. 
     /// </summary>
-    public string Example { get; set; }
+    public string? Example { get; set; }
 
     /// <summary>
     /// Name of the argument. 
@@ -169,14 +170,10 @@ public abstract class Argument
 
             if (!string.IsNullOrEmpty(_longName))
             {
-                return _longName;
+                return _longName!;
             }
 
-            if (_shortName.HasValue)
-            {
-                return _shortName.ToString();
-            }
-            return string.Empty;
+            return _shortName.HasValue ? _shortName.ToString() : string.Empty;
         }
     }
 
@@ -318,7 +315,7 @@ public abstract class ArgumentAttribute : Attribute
     /// <summary>
     /// Description of the argument 
     /// </summary>
-    public string Description
+    public string? Description
     {
         get => _argument.Description;
         set => _argument.Description = value;
@@ -327,7 +324,7 @@ public abstract class ArgumentAttribute : Attribute
     /// <summary>
     /// Long, full description of the argument. 
     /// </summary>
-    public string FullDescription
+    public string? FullDescription
     {
         get => _argument.FullDescription;
         set => _argument.FullDescription = value;
@@ -338,7 +335,7 @@ public abstract class ArgumentAttribute : Attribute
     /// Must be one word. 
     /// </summary>
     /// <exception cref="CommandLineFormatException">Name is invalid</exception>
-    public string LongName
+    public string? LongName
     {
         get => _argument.LongName;
         set => _argument.LongName = value;
@@ -377,7 +374,7 @@ public abstract class ArgumentAttribute : Attribute
     /// <summary>
     /// Example usage of the argument.
     /// </summary>
-    public string Example
+    public string? Example
     {
         get => _argument.Example;
         set => _argument.Example = value;

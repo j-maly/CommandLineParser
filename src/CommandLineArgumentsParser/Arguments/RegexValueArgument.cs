@@ -13,12 +13,12 @@ public class RegexValueArgument : CertifiedValueArgument<string>
     /// <summary>
     /// Regular expression which the value must match 
     /// </summary>
-    public Regex? Regex { get; private set; }
+    public Regex? Regex { get; set; }
 
     /// <summary>
     /// Sample value that would be displayed to the user as a suggestion when the user enters a wrong value. 
     /// </summary>
-    public string? SampleValue { get; private set; }
+    public string? SampleValue { get; set; }
 
     #region constructor
 
@@ -27,7 +27,7 @@ public class RegexValueArgument : CertifiedValueArgument<string>
     /// <see cref="Argument.LongName">long name</see> and <see cref="Argument.Description">description</see>.
     /// </summary>
     /// <param name="shortName">Short name of the argument</param>
-    /// <param name="regex">regular expressin which the value must match</param>
+    /// <param name="regex">regular expression which the value must match</param>
     public RegexValueArgument(char shortName, Regex regex) : base(shortName)
     {
         Regex = regex;
@@ -38,7 +38,7 @@ public class RegexValueArgument : CertifiedValueArgument<string>
     /// <see cref="Argument.LongName">long name</see> and <see cref="Argument.Description">description</see>.
     /// </summary>
     /// <param name="longName">Long name of the argument </param>
-    /// <param name="regex">regular expressin which the value must match</param>
+    /// <param name="regex">regular expression which the value must match</param>
     public RegexValueArgument(string longName, Regex regex) : base(longName)
     {
         Regex = regex;
@@ -50,7 +50,7 @@ public class RegexValueArgument : CertifiedValueArgument<string>
     /// </summary>
     /// <param name="shortName">Short name of the argument</param>
     /// <param name="longName">Long name of the argument </param>
-    /// <param name="regex">regular expressin which the value must match</param>
+    /// <param name="regex">regular expression which the value must match</param>
     public RegexValueArgument(char shortName, string longName, Regex regex) : base(shortName, longName)
     {
         Regex = regex;
@@ -63,7 +63,7 @@ public class RegexValueArgument : CertifiedValueArgument<string>
     /// <param name="shortName">Short name of the argument</param>
     /// <param name="longName">Long name of the argument </param>
     /// <param name="description">description of the argument</param>
-    /// <param name="regex">regular expressin which the value must match</param>
+    /// <param name="regex">regular expression which the value must match</param>
     public RegexValueArgument(char shortName, string longName, string description, Regex regex) : base(shortName, longName, description)
     {
         Regex = regex;
@@ -73,17 +73,14 @@ public class RegexValueArgument : CertifiedValueArgument<string>
     protected override void Certify(string value)
     {
         // override the Certify method to validate value against regex
-        if (Regex != null)
+        if (Regex != null && !Regex.IsMatch(value))
         {
-            if (!Regex.IsMatch(value))
+            if (SampleValue == null)
             {
-                if (SampleValue == null)
-                {
-                    throw new CommandLineArgumentOutOfRangeException($"Argument '{value}' does not match the regex pattern '{Regex}'.", Name);
-                }
-
-                throw new CommandLineArgumentOutOfRangeException($"Argument '{value}' does not match the regex pattern '{Regex}'. An example of a valid value would be '{SampleValue}'.", Name);
+                throw new CommandLineArgumentOutOfRangeException($"Argument '{value}' does not match the regex pattern '{Regex}'.", Name);
             }
+
+            throw new CommandLineArgumentOutOfRangeException($"Argument '{value}' does not match the regex pattern '{Regex}'. An example of a valid value would be '{SampleValue}'.", Name);
         }
     }
 }

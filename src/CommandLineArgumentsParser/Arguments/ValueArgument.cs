@@ -186,7 +186,7 @@ namespace CommandLineParser.Arguments
         /// method for built-in types or using <see cref="ConvertValueHandler"/> for user types).
         /// </summary>
         /// <param name="args">command line arguments</param>
-        /// <param name="i">index to the args array, where this argument occured. 
+        /// <param name="i">index to the args array, where this argument occurred. 
         /// The index to the next argument after the argument is processed. </param>
         /// <seealso cref="ConvertValueHandler"/>
         /// <exception cref="CommandLineArgumentException">Incorrect format of the command line
@@ -470,7 +470,7 @@ namespace CommandLineParser.Arguments
     /// </summary>
     /// <remarks>Applicable to fields and properties (public).</remarks>
     /// <remarks>Use <see cref="CommandLineParser.ExtractArgumentAttributes"/> for each object 
-    /// you where you have delcared argument attributes.</remarks>
+    /// you where you have declared argument attributes.</remarks>
     public class ValueArgumentAttribute : ArgumentAttribute
     {
         private static Type _underlyingValueArgument;

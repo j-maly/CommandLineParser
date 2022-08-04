@@ -179,9 +179,9 @@ namespace CommandLineParser.Arguments
     /// attribute and let the CommandLineParse take care of binding the attribute to the field.
     /// </para>
     /// </summary>
-    /// <remarks>Appliable to fields and properties (public).</remarks>
+    /// <remarks>Applicable to fields and properties (public).</remarks>
     /// <remarks>Use <see cref="CommandLineParser.ExtractArgumentAttributes"/> for each object 
-    /// you where you have delcared argument attributes.</remarks>
+    /// you where you have declared argument attributes.</remarks>
     public sealed class EnumeratedValueArgumentAttribute : ArgumentAttribute
     {
         private readonly Type _argumentType;

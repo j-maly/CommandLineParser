@@ -105,7 +105,7 @@ As Andreas Kroll pointed out - it can be useful to define set of arguments that 
 // exactly one of the arguments x, o, c must be used
 [ArgumentGroupCertification("x,o,c", EArgumentGroupCondition.ExactlyOneUsed)]
 // only one of the arguments f, u must be used
-[ArgumentGroupCertification("f,u", EArgumentGroupCondition.OneOreNoneUsed)]
+[ArgumentGroupCertification("f,u", EArgumentGroupCondition.OneOrNoneUsed)]
 // arguments j and k can not be used together with arguments l or m
 [DistinctGroupsCertification("j,k","l,m")]
 public class Archiver

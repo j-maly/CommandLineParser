@@ -30,7 +30,7 @@ namespace CommandLineParser
                 }
                 if (!_acceptAdditionalArguments)
                 {
-                    throw new CommandLineException(Messages.EXC_ADDITONAL_ARGS_FORBIDDEN);
+                    throw new CommandLineException(Messages.EXC_ADDITIONAL_ARGS_FORBIDDEN);
                 }
                 throw new CommandLineException(Messages.EXC_ADDITIONAL_ARGS_TOO_EARLY);
             }

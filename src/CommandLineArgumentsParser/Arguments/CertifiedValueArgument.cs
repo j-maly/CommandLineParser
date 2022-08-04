@@ -54,7 +54,7 @@ namespace CommandLineParser.Arguments
         /// After successful conversion, validation <see cref="Certify"/> method is called
         /// </summary>
         /// <param name="args">command line arguments</param>
-        /// <param name="i">index to the args array, where this argument occured. The index to the next argument 
+        /// <param name="i">index to the args array, where this argument occurred. The index to the next argument 
         /// after the argument is processed. </param>
         /// <seealso cref="ValueArgument{TValue}.ConvertValueHandler"/>
         public override void Parse(IList<string> args, ref int i)

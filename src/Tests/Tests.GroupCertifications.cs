@@ -126,7 +126,7 @@ namespace Tests
         [Fact]
         public void GroupCertifications_OneOrNone1()
         {
-            ArgumentGroupCertification oon = new ArgumentGroupCertification("f,u", EArgumentGroupCondition.OneOreNoneUsed);
+            ArgumentGroupCertification oon = new ArgumentGroupCertification("f,u", EArgumentGroupCondition.OneOrNoneUsed);
             var commandLineParser = InitGroupCertifications();
             commandLineParser.Certifications.Clear();
             commandLineParser.Certifications.Add(oon);
@@ -142,7 +142,7 @@ namespace Tests
         public void GroupCertifications_OneOrNone2()
         {
             // exactly one of the arguments x, o, c must be used
-            ArgumentGroupCertification oon = new ArgumentGroupCertification("f,u", EArgumentGroupCondition.OneOreNoneUsed);
+            ArgumentGroupCertification oon = new ArgumentGroupCertification("f,u", EArgumentGroupCondition.OneOrNoneUsed);
 
             var commandLineParser = InitGroupCertifications();
             commandLineParser.Certifications.Clear();
@@ -156,7 +156,7 @@ namespace Tests
         public void GroupCertifications_OneOrNone3()
         {
             // exactly one of the arguments x, o, c must be used
-            ArgumentGroupCertification oon = new ArgumentGroupCertification("f,u", EArgumentGroupCondition.OneOreNoneUsed);
+            ArgumentGroupCertification oon = new ArgumentGroupCertification("f,u", EArgumentGroupCondition.OneOrNoneUsed);
 
             var commandLineParser = InitGroupCertifications();
             commandLineParser.Certifications.Clear();

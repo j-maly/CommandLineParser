@@ -1,49 +1,63 @@
 using CommandLineParser.Arguments;
-using System.Collections.Generic;
 using CommandLineParser.Exceptions;
+using FluentAssertions;
 using Xunit;
-using System;
 
-namespace Tests
+namespace Tests;
+
+public partial class Tests
 {
-    public partial class Tests
+    private class RegexValueArgumentParsingTarget
     {
-        class RegexValueArgumentParsingTarget
-        {
-            [RegexValueArgument('c', "\\d[A-Z]\\d")]
-            public string Code { get; set; }
-        }
+        [RegexValueArgument('s', "\\d[A-Z]\\d", Optional = false)]
+        public string Sample { get; set; } = null!;
 
-        private RegexValueArgumentParsingTarget regexTarget;
+        [RegexValueArgument(longName: "countdown"
+            , shortName: 'c'
+            , pattern: @"(?i:(?:^(?<SecondsOnly>\d{1,3})$)|(?:^(?<Min>\d{1,2})[:.](?<Sec>\d{1,2})$)|(?:(?<Min>\d{1,3})\s*(?:m(?:(?:(?:in)?(?:ute)?(?:s)?)?)))|(?:(?<Sec>\d{1,3})\s*(?:s(?:(?:(?:ec)?(?:ond)?(?:s)?)?))))"
+            , Aliases = new[] { "t", "timeout", }
+            , AllowMultiple = false
+            , Description = "Time for executing selected command (range between 0 … 15 minutes)"
+            , Example = "/c:00:00:10 | /c:12:34"
+            , Optional = true
+            , ValueOptional = false
+            , SampleValue = "XXXXXXXXXXXXXXXXXXXXX"
+        )]
+        public string? TimeOut { get; set; }
+    }
 
-        public CommandLineParser.CommandLineParser InitForRegexValueArgument()
-        {
-            var commandLineParser = new CommandLineParser.CommandLineParser();
-            regexTarget = new RegexValueArgumentParsingTarget();
-            commandLineParser.ExtractArgumentAttributes(regexTarget);
+    private (CommandLineParser.CommandLineParser Parser, RegexValueArgumentParsingTarget ParsingTarget) InitForRegexValueArgument()
+    {
+        var commandLineParser = new CommandLineParser.CommandLineParser();
+        var regexValueArgumentParsingTarget = new RegexValueArgumentParsingTarget();
+        commandLineParser.ExtractArgumentAttributes(regexValueArgumentParsingTarget);
 
-            return commandLineParser;
-        }
+        return (commandLineParser, regexValueArgumentParsingTarget);
+    }
 
-        [Fact]
-        public void RegexMatchTest()
-        {
-            string[] args = { "-c", "1X2" };
+    [Fact]
+    public void RegexMatchTest()
+    {
+        // Arrange
+        string[] args = { "-s", "1X2", "-c", "123" };
+        var (commandLineParser, parsingTarget) = InitForRegexValueArgument();
+        
+        // Act
+        commandLineParser.ParseCommandLine(args);
 
-            var commandLineParser = InitForRegexValueArgument();
-            commandLineParser.ParseCommandLine(args);
+        // Assert
+        parsingTarget.Sample.Should().Be("1X2");
+        parsingTarget.TimeOut.Should().Be("123");
+    }
 
-            Assert.Equal("1X2", regexTarget.Code);
-        }
+    [Fact]
+    public void RegexMismatchTest()
+    {
+        // Arrange
+        string[] args = { "-s", "XXX" };
+        var (commandLineParser, _) = InitForRegexValueArgument();
 
-        [Fact]
-        public void RegexMismatchTest()
-        {
-            string[] args = { "-c", "XXX" };
-
-            var commandLineParser = InitForRegexValueArgument();
-
-            Assert.Throws<CommandLineArgumentOutOfRangeException>(() => commandLineParser.ParseCommandLine(args));
-        }
+        // Act and Assert
+        Assert.Throws<CommandLineArgumentOutOfRangeException>(() => commandLineParser.ParseCommandLine(args));
     }
 }

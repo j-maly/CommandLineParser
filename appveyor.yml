@@ -1,6 +1,6 @@
-os: Visual Studio 2019
+os: Visual Studio 2022
 
-version: 3.0.21.{build}
+version: 3.0.22.{build}
 
 configuration:
 - Debug
@@ -22,12 +22,13 @@ build_script:
  - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework net452
  - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework netcoreapp1.1
  - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework netcoreapp2.1
+ - cmd: dotnet build src\ParserTest\ParserTest.csproj --configuration %CONFIGURATION% --framework net6.0
  
  - cmd: dotnet restore src\Tests\Tests.csproj
- - cmd: dotnet build src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp2.1
+ - cmd: dotnet build src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework net6.0
 
 test_script:
- - cmd: dotnet test src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework netcoreapp2.1
+ - cmd: dotnet test src\Tests\Tests.csproj --configuration %CONFIGURATION% --framework net6.0
 
 cache:
 - '%USERPROFILE%\.nuget\packages'

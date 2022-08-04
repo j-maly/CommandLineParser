@@ -23,7 +23,7 @@ namespace CommandLineParser.Validation
         /// <summary>
         /// Only one of the arguments in the group can be used
         /// </summary>
-        OneOreNoneUsed,
+        OneOrNoneUsed,
 
         /// <summary>
         /// All or none of the arguments in the group can be used
@@ -165,7 +165,7 @@ namespace CommandLineParser.Validation
                         throw new ArgumentConflictException(
                             string.Format(Description, _argumentGroupString));
                     break;
-                case EArgumentGroupCondition.OneOreNoneUsed:
+                case EArgumentGroupCondition.OneOrNoneUsed:
                     if (usedArgsFromGroup > 1)
                         throw new ArgumentConflictException(
                             string.Format(Description, _argumentGroupString));
@@ -191,7 +191,7 @@ namespace CommandLineParser.Validation
                     return string.Format(Messages.GROUP_AT_LEAST_ONE_USED, _argumentGroupString);
                 case EArgumentGroupCondition.ExactlyOneUsed:
                         return string.Format(Messages.GROUP_EXACTLY_ONE_USED, _argumentGroupString);
-                    case EArgumentGroupCondition.OneOreNoneUsed:
+                    case EArgumentGroupCondition.OneOrNoneUsed:
                         return string.Format(Messages.GROUP_ONE_OR_NONE_USED, _argumentGroupString);
                 case EArgumentGroupCondition.AllUsed:
                     return string.Format(Messages.GROUP_ALL_USED, _argumentGroupString);

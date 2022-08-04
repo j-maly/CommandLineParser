@@ -1,8 +1,6 @@
 using CommandLineParser.Arguments;
-using System.Collections.Generic;
 using CommandLineParser.Exceptions;
 using Xunit;
-using System;
 
 namespace Tests
 {

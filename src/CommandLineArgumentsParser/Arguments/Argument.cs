@@ -122,7 +122,7 @@ public abstract class Argument
     /// <exception cref="CommandLineFormatException">Name is invalid</exception>
     public string LongName
     {
-        get { return _longName; }
+        get => _longName;
         set
         {
             if (value.IndexOfAny(BadChars) > -1)
@@ -139,7 +139,7 @@ public abstract class Argument
     /// <exception cref="CommandLineFormatException">Name is invalid</exception>
     public char? ShortName
     {
-        get { return _shortName; }
+        get => _shortName;
         set
         {
             if (value.HasValue && char.IsWhiteSpace(value.Value))
@@ -164,12 +164,14 @@ public abstract class Argument
         {
             if (_shortName.HasValue && !string.IsNullOrEmpty(_longName))
             {
-                return string.Format("{0}({1})", _shortName, _longName);
+                return $"{_shortName}({_longName})";
             }
+
             if (!string.IsNullOrEmpty(_longName))
             {
                 return _longName;
             }
+
             if (_shortName.HasValue)
             {
                 return _shortName.ToString();
@@ -183,20 +185,14 @@ public abstract class Argument
     /// <see cref="AddAlias(char)"/>
     /// </summary>
     /// <seealso cref="LongAliases"/>
-    public IEnumerable<char> ShortAliases
-    {
-        get { return _shortAliases; }
-    }
+    public IEnumerable<char> ShortAliases => _shortAliases;
 
     /// <summary>
     /// Defined long aliases of the parameter. The parameter can also appear on the command line in --<i>longAlias</i> format.
     /// <see cref="AddAlias(string)"/>
     /// </summary>
     /// <seealso cref="ShortAliases"/>
-    public IEnumerable<string> LongAliases
-    {
-        get { return _longAliases; }
-    }
+    public IEnumerable<string> LongAliases => _longAliases;
 
     internal IEnumerable<string> AllAliases
     {
@@ -252,7 +248,9 @@ public abstract class Argument
     {
         //check for invalid multiple occurrences
         if (Parsed && !AllowMultiple)
+        {
             throw new CommandLineArgumentException(String.Format(Messages.EXC_ARG_VALUE_MULTIPLE_OCCURS, Name), Name);
+        }
     }
 
     /// <summary>
@@ -322,8 +320,8 @@ public abstract class ArgumentAttribute : Attribute
     /// </summary>
     public string Description
     {
-        get { return _argument.Description; }
-        set { _argument.Description = value; }
+        get => _argument.Description;
+        set => _argument.Description = value;
     }
 
     /// <summary>
@@ -331,8 +329,8 @@ public abstract class ArgumentAttribute : Attribute
     /// </summary>
     public string FullDescription
     {
-        get { return _argument.FullDescription; }
-        set { _argument.FullDescription = value; }
+        get => _argument.FullDescription;
+        set => _argument.FullDescription = value;
     }
 
     /// <summary>
@@ -342,8 +340,8 @@ public abstract class ArgumentAttribute : Attribute
     /// <exception cref="CommandLineFormatException">Name is invalid</exception>
     public string LongName
     {
-        get { return _argument.LongName; }
-        set { _argument.LongName = value; }
+        get => _argument.LongName;
+        set => _argument.LongName = value;
     }
 
     /// <summary>
@@ -353,8 +351,8 @@ public abstract class ArgumentAttribute : Attribute
     /// </summary>
     public bool Optional
     {
-        get { return _argument.Optional; }
-        set { _argument.Optional = value; }
+        get => _argument.Optional;
+        set => _argument.Optional = value;
     }
 
     /// <summary>
@@ -362,8 +360,8 @@ public abstract class ArgumentAttribute : Attribute
     /// </summary>
     public bool AllowMultiple
     {
-        get { return Argument.AllowMultiple; }
-        set { Argument.AllowMultiple = value; }
+        get => Argument.AllowMultiple;
+        set => Argument.AllowMultiple = value;
     }
 
     /// <summary>
@@ -372,8 +370,8 @@ public abstract class ArgumentAttribute : Attribute
     /// <exception cref="CommandLineFormatException">Name is invalid</exception>
     public char? ShortName
     {
-        get { return _argument.ShortName; }
-        set { _argument.ShortName = value; }
+        get => _argument.ShortName;
+        set => _argument.ShortName = value;
     }
 
     /// <summary>
@@ -381,16 +379,16 @@ public abstract class ArgumentAttribute : Attribute
     /// </summary>
     public string Example
     {
-        get { return _argument.Example; }
-        set { _argument.Example = value; }
+        get => _argument.Example;
+        set => _argument.Example = value;
     }
 
     /// <summary>
     /// Set aliases for the argument.
     /// </summary>
-    public string[] Aliases
+    public string[]? Aliases
     {
-        get { return _argument.AllAliases.ToArray(); }
+        get => _argument.AllAliases.ToArray();
         set
         {
             if (value != null)
@@ -409,7 +407,5 @@ public abstract class ArgumentAttribute : Attribute
             }
         }
     }
-
     #endregion
-
 }

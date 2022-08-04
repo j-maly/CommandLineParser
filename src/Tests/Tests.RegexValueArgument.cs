@@ -1,47 +1,49 @@
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
+using FluentAssertions;
 using Xunit;
 
-namespace Tests
+namespace Tests;
+
+public partial class Tests
 {
-    public partial class Tests
+    private class RegexValueArgumentParsingTarget
     {
-        class RegexValueArgumentParsingTarget
-        {
-            [RegexValueArgument('c', "\\d[A-Z]\\d")]
-            public string Code { get; set; }
-        }
+        [RegexValueArgument('c', "\\d[A-Z]\\d", Optional = false)]
+        public string Code { get; set; } = null!;
+    }
 
-        private RegexValueArgumentParsingTarget regexTarget;
+    private (CommandLineParser.CommandLineParser Parser, RegexValueArgumentParsingTarget ParsingTarget) InitForRegexValueArgument()
+    {
+        var commandLineParser = new CommandLineParser.CommandLineParser();
+        var regexValueArgumentParsingTarget = new RegexValueArgumentParsingTarget();
+        commandLineParser.ExtractArgumentAttributes(regexValueArgumentParsingTarget);
 
-        public CommandLineParser.CommandLineParser InitForRegexValueArgument()
-        {
-            var commandLineParser = new CommandLineParser.CommandLineParser();
-            regexTarget = new RegexValueArgumentParsingTarget();
-            commandLineParser.ExtractArgumentAttributes(regexTarget);
+        return (commandLineParser, regexValueArgumentParsingTarget);
+    }
 
-            return commandLineParser;
-        }
+    [Fact]
+    public void RegexMatchTest()
+    {
+        // Arrange
+        string[] args = { "-c", "1X2" };
+        var (commandLineParser, parsingTarget) = InitForRegexValueArgument();
+        
+        // Act
+        commandLineParser.ParseCommandLine(args);
 
-        [Fact]
-        public void RegexMatchTest()
-        {
-            string[] args = { "-c", "1X2" };
+        // Assert
+        parsingTarget.Code.Should().Be("1X2");
+    }
 
-            var commandLineParser = InitForRegexValueArgument();
-            commandLineParser.ParseCommandLine(args);
+    [Fact]
+    public void RegexMismatchTest()
+    {
+        // Arrange
+        string[] args = { "-c", "XXX" };
+        var (commandLineParser, _) = InitForRegexValueArgument();
 
-            Assert.Equal("1X2", regexTarget.Code);
-        }
-
-        [Fact]
-        public void RegexMismatchTest()
-        {
-            string[] args = { "-c", "XXX" };
-
-            var commandLineParser = InitForRegexValueArgument();
-
-            Assert.Throws<CommandLineArgumentOutOfRangeException>(() => commandLineParser.ParseCommandLine(args));
-        }
+        // Act and Assert
+        Assert.Throws<CommandLineArgumentOutOfRangeException>(() => commandLineParser.ParseCommandLine(args));
     }
 }

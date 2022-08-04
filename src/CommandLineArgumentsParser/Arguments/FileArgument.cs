@@ -116,7 +116,7 @@ namespace CommandLineParser.Arguments
 	/// </summary>
 	/// <remarks>Applicable to fields and properties (public).</remarks>
 	/// <remarks>Use <see cref="CommandLineParser.ExtractArgumentAttributes"/> for each object 
-	/// you where you have delcared argument attributes.</remarks>	
+	/// you where you have declared argument attributes.</remarks>	
 	public sealed class FileArgumentAttribute : ArgumentAttribute
 	{
 		/// <summary>

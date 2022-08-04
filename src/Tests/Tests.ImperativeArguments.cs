@@ -21,7 +21,7 @@ namespace Tests
             ValueArgument<decimal> version = new ValueArgument<decimal>('v', "version", "Set desired version");
             version.AddAlias("ver");
             version.AddAlias('w');
-            
+
 
             ValueArgument<Point> point = new ValueArgument<Point>('p', "point", "specify the point");
 
@@ -42,9 +42,11 @@ namespace Tests
                 if (stringValue.StartsWith("[") && stringValue.EndsWith("]"))
                 {
                     string[] parts = stringValue.Substring(1, stringValue.Length - 2).Split(';', ',');
-                    Point p = new Point();
-                    p.x = int.Parse(parts[0]);
-                    p.y = int.Parse(parts[1]);
+                    Point p = new Point
+                    {
+                        X = int.Parse(parts[0]),
+                        Y = int.Parse(parts[1])
+                    };
                     return p;
                 }
 
@@ -119,7 +121,7 @@ namespace Tests
             commandLineParser.ParseCommandLine(args);
         }
 
-        [Fact]        
+        [Fact]
         public void ImperativeArguments_CommandLineArgumentException()
         {
             string[] args = new[] { "-d" };

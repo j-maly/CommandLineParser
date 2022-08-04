@@ -41,9 +41,11 @@ namespace Tests
                 if (stringValue.StartsWith("[") && stringValue.EndsWith("]"))
                 {
                     string[] parts = stringValue.Substring(1, stringValue.Length - 2).Split(';', ',');
-                    Point p = new Point();
-                    p.x = int.Parse(parts[0]);
-                    p.y = int.Parse(parts[1]);
+                    Point p = new Point
+                    {
+                        X = int.Parse(parts[0]),
+                        Y = int.Parse(parts[1])
+                    };
                     return p;
                 }
 

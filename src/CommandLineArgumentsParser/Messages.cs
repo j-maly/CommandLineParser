@@ -31,7 +31,7 @@ internal static class Messages
 
     public static string EXC_ARG_VALUE_PRINT = "Argument: {0}, type: {3}, value: {2} (converted from: {1})";
 
-    public static string EXC_ARG_VALUE_PRINT_MULTIPLE = "Argument: {0}, type: {3}, occured {1}x values: {2}";
+    public static string EXC_ARG_VALUE_PRINT_MULTIPLE = "Argument: {0}, type: {3}, occurred {1}x values: {2}";
 
     public static string EXC_ARG_VALUE_STANDARD_CONVERT_FAILED = "Failed to convert string {0} to type {1}. Use strings in accepted format or define custom conversion using ConvertValueHandler.";
 

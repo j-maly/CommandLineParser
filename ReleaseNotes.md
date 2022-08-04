@@ -1,3 +1,9 @@
+# 3.0.23 (04 August 2022)
+- [#74](https://github.com/j-maly/CommandLineParser/pull/74) - Bump System.Text.RegularExpressions from 4.3.0 to 4.3.1 in /src/CommandLineArgumentsParser [dependencies] contributed by [dependabot[bot]](https://github.com/apps/dependabot)
+- [#80](https://github.com/j-maly/CommandLineParser/pull/80) - Fixed RegexValueArgumentAttribute [bug] contributed by [StefH](https://github.com/StefH)
+- [#77](https://github.com/j-maly/CommandLineParser/issues/77) - Typo in EArgumentGroupCondition enum [bug]
+- [#79](https://github.com/j-maly/CommandLineParser/issues/79) - RegexValueArgumentAttribute(char shortName, string longName, string pattern) constructor declaration error
+
 # 3.0.22 (04 December 2020)
 - [#68](https://github.com/j-maly/CommandLineParser/pull/68) - Fixed ForcedDefaultValue regression. contributed by [alexandre-lecoq](https://github.com/alexandre-lecoq)
 - [#73](https://github.com/j-maly/CommandLineParser/pull/73) - Add some extra unit-tests for #70 [enhancement] contributed by [StefH](https://github.com/StefH)

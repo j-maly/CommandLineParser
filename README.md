@@ -16,6 +16,7 @@ Supports the following Frameworks:
 * NET 4.5.2 and higher
 * NETStandard 1.3 and higher
 * NETStandard 2.0
+* NETStandard 2.1
 
 ## Motivational Example
 

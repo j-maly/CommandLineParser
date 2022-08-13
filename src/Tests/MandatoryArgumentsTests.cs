@@ -110,10 +110,11 @@ namespace Tests
             commandLineParser.ExtractArgumentAttributes(target);
 
             // Act
-            commandLineParser.ParseCommandLine(args);
+            Action act = () => commandLineParser.ParseCommandLine(args);
 
             // Assert
-            target.Severity.Should().BeNull();
+            act.Should().Throw<MandatoryArgumentNotSetException>();
+
         }
     }
 }

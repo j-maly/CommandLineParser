@@ -1,6 +1,7 @@
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace Tests;
@@ -28,7 +29,9 @@ public partial class Tests
 
     private (CommandLineParser.CommandLineParser Parser, RegexValueArgumentParsingTarget ParsingTarget) InitForRegexValueArgument()
     {
-        var commandLineParser = new CommandLineParser.CommandLineParser();
+        var factory = LoggerFactory.Create(b => b.AddConsole());
+        ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+        var commandLineParser = new CommandLineParser.CommandLineParser(logger);
         var regexValueArgumentParsingTarget = new RegexValueArgumentParsingTarget();
         commandLineParser.ExtractArgumentAttributes(regexValueArgumentParsingTarget);
 

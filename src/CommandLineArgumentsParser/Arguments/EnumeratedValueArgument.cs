@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace CommandLineParser.Arguments
 {

@@ -1,6 +1,7 @@
 using System;
 using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace CommandLineParser.Arguments
 {

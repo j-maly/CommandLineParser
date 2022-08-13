@@ -1,5 +1,6 @@
 using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -442,18 +443,18 @@ namespace CommandLineParser.Arguments
         }
 
         /// <summary>
-        /// Prints information about the argument value to the console.
+        /// Prints information about the argument value to the log.
         /// </summary>
-        public override void PrintValueInfo()
+        public override void PrintValueInfo(ILogger logger)
         {
             if (!AllowMultiple)
             {
-                Console.WriteLine(Messages.EXC_ARG_VALUE_PRINT, Name, _stringValue, _value, typeof(TValue).Name);
+                logger.LogInformation(Messages.IL_EXC_ARG_VALUE_PRINT, Name, _stringValue, _value, typeof(TValue).Name);
             }
             else
             {
                 string valuesString = string.Join(", ", _values.Select(v => v.ToString()).ToArray());
-                Console.WriteLine(Messages.EXC_ARG_VALUE_PRINT_MULTIPLE, Name, Values.Count, valuesString, typeof(TValue).Name);
+                logger.LogInformation(Messages.IL_EXC_ARG_VALUE_PRINT_MULTIPLE, Name, Values.Count, valuesString, typeof(TValue).Name);
             }
         }
     }

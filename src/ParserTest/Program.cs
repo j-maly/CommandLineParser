@@ -4,6 +4,7 @@ using System.IO;
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
 using CommandLineParser.Validation;
+using Microsoft.Extensions.Logging;
 
 namespace ParserTest
 {
@@ -54,7 +55,9 @@ namespace ParserTest
     {
         public static void Main(string[] args)
         {
-            var parser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var parser = new CommandLineParser.CommandLineParser(logger);
             parser.ShowUsageOnEmptyCommandline = true;
 
             var p = new ParsingTarget();
@@ -82,20 +85,18 @@ namespace ParserTest
                 try
                 {
                     if (arguments.Length == 0)
-                        Console.WriteLine("INPUT: No arguments supplied.");
+                        logger.LogWarning("INPUT: No arguments supplied.");
                     else
-                        Console.WriteLine("INPUT: {0}", arguments);
+                        logger.LogInformation("INPUT: {0}", arguments);
 
                     parser.ParseCommandLine(arguments);
 
                     parser.ShowParsedArguments(true);
-                    Console.WriteLine("RESULT: OK");
-                    Console.WriteLine();
+                    logger.LogInformation("RESULT: OK");
                 }
                 catch (CommandLineException e)
                 {
-                    Console.WriteLine("RESULT: EXC - " + e.Message);
-                    Console.WriteLine();
+                    logger.LogError("RESULT: EXC - " + e.Message);
                 }
             }
 
@@ -121,15 +122,13 @@ namespace ParserTest
             }
             catch (CommandLineException e)
             {
-                Console.WriteLine("RESULT: EXC - " + e.Message);
-                Console.WriteLine();
+                logger.LogError("RESULT: EXC - " + e.Message);
             }
 
             // two files - OK 
             parser.ParseCommandLine(new[] { "/d", "C:\\Input", "file1.txt", "file2.txt" });
             parser.ShowParsedArguments();
-            Console.WriteLine("RESULT: OK");
-            Console.WriteLine();
+            logger.LogInformation("RESULT: OK");
         }
     }
 }

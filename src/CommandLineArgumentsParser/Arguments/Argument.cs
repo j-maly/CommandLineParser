@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace CommandLineParser.Arguments;
 
@@ -251,9 +252,9 @@ public abstract class Argument
     }
 
     /// <summary>
-    /// Prints information about the argument value to the console.
+    /// Prints information about the argument value to the log.
     /// </summary>
-    public abstract void PrintValueInfo();
+    public abstract void PrintValueInfo(ILogger logger);
 
     /// <summary>
     /// Initializes the argument. Sets <see cref="Parsed"/> to false. Override in inherited classes 

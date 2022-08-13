@@ -1,4 +1,5 @@
 using CommandLineParser.Arguments;
+using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace Tests
@@ -42,7 +43,9 @@ namespace Tests
         [Fact]
         public void DeclarativeSwitch_SwitchArgumentTrueDefault()
         {
-            var parser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var parser = new CommandLineParser.CommandLineParser(logger);
             var options = new TestOptionsTrue();
             parser.ExtractArgumentAttributes(options);
 
@@ -54,7 +57,9 @@ namespace Tests
         [Fact]
         public void DeclarativeSwitch_SwitchArgumentTrueSet()
         {
-            var parser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var parser = new CommandLineParser.CommandLineParser(logger);
             var options = new TestOptionsTrue();
             parser.ExtractArgumentAttributes(options);
 
@@ -66,7 +71,9 @@ namespace Tests
         [Fact]
         public void DeclarativeSwitch_SwitchArgumentFalseDefault()
         {
-            var parser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var parser = new CommandLineParser.CommandLineParser(logger);
             var options = new TestOptionsFalse();
             parser.ExtractArgumentAttributes(options);
 
@@ -78,7 +85,9 @@ namespace Tests
         [Fact]
         public void DeclarativeSwitch_SwitchArgumentFalseSet()
         {
-            var parser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var parser = new CommandLineParser.CommandLineParser(logger);
             var options = new TestOptionsFalse();
             parser.ExtractArgumentAttributes(options);
 
@@ -90,7 +99,9 @@ namespace Tests
         [Fact]
         public void PathAsAnArgumentShouldNotBreakThings()
         {
-            var parser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var parser = new CommandLineParser.CommandLineParser(logger);
             var options = new TestOptionsFalse();
             parser.ExtractArgumentAttributes(options);
 

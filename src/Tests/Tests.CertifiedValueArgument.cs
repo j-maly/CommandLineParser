@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace Tests;
@@ -22,7 +23,9 @@ public partial class Tests
 
     public CommandLineParser.CommandLineParser InitForCertifiedValueArgument()
     {
-        var commandLineParser = new CommandLineParser.CommandLineParser();
+        var factory = LoggerFactory.Create(b => b.AddConsole());
+        ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+        var commandLineParser = new CommandLineParser.CommandLineParser(logger);
         _certifiedValueArgumentParsingTarget = new CertifiedValueArgumentParsingTarget();
         commandLineParser.ExtractArgumentAttributes(_certifiedValueArgumentParsingTarget);
 
@@ -83,7 +86,9 @@ public partial class Tests
     [Fact]
     public void ValueArgument_ShouldParseDate()
     {
-        var commandLineParser = new CommandLineParser.CommandLineParser();
+        var factory = LoggerFactory.Create(b => b.AddConsole());
+        ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+        var commandLineParser = new CommandLineParser.CommandLineParser(logger);
         ValueArgument<DateTime> dateTime = new ValueArgument<DateTime>('d', "date");
         commandLineParser.Arguments.Add(dateTime);
 

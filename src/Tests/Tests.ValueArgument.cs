@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
+using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace Tests;
@@ -40,7 +41,9 @@ public partial class Tests
 
     private (CommandLineParser.CommandLineParser Parser, ValueArgumentParsingTarget ParsingTarget) InitValueArgument()
     {
-        var commandLineParser = new CommandLineParser.CommandLineParser();
+        var factory = LoggerFactory.Create(b => b.AddConsole());
+        ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+        var commandLineParser = new CommandLineParser.CommandLineParser(logger);
         var valueArgumentTarget = new ValueArgumentParsingTarget();
         commandLineParser.ExtractArgumentAttributes(valueArgumentTarget);
         return (commandLineParser, valueArgumentTarget);

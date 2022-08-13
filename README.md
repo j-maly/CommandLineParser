@@ -32,7 +32,9 @@ For application with one or two arguments, you could probably manage with some s
 
 This is the way you define arguments for your application:
 ```csharp
-CommandLineParser.CommandLineParser parser = new CommandLineParser.CommandLineParser();
+var factory = LoggerFactory.Create(b => b.AddConsole());
+ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+CommandLineParser.CommandLineParser parser = new CommandLineParser.CommandLineParser(logger);
 //switch argument is meant for true/false logic
 SwitchArgument showArgument = new SwitchArgument('s', "show", "Set whether show or not", true);
 ValueArgument<decimal> version = new ValueArgument<decimal>('v', "version", "Set desired version");
@@ -60,7 +62,7 @@ try
 }
 catch (CommandLineException e)
 {
-    Console.WriteLine(e.Message);
+    logger.LogWarning(e.Message);
 }
 ```
 You can find more examples of use in the [wiki](https://github.com/j-maly/CommandLineParser/wiki).

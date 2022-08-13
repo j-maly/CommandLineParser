@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace CommandLineParser.Arguments;
 

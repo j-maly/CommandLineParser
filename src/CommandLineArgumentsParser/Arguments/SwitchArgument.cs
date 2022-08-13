@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace CommandLineParser.Arguments
 {
@@ -113,11 +114,11 @@ namespace CommandLineParser.Arguments
         }
 
         /// <summary>
-        /// Prints information about the argument value to the console.
+        /// Prints information about the argument value to the ILogger.
         /// </summary>
-        public override void PrintValueInfo()
+        public override void PrintValueInfo(ILogger logger)
         {
-            Console.WriteLine(Messages.EXC_ARG_SWITCH_PRINT, Name, Value ? "1" : "0");
+            logger.LogInformation(Messages.IL_EXC_ARG_SWITCH_PRINT, Name, Value ? "1" : "0");
         }
 
         /// <summary>

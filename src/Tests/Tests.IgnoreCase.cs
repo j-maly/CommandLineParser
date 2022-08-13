@@ -1,5 +1,6 @@
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
+using Microsoft.Extensions.Logging;
 using ParserTest;
 using Xunit;
 
@@ -9,7 +10,9 @@ namespace Tests
     {
         private CommandLineParser.CommandLineParser InitIgnoreCase()
         {
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger); 
             commandLineParser.IgnoreCase = true;
             commandLineParser.ShowUsageOnEmptyCommandline = true;
 

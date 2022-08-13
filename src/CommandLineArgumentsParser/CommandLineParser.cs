@@ -56,10 +56,13 @@ public class CommandLineParser : IDisposable
 
     #endregion
 
-    public CommandLineParser(ILogger<CommandLineParser> logger)
+    public CommandLineParser(ILogger<CommandLineParser>? logger)
     {
-        _logger = logger;
+        _logger = (logger == null ? 
+            LoggerFactory.Create(b => b.AddConsole()).CreateLogger<CommandLineParser>() 
+            : logger) ;
     }
+
     /// <summary>
     /// Defined command line arguments
     /// </summary>

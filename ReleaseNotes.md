@@ -1,6 +1,3 @@
-# 3.1.0 (13 August 2022)
-- [#82](https://github.com/j-maly/CommandLineParser/pull/82) - Replace Console.Write with ILogger using Microsoft Logging extenions. Also standardized support for only .Net Standard 2.0 and 2.1 [enhancement] contributed by [askids](https://github.com/askids)
-
 # 3.0.23 (04 August 2022)
 - [#74](https://github.com/j-maly/CommandLineParser/pull/74) - Bump System.Text.RegularExpressions from 4.3.0 to 4.3.1 in /src/CommandLineArgumentsParser [dependencies] contributed by [dependabot[bot]](https://github.com/apps/dependabot)
 - [#80](https://github.com/j-maly/CommandLineParser/pull/80) - Fixed RegexValueArgumentAttribute [bug] contributed by [StefH](https://github.com/StefH)

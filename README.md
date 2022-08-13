@@ -9,12 +9,6 @@ CommandLine Parser Library lets you easily define strongly typed command line ar
 See [Quick Start](https://github.com/j-maly/CommandLineParser/wiki) on how to use the library. 
 
 Supports the following Frameworks:
-* NET 2.0
-* NET 3.5
-* NET 4.0
-* NET 4.5
-* NET 4.5.2 and higher
-* NETStandard 1.3 and higher
 * NETStandard 2.0
 * NETStandard 2.1
 

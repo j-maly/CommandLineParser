@@ -20,6 +20,7 @@ internal static class Messages
     public static string EXC_ARG_NOT_ONE_WORD = "LongName of an argument must be one word.";
 
     public static string EXC_ARG_SWITCH_PRINT = "Argument: {0} value: {1}";
+    public static string IL_EXC_ARG_SWITCH_PRINT = "Argument: {@Argument} value: {@Value}";
 
     public static string EXC_ARG_UNKNOWN = "Unknown argument found: {0}.";
 
@@ -30,8 +31,10 @@ internal static class Messages
     public static string EXC_ARG_VALUE_MULTIPLE_OCCURS = "Argument {0} can not be used multiple times.";
 
     public static string EXC_ARG_VALUE_PRINT = "Argument: {0}, type: {3}, value: {2} (converted from: {1})";
+    public static string IL_EXC_ARG_VALUE_PRINT = "Argument: {@Argument}, type: {@Type}, value: {@Value} (converted from: {@ConvertedFrom})";
 
     public static string EXC_ARG_VALUE_PRINT_MULTIPLE = "Argument: {0}, type: {3}, occurred {1}x values: {2}";
+    public static string IL_EXC_ARG_VALUE_PRINT_MULTIPLE = "Argument: {@Argument}, type: {@Type}, occurred {@occured}x values: {@Values}";
 
     public static string EXC_ARG_VALUE_STANDARD_CONVERT_FAILED = "Failed to convert string {0} to type {1}. Use strings in accepted format or define custom conversion using ConvertValueHandler.";
 
@@ -90,6 +93,8 @@ internal static class Messages
     public static string EXC_NOT_ENOUGH_ADDITIONAL_ARGUMENTS = "Not enough additional arguments. Needed {0} additional arguments.";
 
     public static string MSG_EXAMPLE_FORMAT = "Example: {0}";
+    public static string IL_MSG_EXAMPLE_FORMAT = "Example: {@Example}";
+    public static string IL_MSG_FULL_DESC = "Full Description: {@FullDescription}";
 
     // public static string EXC_GROUP_ALL_OR_NONE_USED_NOT_ALL_USED = "All or none of these arguments: {0} must be used.";
 

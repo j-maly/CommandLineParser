@@ -1,5 +1,6 @@
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using Xunit;
 
@@ -20,7 +21,9 @@ namespace Tests
 
         public CommandLineParser.CommandLineParser InitBoundedValueArgument()
         {
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
             boundedValueArgumentTarget = new BoundedValueArgumentParsingTarget();
             commandLineParser.ExtractArgumentAttributes(boundedValueArgumentTarget);
             return commandLineParser;

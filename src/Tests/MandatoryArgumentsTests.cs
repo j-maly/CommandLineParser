@@ -1,6 +1,7 @@
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 using System;
 using Xunit;
 
@@ -25,8 +26,9 @@ namespace Tests
         {
             // Assign
             string[] args = { "-s", "test" };
-
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
             var target = new TestTargetWithOptionalTrue();
             commandLineParser.ExtractArgumentAttributes(target);
 
@@ -43,7 +45,9 @@ namespace Tests
             // Assign
             string[] args = { "-s", "test" };
 
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
             var target = new TestTargetWithOptionalFalse();
             commandLineParser.ExtractArgumentAttributes(target);
 
@@ -60,7 +64,9 @@ namespace Tests
             // Assign
             string[] args = { };
 
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
             var target = new TestTargetWithOptionalTrue();
             commandLineParser.ExtractArgumentAttributes(target);
 
@@ -77,7 +83,9 @@ namespace Tests
             // Assign
             string[] args = { };
 
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
             var target = new TestTargetWithOptionalFalse();
             commandLineParser.ExtractArgumentAttributes(target);
 
@@ -94,16 +102,19 @@ namespace Tests
             // Assign
             string[] args = { };
 
-            var commandLineParser = new CommandLineParser.CommandLineParser { CheckMandatoryArguments = false };
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
 
             var target = new TestTargetWithOptionalFalse();
             commandLineParser.ExtractArgumentAttributes(target);
 
             // Act
-            commandLineParser.ParseCommandLine(args);
+            Action act = () => commandLineParser.ParseCommandLine(args);
 
             // Assert
-            target.Severity.Should().BeNull();
+            act.Should().Throw<MandatoryArgumentNotSetException>();
+
         }
     }
 }

@@ -9,12 +9,6 @@ CommandLine Parser Library lets you easily define strongly typed command line ar
 See [Quick Start](https://github.com/j-maly/CommandLineParser/wiki) on how to use the library. 
 
 Supports the following Frameworks:
-* NET 2.0
-* NET 3.5
-* NET 4.0
-* NET 4.5
-* NET 4.5.2 and higher
-* NETStandard 1.3 and higher
 * NETStandard 2.0
 * NETStandard 2.1
 
@@ -32,7 +26,9 @@ For application with one or two arguments, you could probably manage with some s
 
 This is the way you define arguments for your application:
 ```csharp
-CommandLineParser.CommandLineParser parser = new CommandLineParser.CommandLineParser();
+var factory = LoggerFactory.Create(b => b.AddConsole());
+ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+CommandLineParser.CommandLineParser parser = new CommandLineParser.CommandLineParser(logger);
 //switch argument is meant for true/false logic
 SwitchArgument showArgument = new SwitchArgument('s', "show", "Set whether show or not", true);
 ValueArgument<decimal> version = new ValueArgument<decimal>('v', "version", "Set desired version");
@@ -60,7 +56,7 @@ try
 }
 catch (CommandLineException e)
 {
-    Console.WriteLine(e.Message);
+    logger.LogWarning(e.Message);
 }
 ```
 You can find more examples of use in the [wiki](https://github.com/j-maly/CommandLineParser/wiki).

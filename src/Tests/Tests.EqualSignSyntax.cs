@@ -1,5 +1,6 @@
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
+using Microsoft.Extensions.Logging;
 using ParserTest;
 using System.Collections.Generic;
 using Xunit;
@@ -10,7 +11,9 @@ namespace Tests
     {
         private CommandLineParser.CommandLineParser InitEqualSignSyntax()
         {
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
             commandLineParser.ShowUsageOnEmptyCommandline = true;
 
@@ -154,7 +157,9 @@ namespace Tests
         {
             string[] args = new[] { "-n=\"1,2,3\"", "x" };
 
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
             ValueArgument<int> lines = new ValueArgument<int>('n', "lines", "Specific lines") { AllowMultiple = true };
             commandLineParser.Arguments.Add(lines);
@@ -164,7 +169,7 @@ namespace Tests
 
             // ASSERT
             Assert.Equal(new List<int> { 1, 2, 3 }, lines.Values);
-            Assert.Equal(1, commandLineParser.AdditionalArgumentsSettings.AdditionalArguments.Length);
+            Assert.Single(commandLineParser.AdditionalArgumentsSettings.AdditionalArguments);
             Assert.Equal("x", commandLineParser.AdditionalArgumentsSettings.AdditionalArguments[0]);
         }
 
@@ -173,7 +178,9 @@ namespace Tests
         {
             string[] args = new[] { "-n=1,2,3", "-n=4" };
 
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
             ValueArgument<int> lines = new ValueArgument<int>('n', "lines", "Specific lines") { AllowMultiple = true };
             commandLineParser.Arguments.Add(lines);
@@ -190,7 +197,9 @@ namespace Tests
         {
             string[] args = new[] { "-n=", "-n=" };
 
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
             commandLineParser.AcceptEqualSignSyntaxForValueArguments = true;
             ValueArgument<int> lines = new ValueArgument<int>('n', "lines", "Specific lines") { AllowMultiple = true, ValueOptional=true };
             commandLineParser.Arguments.Add(lines);

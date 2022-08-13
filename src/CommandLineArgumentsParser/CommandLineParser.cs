@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 using CommandLineParser.Arguments;
 using CommandLineParser.Compatibility;
 using CommandLineParser.Exceptions;
 using CommandLineParser.Validation;
+using Microsoft.Extensions.Logging;
 
 namespace CommandLineParser;
 
@@ -41,7 +43,7 @@ public class CommandLineParser : IDisposable
     private readonly AdditionalArgumentsSettings _additionalArgumentsSettings = new AdditionalArgumentsSettings();
 
     private readonly List<string> _showUsageCommands = new List<string> { "--help", "/?", "/help" };
-
+    private readonly ILogger<CommandLineParser> _logger;
     private bool _acceptSlash = true;
 
     private bool _acceptHyphen = true;
@@ -53,6 +55,13 @@ public class CommandLineParser : IDisposable
     private static Regex lettersOnly = new Regex("^[a-zA-Z]$");
 
     #endregion
+
+    public CommandLineParser(ILogger<CommandLineParser>? logger)
+    {
+        _logger = (logger == null ? 
+            LoggerFactory.Create(b => b.AddConsole()).CreateLogger<CommandLineParser>() 
+            : logger) ;
+    }
 
     /// <summary>
     /// Defined command line arguments
@@ -617,82 +626,81 @@ public class CommandLineParser : IDisposable
     }
 
     /// <summary>
-    /// Prints arguments information and usage information to
-    /// the <paramref name="outputStream"/>. 
+    /// Prints arguments information and usage information using ILogger
     /// </summary>
-    public void PrintUsage(TextWriter outputStream)
+    public void PrintUsage()
     {
-        outputStream.WriteLine(ShowUsageHeader);
-
-        outputStream.WriteLine(Messages.MSG_USAGE);
-
+        _logger.LogInformation(ShowUsageHeader);
+        _logger.LogInformation(Messages.MSG_USAGE);
+        var sb = new StringBuilder();
         foreach (Argument argument in _arguments)
         {
-            outputStream.Write("\t");
+            sb.Append("\t");
             bool comma = false;
             if (argument.ShortName.HasValue)
             {
-                outputStream.Write("-" + argument.ShortName);
+                sb.Append("-" + argument.ShortName);
                 comma = true;
             }
             foreach (char c in argument.ShortAliases)
             {
                 if (comma)
-                    outputStream.WriteLine(", ");
-                outputStream.Write("-" + c);
+                    sb.Append(", ");
+                sb.Append("-" + c);
                 comma = true;
             }
             if (!string.IsNullOrEmpty(argument.LongName))
             {
                 if (comma)
-                    outputStream.Write(", ");
-                outputStream.Write("--" + argument.LongName);
+                    sb.Append(", ");
+                sb.Append("--" + argument.LongName);
                 comma = true;
             }
             foreach (string str in argument.LongAliases)
             {
                 if (comma)
-                    outputStream.Write(", ");
-                outputStream.Write("--" + str);
+                    sb.Append(", ");
+                sb.Append("--" + str);
                 comma = true;
             }
 
             if (argument.Optional)
-                outputStream.Write(Messages.MSG_OPTIONAL);
-            outputStream.WriteLine("... {0} ", argument.Description);
+                sb.Append(Messages.MSG_OPTIONAL);
+            _logger.LogInformation(sb.ToString());
+            _logger.LogInformation($"... {argument.Description} ");
 
             if (!string.IsNullOrEmpty(argument.Example))
             {
-                outputStream.WriteLine(Messages.MSG_EXAMPLE_FORMAT, argument.Example);
+                _logger.LogInformation(Messages.IL_MSG_EXAMPLE_FORMAT, argument.Example);
             }
 
             if (!string.IsNullOrEmpty(argument.FullDescription))
             {
-                outputStream.WriteLine();
-                outputStream.WriteLine(argument.FullDescription);
+                _logger.LogInformation(Messages.IL_MSG_FULL_DESC, argument.FullDescription);
             }
-            outputStream.WriteLine();
         }
 
         if (Certifications.Count > 0)
         {
-            outputStream.WriteLine(Messages.CERT_REMARKS);
+            sb.Clear();
+            sb.AppendLine(Messages.CERT_REMARKS);
             foreach (ArgumentCertification certification in Certifications)
             {
-                outputStream.WriteLine("\t" + certification.Description);
+                sb.Append("\t" + certification.Description);
             }
-            outputStream.WriteLine();
+            _logger.LogInformation(sb.ToString());
         }
 
-        outputStream.WriteLine(ShowUsageFooter);
+        _logger.LogInformation(ShowUsageFooter);
+
     }
 
     /// <summary>
-    /// Prints arguments information and usage information to the console. 
+    /// Prints arguments information and usage information to the ILogger. 
     /// </summary>
     public void ShowUsage()
     {
-        PrintUsage(Console.Out);
+        PrintUsage();
     }
 
     /// <summary>
@@ -700,41 +708,38 @@ public class CommandLineParser : IDisposable
     /// </summary>
     public void ShowParsedArguments(bool showOmittedArguments = false)
     {
-        Console.WriteLine(Messages.MSG_PARSING_RESULTS);
-        Console.WriteLine("\t" + Messages.MSG_COMMAND_LINE);
+        var sb = new StringBuilder();
+        sb.AppendLine(Messages.MSG_PARSING_RESULTS);
+        sb.Append("\t" + Messages.MSG_COMMAND_LINE);
         foreach (string arg in _argsNotParsed)
         {
-            Console.Write(arg);
-            Console.Write(" ");
+            sb.Append(arg);
+            sb.Append(" ");
         }
 
-        Console.WriteLine();
-        Console.WriteLine();
-        Console.WriteLine("\t" + Messages.MSG_PARSED_ARGUMENTS);
+        sb.AppendLine("\t" + Messages.MSG_PARSED_ARGUMENTS);
+        _logger.LogInformation(sb.ToString());
         foreach (Argument argument in _arguments)
         {
             if (argument.Parsed)
-                argument.PrintValueInfo();
+                argument.PrintValueInfo(_logger);
         }
-        Console.WriteLine();
-        Console.WriteLine("\t" + Messages.MSG_NOT_PARSED_ARGUMENTS);
+        _logger.LogInformation(Messages.MSG_NOT_PARSED_ARGUMENTS);
         foreach (Argument argument in _arguments)
         {
             if (!argument.Parsed)
-                argument.PrintValueInfo();
+                argument.PrintValueInfo(_logger);
         }
-        Console.WriteLine();
         if (AdditionalArgumentsSettings.AcceptAdditionalArguments)
         {
-            Console.WriteLine("\t" + Messages.MSG_ADDITIONAL_ARGUMENTS);
-
+            _logger.LogInformation(Messages.MSG_ADDITIONAL_ARGUMENTS);
+            sb.Clear();
             foreach (string simpleArgument in AdditionalArgumentsSettings.AdditionalArguments)
             {
-                Console.Write(simpleArgument + " ");
+                sb.Append(simpleArgument + " ");
             }
 
-            Console.WriteLine();
-            Console.WriteLine();
+            _logger.LogInformation(sb.ToString());
         }
     }
 

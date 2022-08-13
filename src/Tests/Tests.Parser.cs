@@ -1,5 +1,6 @@
 using System;
 using CommandLineParser.Arguments;
+using Microsoft.Extensions.Logging;
 using Xunit;
 
 namespace Tests;
@@ -34,7 +35,9 @@ public partial class Tests
     public void Parser_shouldAllowArgsWithTheSameToUpperConversion_whenIgnoreCaseIsNotUsed()
     {
         // ARRANGE 
-        var parser = new CommandLineParser.CommandLineParser();
+        var factory = LoggerFactory.Create(b => b.AddConsole());
+        ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+        var parser = new CommandLineParser.CommandLineParser(logger);
         parser.Arguments.Add(new SwitchArgument('a', "switch", false));
         parser.Arguments.Add(new SwitchArgument('b', "SWiTCH", false));
         parser.IgnoreCase = false;
@@ -47,7 +50,9 @@ public partial class Tests
     public void Parser_shouldFailWithArgsWithTheSameToUpperConversion_whenIgnoreCaseIsUsed()
     {
         // ARRANGE 
-        var parser = new CommandLineParser.CommandLineParser();
+        var factory = LoggerFactory.Create(b => b.AddConsole());
+        ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+        var parser = new CommandLineParser.CommandLineParser(logger);
         parser.Arguments.Add(new SwitchArgument('a', "switch", false));
         parser.Arguments.Add(new SwitchArgument('b', "SWiTCH", false));
         parser.IgnoreCase = true;
@@ -60,7 +65,9 @@ public partial class Tests
     public void Parser_shouldAcceptSwitch_WithoutShortName()
     {
         // ARRANGE 
-        var parser = new CommandLineParser.CommandLineParser();
+        var factory = LoggerFactory.Create(b => b.AddConsole());
+        ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+        var parser = new CommandLineParser.CommandLineParser(logger);
         var switchArgument = new SwitchArgument("switch", false);
         parser.Arguments.Add(switchArgument);
 

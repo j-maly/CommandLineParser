@@ -2,6 +2,7 @@ using CommandLineParser.Arguments;
 using CommandLineParser.Validation;
 using CommandLineParser.Exceptions;
 using Xunit;
+using Microsoft.Extensions.Logging;
 
 namespace Tests
 {
@@ -39,7 +40,9 @@ namespace Tests
 
         private CommandLineParser.CommandLineParser InitGroupCertifications()
         {
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
 
             Archiver a = new Archiver();
 
@@ -439,7 +442,9 @@ namespace Tests
         [Fact]
         public void ArgumentRequiresOtherArgumentsCertification_shouldPass_whenDefaultValuesAreThere()
         {
-            var commandLineParser = new CommandLineParser.CommandLineParser();
+            var factory = LoggerFactory.Create(b => b.AddConsole());
+            ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+            var commandLineParser = new CommandLineParser.CommandLineParser(logger);
             var parsingTarget = new TestDefaultValues();
             commandLineParser.ExtractArgumentAttributes(parsingTarget);
 

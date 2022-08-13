@@ -2,6 +2,7 @@
 using System.IO;
 using CommandLineParser.Arguments;
 using CommandLineParser.Exceptions;
+using Microsoft.Extensions.Logging;
 using ParserTest;
 using Xunit;
 
@@ -46,7 +47,9 @@ public partial class Tests
 
     private CommandLineParser.CommandLineParser InitDeclarativeArguments()
     {
-        var commandLineParser = new CommandLineParser.CommandLineParser();
+        var factory = LoggerFactory.Create(b => b.AddConsole());
+        ILogger<CommandLineParser.CommandLineParser> logger = factory.CreateLogger<CommandLineParser.CommandLineParser>();
+        var commandLineParser = new CommandLineParser.CommandLineParser(logger);
         DeclarativeArgumentsParsingTarget p = new DeclarativeArgumentsParsingTarget();
 
         // read the argument attributes 

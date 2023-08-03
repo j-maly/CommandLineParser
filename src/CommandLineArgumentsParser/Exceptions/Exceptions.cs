@@ -67,8 +67,8 @@ namespace CommandLineParser.Exceptions
         /// </summary>
         public string Argument
         {
-            get { return _argument; }
-            set { _argument = value; }
+            get => _argument;
+            set => _argument = value;
         }
     }
 

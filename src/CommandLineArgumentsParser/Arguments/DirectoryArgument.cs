@@ -46,15 +46,15 @@ namespace CommandLineParser.Arguments
 		/// Default is true.
 		/// </summary>
 		public bool DirectoryMustExist
-		{
-			get { return _directoryMustExist; }
-			set { _directoryMustExist = value; }
-		}
+        {
+            get => _directoryMustExist;
+            set => _directoryMustExist = value;
+        }
 
-		/// <summary>
-		/// DirectoryInfo for the directory passed as argument.
-		/// </summary>
-		public DirectoryInfo DirectoryInfo
+        /// <summary>
+        /// DirectoryInfo for the directory passed as argument.
+        /// </summary>
+        public DirectoryInfo DirectoryInfo
 		{
 			get
 			{
@@ -128,24 +128,18 @@ namespace CommandLineParser.Arguments
 		/// Default is true.
 		/// </summary>
 		public bool DirectoryMustExist
-		{
-			get { return ((DirectoryArgument)Argument).DirectoryMustExist; }
-			set { ((DirectoryArgument)Argument).DirectoryMustExist = value; }
-		}
+        {
+            get => ((DirectoryArgument)Argument).DirectoryMustExist;
+            set => ((DirectoryArgument)Argument).DirectoryMustExist = value;
+        }
 
         /// <summary>
         /// Default value
         /// </summary>
         public DirectoryInfo DefaultValue
         {
-            get
-            {
-                return ((DirectoryArgument)Argument).DefaultValue;
-            }
-            set
-            {
-                ((DirectoryArgument)Argument).DefaultValue = value;
-            }
+            get => ((DirectoryArgument)Argument).DefaultValue;
+            set => ((DirectoryArgument)Argument).DefaultValue = value;
         }
-	}
+    }
 }

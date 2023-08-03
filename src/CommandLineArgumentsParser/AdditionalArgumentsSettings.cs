@@ -34,10 +34,7 @@ namespace CommandLineParser
                 }
                 throw new CommandLineException(Messages.EXC_ADDITIONAL_ARGS_TOO_EARLY);
             }
-            set
-            {
-                _additionalArguments = value;
-            }
+            set => _additionalArguments = value;
         }
 
         private int _requestedAdditionalArgumentsCount;
@@ -48,7 +45,7 @@ namespace CommandLineParser
         /// </summary>
         public int RequestedAdditionalArgumentsCount
         {
-            get { return _requestedAdditionalArgumentsCount; }
+            get => _requestedAdditionalArgumentsCount;
             set
             {
                 if (value < 0)
@@ -65,8 +62,8 @@ namespace CommandLineParser
         /// </summary>
         public bool AcceptAdditionalArguments
         {
-            get { return _acceptAdditionalArguments; }
-            set { _acceptAdditionalArguments = value; }
+            get => _acceptAdditionalArguments;
+            set => _acceptAdditionalArguments = value;
         }
 
         private readonly List<IValueArgument> _typedAdditionalArguments = new List<IValueArgument>();

@@ -147,24 +147,18 @@ namespace CommandLineParser.Arguments
 		/// Default is true.
 		/// </summary>
 		public bool FileMustExist
-		{
-			get { return ((FileArgument)Argument).FileMustExist; }
-			set { ((FileArgument)Argument).FileMustExist = value; }
-		}
+        {
+            get => ((FileArgument)Argument).FileMustExist;
+            set => ((FileArgument)Argument).FileMustExist = value;
+        }
 
         /// <summary>
         /// Default value
         /// </summary>
         public FileInfo DefaultValue
         {
-            get
-            {
-                return ((FileArgument) Argument).DefaultValue;
-            }
-            set
-            {
-                ((FileArgument)Argument).DefaultValue = value;
-            }
+            get => ((FileArgument)Argument).DefaultValue;
+            set => ((FileArgument)Argument).DefaultValue = value;
         }
-	}
+    }
 }

@@ -27,8 +27,8 @@ namespace CommandLineParser.Validation
         /// </summary>
         public virtual string Description
         {
-            get { return _description; }
-            set { _description = value; }
+            get => _description;
+            set => _description = value;
         }
     }
 
@@ -65,8 +65,8 @@ namespace CommandLineParser.Validation
         }
         public string Description
         {
-            get { return Certification.Description; }
-            set { Certification.Description = value; }
+            get => Certification.Description;
+            set => Certification.Description = value;
         }
     }
 }

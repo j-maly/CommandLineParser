@@ -12,12 +12,9 @@ namespace Tests
             [SwitchArgument('f', false)]
             public bool DefaultFalse
             {
-                get { return defaultFalse; }
+                get => defaultFalse;
 
-                set
-                {
-                    defaultFalse = value;
-                }
+                set => defaultFalse = value;
             }
 
             [ValueArgument(typeof(string), 'p')]
@@ -31,11 +28,8 @@ namespace Tests
             [SwitchArgument('t', true)]
             public bool DefaultTrue
             {
-                get { return defaultTrue; }
-                set
-                {
-                    defaultTrue = value;
-                }
+                get => defaultTrue;
+                set => defaultTrue = value;
             }
         }
 

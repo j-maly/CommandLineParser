@@ -12,12 +12,9 @@ namespace Tests
             [ValueArgument(typeof(bool), 'f', DefaultValue = false)]
             public bool DefaultFalse
             {
-                get { return defaultFalse; }
+                get => defaultFalse;
 
-                set
-                {
-                    defaultFalse = value;
-                }
+                set => defaultFalse = value;
             }
         }
 
@@ -28,11 +25,8 @@ namespace Tests
             [ValueArgument(typeof(bool), 't', ForcedDefaultValue = true)]
             public bool DefaultTrue
             {
-                get { return defaultTrue; }
-                set
-                {
-                    defaultTrue = value;
-                }
+                get => defaultTrue;
+                set => defaultTrue = value;
             }
         }
 

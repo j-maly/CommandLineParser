@@ -59,8 +59,8 @@ public class CommandLineParser : IDisposable
     /// </summary>
     public List<Argument> Arguments
     {
-        get { return _arguments; }
-        set { _arguments = value; }
+        get => _arguments;
+        set => _arguments = value;
     }
 
     /// <summary>
@@ -73,8 +73,8 @@ public class CommandLineParser : IDisposable
     /// <seealso cref="DistinctGroupsCertification"/>
     public List<ArgumentCertification> Certifications
     {
-        get { return _certifications; }
-        set { _certifications = value; }
+        get => _certifications;
+        set => _certifications = value;
     }
 
     /// <summary>
@@ -120,8 +120,8 @@ public class CommandLineParser : IDisposable
     /// </summary>
     public bool CheckMandatoryArguments
     {
-        get { return _checkMandatoryArguments; }
-        set { _checkMandatoryArguments = value; }
+        get => _checkMandatoryArguments;
+        set => _checkMandatoryArguments = value;
     }
 
     /// <summary>
@@ -130,8 +130,8 @@ public class CommandLineParser : IDisposable
     /// </summary>
     public bool CheckArgumentCertifications
     {
-        get { return _checkArgumentCertifications; }
-        set { _checkArgumentCertifications = value; }
+        get => _checkArgumentCertifications;
+        set => _checkArgumentCertifications = value;
     }
 
     /// <summary>
@@ -140,8 +140,8 @@ public class CommandLineParser : IDisposable
     /// </summary>
     public bool AllowShortSwitchGrouping
     {
-        get { return _allowShortSwitchGrouping; }
-        set { _allowShortSwitchGrouping = value; }
+        get => _allowShortSwitchGrouping;
+        set => _allowShortSwitchGrouping = value;
     }
 
     /// <summary>
@@ -149,8 +149,8 @@ public class CommandLineParser : IDisposable
     /// </summary>
     public bool AcceptSlash
     {
-        get { return _acceptSlash; }
-        set { _acceptSlash = value; }
+        get => _acceptSlash;
+        set => _acceptSlash = value;
     }
 
     /// <summary>
@@ -158,8 +158,8 @@ public class CommandLineParser : IDisposable
     /// </summary>
     public bool AcceptHyphen
     {
-        get { return _acceptHyphen; }
-        set { _acceptHyphen = value; }
+        get => _acceptHyphen;
+        set => _acceptHyphen = value;
     }
 
     /// <summary>
@@ -167,8 +167,8 @@ public class CommandLineParser : IDisposable
     /// </summary>
     public bool IgnoreCase
     {
-        get { return _ignoreCase; }
-        set { _ignoreCase = value; }
+        get => _ignoreCase;
+        set => _ignoreCase = value;
     }
 
     /// <summary>
@@ -184,15 +184,9 @@ public class CommandLineParser : IDisposable
 
     public char[] EqualsSignSyntaxValuesSeparators
     {
-        get
-        {
-            return equalsSignSyntaxValuesSeparators;
-        }
+        get => equalsSignSyntaxValuesSeparators;
 
-        set
-        {
-            equalsSignSyntaxValuesSeparators = value;
-        }
+        set => equalsSignSyntaxValuesSeparators = value;
     }
 
     /// <summary>

@@ -22,8 +22,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public ICollection<TValue> AllowedValues
         {
-            get { return _allowedValues; }
-            set { _allowedValues = value; }
+            get => _allowedValues;
+            set => _allowedValues = value;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public bool IgnoreCase
         {
-            get { return _ignoreCase; }
+            get => _ignoreCase;
             set
             {
                 if (!(typeof(TValue) == typeof(string)) && value)
@@ -255,14 +255,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public string AllowedValues
         {
-            get
-            {
-                return string.Empty;
-            }
-            set
-            {
-                _argumentType.InvokeMethod("InitAllowedValues", Argument, value);
-            }
+            get => string.Empty;
+            set => _argumentType.InvokeMethod("InitAllowedValues", Argument, value);
         }
 
         /// <summary>
@@ -270,14 +264,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public object DefaultValue
         {
-            get
-            {
-                return _argumentType.GetPropertyValue<object>("DefaultValue", Argument);
-            }
-            set
-            {
-                _argumentType.SetPropertyValue("DefaultValue", Argument, value);
-            }
+            get => _argumentType.GetPropertyValue<object>("DefaultValue", Argument);
+            set => _argumentType.SetPropertyValue("DefaultValue", Argument, value);
         }
 
         /// <summary>
@@ -290,14 +278,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public bool ValueOptional
         {
-            get
-            {
-                return _argumentType.GetPropertyValue<bool>("ValueOptional", Argument);
-            }
-            set
-            {
-                _argumentType.SetPropertyValue("ValueOptional", Argument, value);
-            }
+            get => _argumentType.GetPropertyValue<bool>("ValueOptional", Argument);
+            set => _argumentType.SetPropertyValue("ValueOptional", Argument, value);
         }
 
         /// <summary>
@@ -305,14 +287,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public bool IgnoreCase
         {
-            get
-            {
-                return _argumentType.GetPropertyValue<bool>("IgnoreCase", Argument);
-            }
-            set
-            {
-                _argumentType.SetPropertyValue("IgnoreCase", Argument, value);
-            }
+            get => _argumentType.GetPropertyValue<bool>("IgnoreCase", Argument);
+            set => _argumentType.SetPropertyValue("IgnoreCase", Argument, value);
         }
     }
 }

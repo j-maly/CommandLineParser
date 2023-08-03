@@ -23,7 +23,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public TValue MinValue
         {
-            get { return _minValue; }
+            get => _minValue;
             set
             {
                 _minValue = value;
@@ -36,7 +36,7 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public TValue MaxValue
         {
-            get { return _maxValue; }
+            get => _maxValue;
             set
             {
                 _maxValue = value;
@@ -319,14 +319,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public object MaxValue
         {
-            get
-            {
-                return _argumentType.GetPropertyValue<object>("MaxValue", Argument);
-            }
-            set
-            {
-                _argumentType.SetPropertyValue("MaxValue", Argument, value);
-            }
+            get => _argumentType.GetPropertyValue<object>("MaxValue", Argument);
+            set => _argumentType.SetPropertyValue("MaxValue", Argument, value);
         }
 
         /// <summary>
@@ -334,14 +328,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public object MinValue
         {
-            get
-            {
-                return _argumentType.GetPropertyValue<object>("MinValue", Argument);
-            }
-            set
-            {
-                _argumentType.SetPropertyValue("MinValue", Argument, value);
-            }
+            get => _argumentType.GetPropertyValue<object>("MinValue", Argument);
+            set => _argumentType.SetPropertyValue("MinValue", Argument, value);
         }
 
         /// <summary>
@@ -349,14 +337,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public bool UseMaxValue
         {
-            get
-            {
-                return _argumentType.GetPropertyValue<bool>("UseMaxValue", Argument);
-            }
-            set
-            {
-                _argumentType.SetPropertyValue("UseMaxValue", Argument, value);
-            }
+            get => _argumentType.GetPropertyValue<bool>("UseMaxValue", Argument);
+            set => _argumentType.SetPropertyValue("UseMaxValue", Argument, value);
         }
 
         /// <summary>
@@ -364,14 +346,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public bool UseMinValue
         {
-            get
-            {
-                return _argumentType.GetPropertyValue<bool>("UseMinValue", Argument);
-            }
-            set
-            {
-                _argumentType.SetPropertyValue("UseMinValue", Argument, value);
-            }
+            get => _argumentType.GetPropertyValue<bool>("UseMinValue", Argument);
+            set => _argumentType.SetPropertyValue("UseMinValue", Argument, value);
         }
 
         /// <summary>
@@ -379,14 +355,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public object DefaultValue
         {
-            get
-            {
-                return _argumentType.GetPropertyValue<object>("DefaultValue", Argument);
-            }
-            set
-            {
-                _argumentType.SetPropertyValue("DefaultValue", Argument, value);
-            }
+            get => _argumentType.GetPropertyValue<object>("DefaultValue", Argument);
+            set => _argumentType.SetPropertyValue("DefaultValue", Argument, value);
         }
 
         /// <summary>
@@ -399,14 +369,8 @@ namespace CommandLineParser.Arguments
         /// </summary>
         public bool ValueOptional
         {
-            get
-            {
-                return _argumentType.GetPropertyValue<bool>("ValueOptional", Argument);
-            }
-            set
-            {
-                _argumentType.SetPropertyValue("ValueOptional", Argument, value);
-            }
+            get => _argumentType.GetPropertyValue<bool>("ValueOptional", Argument);
+            set => _argumentType.SetPropertyValue("ValueOptional", Argument, value);
         }
     }
 }

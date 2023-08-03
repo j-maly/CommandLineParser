@@ -17,8 +17,8 @@ namespace ParserTest
         [SwitchArgument('h', "hide", false, Description = "Set whether hide or not")]
         public bool Hide
         {
-            get { return hide; }
-            set { hide = value; }
+            get => hide;
+            set => hide = value;
         }
 
         [ValueArgument(typeof(decimal), 'v', "version", Description = "Set desired version")]
